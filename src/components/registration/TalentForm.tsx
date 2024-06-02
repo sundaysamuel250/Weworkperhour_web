@@ -1,30 +1,69 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
 import Images from '../constant/Images';
 
+// Define the State interface
+interface State {
+  firstName: string;
+  lastName: string;
+  companyName: string;
+  companySize: string;
+  error: string | null;
+}
+
+// Define the Action types
+type Action =
+  | { type: 'SET_FIRST_NAME'; payload: string }
+  | { type: 'SET_LAST_NAME'; payload: string }
+  | { type: 'SET_COMPANY_NAME'; payload: string }
+  | { type: 'SET_COMPANY_SIZE'; payload: string }
+  | { type: 'SET_ERROR'; payload: string | null };
+
+// Initial state
+const initialState: State = {
+  firstName: '',
+  lastName: '',
+  companyName: '',
+  companySize: '',
+  error: null,
+};
+
+// Reducer function
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'SET_FIRST_NAME':
+      return { ...state, firstName: action.payload };
+    case 'SET_LAST_NAME':
+      return { ...state, lastName: action.payload };
+    case 'SET_COMPANY_NAME':
+      return { ...state, companyName: action.payload };
+    case 'SET_COMPANY_SIZE':
+      return { ...state, companySize: action.payload };
+    case 'SET_ERROR':
+      return { ...state, error: action.payload };
+    default:
+      return state;
+  }
+}
+
 const TalentForm: React.FC = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [companyName, setCompanyName] = useState('');
-  const [companySize, setCompanySize] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       const response = await axios.post('/api/register', {
-        firstName,
-        lastName,
-        companyName,
-        companySize,
+        firstName: state.firstName,
+        lastName: state.lastName,
+        companyName: state.companyName,
+        companySize: state.companySize,
       });
       console.log('Account created:', response.data);
     } catch (err) {
-      setError('An error occurred during registration.');
+      dispatch({ type: 'SET_ERROR', payload: 'An error occurred during registration.' });
       console.error(err);
     }
   };
-
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -36,7 +75,7 @@ const TalentForm: React.FC = () => {
             </h2>
           </div>
           <h1 className="text-[20px] font-sans font-semibold text-center mb-6">Unlock a 95% reduction in hiring time, cost, and effort with <span className='text-[#ee009d]'>WeWorkPerHour!</span></h1>
-          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+          {state.error && <p className="text-red-500 text-center mb-4">{state.error}</p>}
           <form onSubmit={handleSubmit} className="space-y-6" autoComplete="off">
             <div className="flex space-x-4">
               <div className="w-1/2">
@@ -45,8 +84,8 @@ const TalentForm: React.FC = () => {
                   type="text"
                   id="firstName"
                   className="w-full px-2 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  value={state.firstName}
+                  onChange={(e) => dispatch({ type: 'SET_FIRST_NAME', payload: e.target.value })}
                   required
                   autoComplete="off"
                 />
@@ -57,8 +96,8 @@ const TalentForm: React.FC = () => {
                   type="text"
                   id="lastName"
                   className="w-full px-2 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  value={state.lastName}
+                  onChange={(e) => dispatch({ type: 'SET_LAST_NAME', payload: e.target.value })}
                   required
                   autoComplete="off"
                 />
@@ -71,8 +110,8 @@ const TalentForm: React.FC = () => {
                   type="text"
                   id="companyName"
                   className="w-full px-2 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
+                  value={state.companyName}
+                  onChange={(e) => dispatch({ type: 'SET_COMPANY_NAME', payload: e.target.value })}
                   required
                   autoComplete="off"
                 />
@@ -82,8 +121,8 @@ const TalentForm: React.FC = () => {
                 <select
                   id="companySize"
                   className="w-full px-2 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
-                  value={companySize}
-                  onChange={(e) => setCompanySize(e.target.value)}
+                  value={state.companySize}
+                  onChange={(e) => dispatch({ type: 'SET_COMPANY_SIZE', payload: e.target.value })}
                   required
                 >
                   <option value="1-200">1-200</option>

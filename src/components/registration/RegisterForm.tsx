@@ -1,35 +1,80 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
 import Images from '../constant/Images';
 import { FaGoogle, FaApple, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
+interface State {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  showPassword: boolean;
+  error: string | null;
+  termsAccepted: boolean;
+}
+
+type Action =
+  | { type: 'SET_FIRST_NAME'; payload: string }
+  | { type: 'SET_LAST_NAME'; payload: string }
+  | { type: 'SET_EMAIL'; payload: string }
+  | { type: 'SET_PASSWORD'; payload: string }
+  | { type: 'TOGGLE_SHOW_PASSWORD' }
+  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'SET_TERMS_ACCEPTED'; payload: boolean };
+
+const initialState: State = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  showPassword: false,
+  error: null,
+  termsAccepted: false,
+};
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'SET_FIRST_NAME':
+      return { ...state, firstName: action.payload };
+    case 'SET_LAST_NAME':
+      return { ...state, lastName: action.payload };
+    case 'SET_EMAIL':
+      return { ...state, email: action.payload };
+    case 'SET_PASSWORD':
+      return { ...state, password: action.payload };
+    case 'TOGGLE_SHOW_PASSWORD':
+      return { ...state, showPassword: !state.showPassword };
+    case 'SET_ERROR':
+      return { ...state, error: action.payload };
+    case 'SET_TERMS_ACCEPTED':
+      return { ...state, termsAccepted: action.payload };
+    default:
+      return state;
+  }
+}
+
 const RegisterForm: React.FC = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (!state.termsAccepted) {
+      dispatch({ type: 'SET_ERROR', payload: 'You must accept the terms and conditions.' });
+      return;
+    }
     try {
       const response = await axios.post('/api/register', {
-        firstName,
-        lastName,
-        email,
-        password,
+        firstName: state.firstName,
+        lastName: state.lastName,
+        email: state.email,
+        password: state.password,
       });
       console.log('Account created:', response.data);
     } catch (err) {
-      setError('An error occurred during registration.');
+      dispatch({ type: 'SET_ERROR', payload: 'An error occurred during registration.' });
       console.error(err);
     }
-  };
-
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
   };
 
   const handleGoogleLogin = () => {
@@ -50,7 +95,7 @@ const RegisterForm: React.FC = () => {
             </h2>
           </div>
           <h1 className="text-xl font-sans font-semibold text-center mb-6">Create an Account</h1>
-          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+          {state.error && <p className="text-red-500 text-center mb-4">{state.error}</p>}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="flex space-x-4">
               <div className="w-1/2">
@@ -59,8 +104,8 @@ const RegisterForm: React.FC = () => {
                   type="text"
                   id="firstName"
                   className="w-full px-6 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  value={state.firstName}
+                  onChange={(e) => dispatch({ type: 'SET_FIRST_NAME', payload: e.target.value })}
                   required
                 />
               </div>
@@ -70,8 +115,8 @@ const RegisterForm: React.FC = () => {
                   type="text"
                   id="lastName"
                   className="w-full px-6 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  value={state.lastName}
+                  onChange={(e) => dispatch({ type: 'SET_LAST_NAME', payload: e.target.value })}
                   required
                 />
               </div>
@@ -82,33 +127,46 @@ const RegisterForm: React.FC = () => {
                 type="email"
                 id="email"
                 className="w-full px-6 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={state.email}
+                onChange={(e) => dispatch({ type: 'SET_EMAIL', payload: e.target.value })}
                 required
               />
             </div>
             <div className="relative">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={state.showPassword ? 'text' : 'password'}
                 id="password"
                 className="w-full px-6 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={state.password}
+                onChange={(e) => dispatch({ type: 'SET_PASSWORD', payload: e.target.value })}
                 required
               />
               <button
                 type="button"
-                onClick={toggleShowPassword}
+                onClick={() => dispatch({ type: 'TOGGLE_SHOW_PASSWORD' })}
                 className="absolute right-2 top-10 transform -translate-y-1/2"
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                {state.showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
+            </div>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="terms"
+                checked={state.termsAccepted}
+                onChange={(e) => dispatch({ type: 'SET_TERMS_ACCEPTED', payload: e.target.checked })}
+                className="mr-2"
+              />
+              <label htmlFor="terms" className="text-sm text-gray-700">
+                I accept the <a href="/terms" className="text-blue-600 hover:underline">terms and conditions</a>
+              </label>
             </div>
             <div>
               <button
                 type="submit"
-                className="w-full px-6 py-3 text-white bg-[#ee009d] rounded-md hover:bg-[#2AA100] focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                disabled={!state.termsAccepted}
+                className={`w-full px-6 py-3 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${state.termsAccepted ? 'bg-[#ee009d] hover:bg-[#2AA100]' : 'bg-gray-400 cursor-not-allowed'}`}
               >
                 Create Account
               </button>

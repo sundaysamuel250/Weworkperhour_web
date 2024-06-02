@@ -1,31 +1,63 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
 import Images from '../constant/Images';
 import { FaGoogle, FaApple, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
+// Define the State interface
+interface State {
+  email: string;
+  password: string;
+  showPassword: boolean;
+  error: string | null;
+}
+
+// Define the Action types
+type Action =
+  | { type: 'SET_EMAIL'; payload: string }
+  | { type: 'SET_PASSWORD'; payload: string }
+  | { type: 'TOGGLE_SHOW_PASSWORD' }
+  | { type: 'SET_ERROR'; payload: string | null };
+
+// Initial state
+const initialState: State = {
+  email: '',
+  password: '',
+  showPassword: false,
+  error: null,
+};
+
+// Reducer function
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'SET_EMAIL':
+      return { ...state, email: action.payload };
+    case 'SET_PASSWORD':
+      return { ...state, password: action.payload };
+    case 'TOGGLE_SHOW_PASSWORD':
+      return { ...state, showPassword: !state.showPassword };
+    case 'SET_ERROR':
+      return { ...state, error: action.payload };
+    default:
+      return state;
+  }
+}
+
 const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       const response = await axios.post('/api/register', {
-        email,
-        password,
+        email: state.email,
+        password: state.password,
       });
       console.log('Account created:', response.data);
     } catch (err) {
-      setError('An error occurred during registration.');
+      dispatch({ type: 'SET_ERROR', payload: 'An error occurred during registration.' });
       console.error(err);
     }
-  };
-
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
   };
 
   const handleGoogleLogin = () => {
@@ -46,7 +78,7 @@ const LoginForm: React.FC = () => {
             </h2>
           </div>
           <h1 className="text-xl font-semibold text-center mb-6">Sign in to your Account</h1>
-          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+          {state.error && <p className="text-red-500 text-center mb-4">{state.error}</p>}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
@@ -54,27 +86,27 @@ const LoginForm: React.FC = () => {
                 type="email"
                 id="email"
                 className="w-full px-6 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={state.email}
+                onChange={(e) => dispatch({ type: 'SET_EMAIL', payload: e.target.value })}
                 required
               />
             </div>
             <div className="relative">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={state.showPassword ? 'text' : 'password'}
                 id="password"
                 className="w-full px-6 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={state.password}
+                onChange={(e) => dispatch({ type: 'SET_PASSWORD', payload: e.target.value })}
                 required
               />
               <button
                 type="button"
-                onClick={toggleShowPassword}
+                onClick={() => dispatch({ type: 'TOGGLE_SHOW_PASSWORD' })}
                 className="absolute right-2 top-10 transform -translate-y-1/2"
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                {state.showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
             <div className="flex justify-between items-center">
