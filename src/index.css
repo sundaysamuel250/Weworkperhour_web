@@ -14,3 +14,13 @@ body {
   box-sizing: border-box;
   overflow-x: none;
 }
+
+
+.slick-dots li button:before {
+  color: red; /* Color for inactive dots */
+}
+
+.slick-dots li.slick-active button:before {
+  color: green; /* Color for active dot */
+}
+

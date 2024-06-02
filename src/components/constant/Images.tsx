@@ -54,6 +54,23 @@ import SliderImageOne from "../../images/slider_one.png"
 import SliderImageTwo from "../../images/slider_two.png"
 import SliderImageThree from "../../images/slider_three.png"
 import JoinUsImage from "../../images/join-us.png"
+import CareerSliderImageOne from "../../images/career_one.png"
+import CareerSliderImageTwo from "../../images/career_two.png"
+import CareerSliderImageThree from "../../images/career_three.png"
+import CareerCardImageFour from "../../images/career_four.png"
+import CareerCardImageFive from "../../images/career_five.png"
+import CareerCardImageSix from "../../images/career_six.png"
+import CareerCardImageSeven from "../../images/career_seven.png"
+import CareerCardImageEight from "../../images/career_eight.png"
+import CareerCardImageNine from "../../images/career_nine.png"
+import CareerCardImageTen from "../../images/career_ten.png"
+import CareerCardImageEleven from "../../images/career_eleven.png"
+import CareerCardImageTwelve from "../../images/career_twelve.png"
+import CareerCardImageThirteen from "../../images/career_thirteen.png"
+import CareerCardImageFourteen from "../../images/career_fourteen.png"
+import CareerCardImageFifteen from "../../images/Design_three.png"
+import AboutHeroImage from "../../images/video.png"
+import LoginImage from "../../images/login.png"
 
 
 
@@ -120,7 +137,24 @@ const assets: Assets = {
   SliderImageOne,
   SliderImageTwo,
   SliderImageThree,
-  JoinUsImage
+  JoinUsImage,
+  CareerSliderImageOne,
+  CareerSliderImageTwo,
+  CareerSliderImageThree,
+  CareerCardImageFour,
+  CareerCardImageFive,
+  CareerCardImageSix,
+  CareerCardImageSeven,
+  CareerCardImageEight,
+  CareerCardImageNine,
+  CareerCardImageTen,
+  CareerCardImageEleven,
+  CareerCardImageTwelve,
+  CareerCardImageThirteen,
+  CareerCardImageFourteen,
+  CareerCardImageFifteen,
+  AboutHeroImage,
+  LoginImage,
 
  
   

@@ -33,8 +33,9 @@ const Navbar: React.FC = () => {
       { label: "Home", path: "/" },
       { label: "For Company", path: "company" },
       { label: "Find Jobs", path: "find-job" },
-      { label: "Career Tips", path: "/services" },
-      { label: "Log in", path: "/login" },
+      { label: "Career Tips", path: "career-tips" },
+      { label: "About Us", path: "about" },
+      { label: "Log in", path: "login" },
       // Add more links here
     ],
     []
@@ -68,11 +69,11 @@ const Navbar: React.FC = () => {
           ))}
          
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-[6px]">
-            <Link to="/" onClick={toggleMenu}>
-              <button className="font-sans text-[14px] font-medium text-[#000000] border-2 border-[#2AA100] hover:text-[#EE009D] py-[4px] px-[10px] rounded-[5px] ">Sign Up</button>
+            <Link to="register" onClick={toggleMenu}>
+              <button className="font-sans text-[14px] font-medium text-[#000000] border-2 border-[#2AA100] hover:text-[#EE009D] py-[4px] px-[10px] rounded-[5px] ease-in duration-300 ">Sign Up</button>
             </Link>
-            <Link to="/" onClick={toggleMenu}>
-              <button className="font-sans text-[14px] font-medium  text-[#FFFFFF]  bg-[#EE009D] hover:bg-[#2AA100] py-[6px] px-[10px] rounded-[5px] justify-center  ">Hire Talent</button>
+            <Link to="talent" onClick={toggleMenu}>
+              <button className="font-sans text-[14px] font-medium  text-[#FFFFFF]  bg-[#EE009D] hover:bg-[#2AA100] py-[6px] px-[10px] rounded-[5px] justify-center ease-in duration-300 ">Hire Talent</button>
             </Link>
           </div>
         </nav>

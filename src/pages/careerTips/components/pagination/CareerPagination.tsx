@@ -3,13 +3,13 @@ import React from 'react';
 import { BiChevronRight } from "react-icons/bi";
 import { BiChevronLeft } from "react-icons/bi";
 
-interface PaginationProps {
+interface CareerPaginationProps {
     currentPage: number;
     totalPages: number;
     onPageChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
+const CareerPagination: React.FC<CareerPaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
     const handlePrevious = () => {
         if (currentPage > 1) {
             onPageChange(currentPage - 1);
@@ -63,4 +63,4 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
     );
 };
 
-export default Pagination;
+export default CareerPagination;

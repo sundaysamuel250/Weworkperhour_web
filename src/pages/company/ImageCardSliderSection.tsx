@@ -8,7 +8,7 @@ import Images from '../../components/constant/Images';
 
 
 
-const HeroSlider: FC = () => {
+const ImageCardSliderSection: FC = () => {
   const settings = {
     dots: true,
     infinite: true,
@@ -71,4 +71,4 @@ const HeroSlider: FC = () => {
   );
 };
 
-export default HeroSlider;
+export default ImageCardSliderSection;
