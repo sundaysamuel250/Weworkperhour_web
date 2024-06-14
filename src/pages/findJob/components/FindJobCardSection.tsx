@@ -9,10 +9,14 @@ interface FindJobCardSectionProps {
     LocationName: string;
     jobDescription: string;
     payment: number;
+    jobStyleOne: string;
+    jobStyleTwo: string;
+    jobStyleThree: string;
+
   }
   
 
-const FindJobCardSection: React.FC <FindJobCardSectionProps>= ({companyLogo, companyName, LocationName, jobTitle, jobDescription, payment}) => {
+const FindJobCardSection: React.FC <FindJobCardSectionProps>= ({companyLogo, companyName, LocationName, jobTitle, jobDescription, payment, jobStyleOne, jobStyleTwo, jobStyleThree}) => {
   const [lastUpdated, setLastUpdated] = useState<string>('');
   
   useEffect(() => {
@@ -36,9 +40,9 @@ const FindJobCardSection: React.FC <FindJobCardSectionProps>= ({companyLogo, com
          <p className="text-[12px] text-[#646A73] font-sans font-semilight tracking-[0.5px] w-[100px]">{lastUpdated}</p>
         </section>
         <div className='flex items-center gap-[0.5rem] mt-[1rem] '>
-          <p className='text-[12px] text-center font-sans my-2 tracking-wider rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>Hybrid</p>
-          <p className='text-[12px] text-center font-sans my-2 tracking-wider  rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>Remote</p>
-          <p className='text-[12px] text-center font-sans my-2 tracking-wider  rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>Onsite</p>
+          <p className='text-[12px] text-center font-sans my-2 tracking-wider rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>{jobStyleOne}</p>
+          <p className='text-[12px] text-center font-sans my-2 tracking-wider  rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>{jobStyleTwo}</p>
+          <p className='text-[12px] text-center font-sans my-2 tracking-wider  rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>{jobStyleThree}</p>
         </div>
           <div className="flex items-center space-x-4 py-4 rounded-lg">
       <div>
