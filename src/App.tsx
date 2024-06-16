@@ -11,6 +11,8 @@ import LoginForm from './components/registration/LoginForm';
 import RegisterForm from './components/registration/RegisterForm';
 import TalentForm from './components/registration/TalentForm';
 import ScrollToTop from './components/constant/ScrollToTop';
+import JobDetails from './pages/findJob/job-details/JobDetails';
+import JobDataPage from './pages/findJob/job-details/JobDataPage';
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function Main() {
         <Route path="login" element={<LoginForm />} />
         <Route path="register" element={<RegisterForm />} />
         <Route path="talent" element={<TalentForm />} />
+        <Route path="application-details" element={<JobDataPage />} />
       </Routes>
     </div>
   );

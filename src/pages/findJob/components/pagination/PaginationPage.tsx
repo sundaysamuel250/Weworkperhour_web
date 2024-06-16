@@ -9,6 +9,9 @@ const jobData = [
         companyName: 'Huawei',
         LocationName: 'Lekki Lagos, Nigeria',
         jobTitle: "Customer Care Assistant",
+        jobStyleOne:"Hybrid",
+        jobStyleTwo: "Remote",
+        jobStyleThree: "Onsite",
         jobDescription: "We are looking for a talented Customer Care Assistant to join our team...",
         payment: 400
     },
@@ -17,6 +20,9 @@ const jobData = [
         companyName: 'Moderna',
         LocationName: 'Lekki Lagos, Nigeria',
         jobTitle: "Compliance Head",
+        jobStyleOne:"Hybrid",
+        jobStyleTwo: "Remote",
+        jobStyleThree: "Onsite",
         jobDescription: "We are looking for a talented compliance head to join our team...",
         payment: 1000
     },
@@ -25,6 +31,9 @@ const jobData = [
         companyName: 'Access Bank',
         LocationName: 'Lekki Lagos, Nigeria',
         jobTitle: "IT Specialist",
+        jobStyleOne:"Hybrid",
+        jobStyleTwo: "Remote",
+        jobStyleThree: "Onsite",
         jobDescription: "We are looking for a talented IT specialist to join our team...",
         payment: 2000
     },
@@ -33,6 +42,9 @@ const jobData = [
         companyName: 'Sterling Bank',
         LocationName: 'Surulere Lagos, Nigieria',
         jobTitle: "Head of Margeting",
+        jobStyleOne:"Hybrid",
+        jobStyleTwo: "Remote",
+        jobStyleThree: "Onsite",
         jobDescription: "We are looking for a talented head of marketing to join our team...",
         payment: 1400
     },
@@ -41,6 +53,9 @@ const jobData = [
         companyName: 'Threads',
         LocationName: 'Alanta Georgia, USA',
         jobTitle: "Product Designer",
+        jobStyleOne:"Hybrid",
+        jobStyleTwo: "Remote",
+        jobStyleThree: "Onsite",
         jobDescription: "We are looking for a talented product designer to join our team...",
         payment: 1500
     },
@@ -49,6 +64,9 @@ const jobData = [
         companyName: 'Samsung',
         LocationName: 'Alanta Georgia, USA',
         jobTitle: "Digital Marketing",
+        jobStyleOne:"Hybrid",
+        jobStyleTwo: "Remote",
+        jobStyleThree: "Onsite",
         jobDescription: "We are looking for a talented digital marketing to join our team...",
         payment: 800
     },
@@ -58,6 +76,9 @@ const jobData = [
         LocationName: 'New York, USA',
         jobTitle: "Software Engineer",
         jobDescription: "We are looking for a talented software engineer to join our team...",
+        jobStyleOne:"Hybrid",
+        jobStyleTwo: "Remote",
+        jobStyleThree: "Onsite",
         payment: 1500 // example payment amount in Naira
     },
    {
@@ -65,6 +86,9 @@ const jobData = [
       companyName: 'UBA Bank',
       LocationName: 'Surulere Lagos, Nigeria',
       jobTitle: "Customer Support Officer",
+      jobStyleOne:"Hybrid",
+      jobStyleTwo: "Remote",
+      jobStyleThree: "Onsite",
       jobDescription: "We are looking for a talented customer support officer to join our team...",
       payment: 1500 // example payment amount in Naira
    },
@@ -73,6 +97,9 @@ const jobData = [
       companyName: 'Palmpay',
       LocationName: 'Ikeja Lagos, Nigeria',
       jobTitle: "Full stack Developer",
+      jobStyleOne:"Hybrid",
+      jobStyleTwo: "Remote",
+      jobStyleThree: "Onsite",
       jobDescription: "We are looking for full stack developer to join our team...",
       payment: 1500 // example payment amount in Naira
    },
@@ -81,6 +108,9 @@ const jobData = [
       companyName: 'Netflix',
       LocationName: 'New York, USA',
       jobTitle: "React Developer",
+      jobStyleOne:"Hybrid",
+      jobStyleTwo: "Remote",
+      jobStyleThree: "Onsite",
       jobDescription: "We are looking for a talented software engineer to join our team...",
       payment: 1500 // example payment amount in Naira
    },
@@ -89,6 +119,9 @@ const jobData = [
       companyName: 'Twiiter',
       LocationName: 'New York, USA',
       jobTitle: "Back-end Engineer",
+      jobStyleOne:"Hybrid",
+      jobStyleTwo: "Remote",
+      jobStyleThree: "Onsite",
       jobDescription: "We are looking for a talented software engineer to join our team...",
       payment: 1500 // example payment amount in Naira
    },
@@ -97,6 +130,9 @@ const jobData = [
       companyName: 'Apple',
       LocationName: 'New York, USA',
       jobTitle: "Quality Assurance",
+      jobStyleOne:"Hybrid",
+      jobStyleTwo: "Remote",
+      jobStyleThree: "Onsite",
       jobDescription: "We are looking for a talented software engineer to join our team...",
       payment: 1500 // example payment amount in Naira
    },
@@ -105,6 +141,9 @@ const jobData = [
     companyName: 'Mircrosoft',
     LocationName: 'New York, USA',
     jobTitle: "DevOps Engineer",
+    jobStyleOne:"Hybrid",
+    jobStyleTwo: "Remote",
+    jobStyleThree: "Onsite",
     jobDescription: "We are looking for a talented DevOps engineer to join our team...",
     payment: 1500 // example payment amount in Naira
    },
@@ -113,6 +152,9 @@ const jobData = [
       companyName: 'Google',
       LocationName: 'New York, USA',
       jobTitle: "Software Engineer",
+      jobStyleOne:"Hybrid",
+      jobStyleTwo: "Remote",
+      jobStyleThree: "Onsite",
       jobDescription: "We are looking for a talented software engineer to join our team...",
       payment: 700// example payment amount in Naira
    },
@@ -121,6 +163,9 @@ const jobData = [
       companyName: 'Moniepoint',
       LocationName: 'Ikeja Lagos, Nigeria',
       jobTitle: "Backend Engineer",
+      jobStyleOne:"Hybrid",
+      jobStyleTwo: "Remote",
+      jobStyleThree: "Onsite",
       jobDescription: "We are looking for a talented backend engineer to join our team...",
       payment: 2800 // example payment amount in Naira
    },
@@ -129,6 +174,9 @@ const jobData = [
       companyName: 'Amazon',
       LocationName: 'Ontario, Canada',
       jobTitle: "IT Specialist",
+      jobStyleOne:"Hybrid",
+      jobStyleTwo: "Remote",
+      jobStyleThree: "Onsite",
       jobDescription: "We are looking for a talented IT specialist to join our team...",
       payment: 1600 // example payment amount in Naira
    },
@@ -137,6 +185,9 @@ const jobData = [
     companyName: 'Oracle',
     LocationName: 'New York, USA',
     jobTitle: "UX/UI Designer",
+    jobStyleOne:"Hybrid",
+    jobStyleTwo: "Remote",
+    jobStyleThree: "Onsite",
     jobDescription: "We are looking for a ui ux designer to join our team...",
     payment: 1800 // example payment amount in Naira
    },
@@ -145,6 +196,9 @@ const jobData = [
     companyName: 'Mircrosoft',
     LocationName: 'New York, USA',
     jobTitle: "DevOps Engineer",
+    jobStyleOne:"Hybrid",
+    jobStyleTwo: "Remote",
+    jobStyleThree: "Onsite",
     jobDescription: "We are looking for a talented DevOps engineer to join our team...",
     payment: 1500 // example payment amount in Naira
    },
@@ -153,6 +207,9 @@ const jobData = [
     companyName: 'Paypal',
     LocationName: 'New York, USA',
     jobTitle: "Software Engineer",
+    jobStyleOne:"Hybrid",
+    jobStyleTwo: "Remote",
+    jobStyleThree: "Onsite",
     jobDescription: "We are looking for a talented software engineer to join our team...",
     payment: 1500 // example payment amount in Naira
    },
@@ -161,6 +218,9 @@ const jobData = [
       companyName: 'Tiktok',
       LocationName: 'Alanta Georgia, USA',
       jobTitle: "Product Designer",
+      jobStyleOne:"Hybrid",
+      jobStyleTwo: "Remote",
+      jobStyleThree: "Onsite",
       jobDescription: "We are looking for a product designer to join our team...",
       payment: 1500 // example payment amount in Naira
    },
@@ -169,6 +229,9 @@ const jobData = [
     companyName: 'Apple',
     LocationName: 'Alanta Georgia, USA',
     jobTitle: "Swift Developer",
+    jobStyleOne:"Hybrid",
+    jobStyleTwo: "Remote",
+    jobStyleThree: "Onsite",
     jobDescription: "We are looking for a swift developer to join our team...",
     payment: 2500// example payment amount in Naira
    },
@@ -177,6 +240,9 @@ const jobData = [
     companyName: 'Uber',
     LocationName: 'North America',
     jobTitle: "SEO Associate",
+    jobStyleOne:"Hybrid",
+    jobStyleTwo: "Remote",
+    jobStyleThree: "Onsite",
     jobDescription: "We are looking for a talented SEO Associate to join our team...",
     payment: 1500 // example payment amount in Naira
    },
@@ -185,6 +251,9 @@ const jobData = [
       companyName: 'First Bank',
       LocationName: 'Marina Lagos Nigeria',
       jobTitle: "Team Lead",
+      jobStyleOne:"Hybrid",
+      jobStyleTwo: "Remote",
+      jobStyleThree: "Onsite",
       jobDescription: "We are looking for a talented team lead to join our team...",
       payment: 1500 // example payment amount in Naira
    },
@@ -193,6 +262,9 @@ const jobData = [
     companyName: 'Sterling Bank',
     LocationName: 'Surulere Lagos, Nigieria',
     jobTitle: "Head of Margeting",
+    jobStyleOne:"Hybrid",
+    jobStyleTwo: "Remote",
+    jobStyleThree: "Onsite",
     jobDescription: "We are looking for a talented head of marketing to join our team...",
     payment: 1400 // example payment amount in Naira
    }
@@ -231,6 +303,9 @@ const PaginationPage: React.FC = () => {
                                 jobTitle={job.jobTitle}
                                 jobDescription={job.jobDescription}
                                 payment={job.payment}
+                                jobStyleOne={job.jobStyleOne}
+                                jobStyleTwo={job.jobStyleTwo}
+                                jobStyleThree={job.jobStyleThree}
                             />
                         ))}
                     </div>

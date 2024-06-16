@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-interface CardSectionProps {
+interface SuggestionCardrops {
     companyLogo: string;
     companyName: string;
     jobTitle: string;
@@ -13,7 +13,7 @@ interface CardSectionProps {
   }
   
 
-const CardSection: React.FC <CardSectionProps>= ({companyLogo, companyName, LocationName, jobTitle, jobDescription, payment}) => {
+const SuggestionCrad: React.FC <SuggestionCardrops>= ({companyLogo, companyName, LocationName, jobTitle, jobDescription, payment}) => {
   const [lastUpdated, setLastUpdated] = useState<string>('');
   
   useEffect(() => {
@@ -61,4 +61,4 @@ const CardSection: React.FC <CardSectionProps>= ({companyLogo, companyName, Loca
   );
 };
 
-export default CardSection;
+export default SuggestionCrad;
