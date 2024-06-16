@@ -1,8 +1,8 @@
 import React, { useReducer } from 'react';
-import axios from 'axios';
 import Images from '../constant/Images';
 import { FaGoogle, FaApple, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { httpPostWithoutToken } from '../../utils/http_utils';
 
 // Define the State interface
 interface State {
@@ -48,16 +48,14 @@ const LoginForm: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    try {
-      const response = await axios.post('/api/register', {
-        email: state.email,
-        password: state.password,
-      });
-      console.log('Account created:', response.data);
-    } catch (err) {
-      dispatch({ type: 'SET_ERROR', payload: 'An error occurred during registration.' });
-      console.error(err);
+    let d = {
+      email: state.email,
+      password: state.password,
     }
+    alert("here")
+    let resp = await httpPostWithoutToken("register", d);
+    console.log(resp)
+
   };
 
   const handleGoogleLogin = () => {
