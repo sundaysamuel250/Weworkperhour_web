@@ -1,8 +1,10 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import Images from '../constant/Images';
 import { FaGoogle, FaApple, FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { httpPostWithoutToken } from '../../utils/http_utils';
+import { useToast } from '@chakra-ui/react';
+import ls from "localstorage-slim";
 
 // Define the State interface
 interface State {
@@ -45,6 +47,9 @@ function reducer(state: State, action: Action): State {
 
 const LoginForm: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const toast = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -52,9 +57,25 @@ const LoginForm: React.FC = () => {
       email: state.email,
       password: state.password,
     }
-    alert("here")
-    let resp = await httpPostWithoutToken("register", d);
-    console.log(resp)
+    setIsSubmitting(true)
+    const response = await httpPostWithoutToken("login", d)
+    setIsSubmitting(false)
+
+    if(response.status == "success") {
+      toast({
+        status : "success",
+        title : "Login successful!",
+        isClosable : true,
+      })
+      ls.set("wwph_token", response.access_token, {encrypt : true});
+      ls.set("wwph_usr", response.user, {encrypt : true});
+      setTimeout(() => {
+        navigate("/")
+      }, 1000);
+    }else{
+      dispatch({ type: 'SET_ERROR', payload: response.message });
+      console.log('Account created:', response.data);
+    }
 
   };
 
@@ -114,6 +135,7 @@ const LoginForm: React.FC = () => {
               <button
                 type="submit"
                 className="w-full px-6 py-3 text-white bg-[#ee009d] rounded-md hover:bg-[#2AA100] focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                disabled={isSubmitting}
               >
                 Sign in
               </button>

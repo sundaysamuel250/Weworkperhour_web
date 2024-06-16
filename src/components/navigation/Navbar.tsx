@@ -4,6 +4,7 @@ import { LiaTimesSolid } from "react-icons/lia";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import "./Navbar.css";
 import Images from "../constant/Images";
+import ls from "localstorage-slim";
 
 interface NavLink {
   label: string;
@@ -14,7 +15,7 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState ("")
-
+  const activeToken = ls.get("wwph_token", {decrypt : true})
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -57,8 +58,12 @@ const Navbar: React.FC = () => {
         </div>
         <nav className={`navbar-menu ${isMenuOpen ? "open" : ""} font-sans text-[14px] font-medium`}>
          
-          {navigationLinks.map(link => (
-            <Link
+          {navigationLinks.map(link => {
+            if(link.path == "login" && activeToken) {
+
+            }else{
+
+            return <Link
             key={link.path}
             to={link.path}
             className={`menu-link ${activeLink === link.path ? "active" : ""}`}
@@ -66,12 +71,22 @@ const Navbar: React.FC = () => {
           >
               {link.label}
             </Link>
-          ))}
+            }
+          }
+          )}
          
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-[6px]">
-            <Link to="register" onClick={toggleMenu}>
-              <button className="font-sans text-[14px] font-medium text-[#000000] border-2 border-[#2AA100] hover:text-[#EE009D] py-[4px] px-[10px] rounded-[5px] ease-in duration-300 ">Sign Up</button>
-            </Link>
+            {
+              activeToken
+              ?
+              <Link to="/dashboard">
+                <button className="font-sans mr-2 text-[14px] font-medium text-[#000000] border-2 border-[#2AA100] hover:text-[#EE009D] py-[4px] px-[10px] rounded-[5px] ease-in duration-300 ">My Account</button>
+              </Link>
+              :
+              <Link to="register" onClick={toggleMenu}>
+                <button className="font-sans mr-2 text-[14px] font-medium text-[#000000] border-2 border-[#2AA100] hover:text-[#EE009D] py-[4px] px-[10px] rounded-[5px] ease-in duration-300 ">Sign Up</button>
+              </Link>
+            }
             <Link to="talent" onClick={toggleMenu}>
               <button className="font-sans text-[14px] font-medium  text-[#FFFFFF]  bg-[#EE009D] hover:bg-[#2AA100] py-[6px] px-[10px] rounded-[5px] justify-center ease-in duration-300 ">Hire Talent</button>
             </Link>

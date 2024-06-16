@@ -1,8 +1,10 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import axios from 'axios';
 import Images from '../constant/Images';
 import { FaGoogle, FaApple, FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { httpPostWithoutToken } from '../../utils/http_utils';
+import { useToast } from '@chakra-ui/react';
 
 interface State {
   firstName: string;
@@ -56,7 +58,9 @@ function reducer(state: State, action: Action): State {
 
 const RegisterForm: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const toast = useToast();
+  const navigate = useNavigate();
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!state.termsAccepted) {
@@ -64,14 +68,32 @@ const RegisterForm: React.FC = () => {
       return;
     }
     try {
-      const response = await axios.post('/api/register', {
-        firstName: state.firstName,
-        lastName: state.lastName,
+      let data = {
+        first_name: state.firstName,
+        last_name: state.lastName,
         email: state.email,
         password: state.password,
-      });
-      console.log('Account created:', response.data);
+      }
+      setIsSubmitting(true)
+      const response = await httpPostWithoutToken("register", data)
+      setIsSubmitting(false)
+
+      if(response.status == "success") {
+        toast({
+          status : "success",
+          title : "Registration successful, proceed to login",
+          isClosable : true,
+        })
+        setTimeout(() => {
+          navigate("/login")
+        }, 1000);
+      }else{
+
+        dispatch({ type: 'SET_ERROR', payload: response.message });
+        console.log('Account created:', response.data);
+      }
     } catch (err) {
+      setIsSubmitting(false)
       dispatch({ type: 'SET_ERROR', payload: 'An error occurred during registration.' });
       console.error(err);
     }
@@ -165,10 +187,10 @@ const RegisterForm: React.FC = () => {
             <div>
               <button
                 type="submit"
-                disabled={!state.termsAccepted}
-                className={`w-full px-6 py-3 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${state.termsAccepted ? 'bg-[#ee009d] hover:bg-[#2AA100]' : 'bg-gray-400 cursor-not-allowed'}`}
+                disabled={isSubmitting}
+                className={`w-full px-6 py-3 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${state.termsAccepted || isSubmitting ? 'bg-[#ee009d] hover:bg-[#2AA100]' : 'bg-gray-400 cursor-not-allowed'}`}
               >
-                Create Account
+                {isSubmitting ? "please wait..." : "Create Account"}
               </button>
             </div>
           </form>
