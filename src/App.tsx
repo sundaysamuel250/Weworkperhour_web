@@ -13,6 +13,7 @@ import TalentForm from './components/registration/TalentForm';
 import ScrollToTop from './components/constant/ScrollToTop';
 import JobDetails from './pages/findJob/job-details/JobDetails';
 import JobDataPage from './pages/findJob/job-details/JobDataPage';
+import AdminDashboard from './components/admin/AdminDashboard';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
 
 function Main() {
   const location = useLocation();
-  const hideNavbarPaths = ['/login', '/register'];
+  const hideNavbarPaths = ['/login', '/register', '/dashboard'];
 
   return (
     <div>
@@ -41,6 +42,7 @@ function Main() {
         <Route path="register" element={<RegisterForm />} />
         <Route path="talent" element={<TalentForm />} />
         <Route path="application-details" element={<JobDataPage />} />
+        <Route path="dashboard" element={<AdminDashboard />} />
       </Routes>
     </div>
   );

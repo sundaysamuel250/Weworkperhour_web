@@ -71,6 +71,8 @@ import CareerCardImageFourteen from "../../images/career_fourteen.png"
 import CareerCardImageFifteen from "../../images/Design_three.png"
 import AboutHeroImage from "../../images/video.png"
 import LoginImage from "../../images/login.png"
+import JobSearchImage from "../../images/job-search.png"
+import ProfileImage from "../../images/profile.png"
 
 
 
@@ -155,7 +157,8 @@ const assets: Assets = {
   CareerCardImageFifteen,
   AboutHeroImage,
   LoginImage,
-
+JobSearchImage,
+ProfileImage
  
   
 };
