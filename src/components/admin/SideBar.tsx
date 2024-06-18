@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaCircle, FaBars, FaTimes, FaFileAlt } from 'react-icons/fa';
-import { UilCreateDashboard, UilSetting, UilTrash } from '@iconscout/react-unicons';
+import { UilCreateDashboard, UilSetting, UilTimes, UilTrash } from '@iconscout/react-unicons';
 import Images from '../constant/Images';
 import { FaBarsStaggered, FaEnvelope, FaRegUser } from 'react-icons/fa6';
 import { IoMdArrowDropdown } from 'react-icons/io';
@@ -34,13 +34,13 @@ const SideNav: React.FC = () => {
     <div>
       <div className="lg:hidden p-4 text-white absolute left-0 top-2 flex justify-between items-center">
         <button onClick={toggleSidebar}>
-          {isSidebarOpen ? <FaTimes size={24} /> : < FaBarsStaggered  size={25}  color='#2aa100' className='font-bold'/>}
+          {isSidebarOpen ? < UilTimes color='#2aa100' className='text-[#2aa100]' size={24} /> : < FaBarsStaggered  size={25}  color='#2aa100' className='font-bold'/>}
         </button>
       </div>
       <div className={`h-screen w-60 bg-[#f5f5f5] text-white flex flex-col fixed lg:static transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
         <div className="p-6 flex items-center flex-col ">
           <div  onClick={toggleSidebar} className='lg:hidden block'>
-          {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          {isSidebarOpen ? < UilTimes size={24} color='#2aa100' className=' absolute top-0 left-[16rem] ' /> : <FaBars size={24} />}
           </div>
           <img src={Images.Logo} alt="logo" className="w-full max-w-[150px] h-auto mb-4" />
           <FaCircle className="relative w-[10px] h-[10px] top-6 left-6 text-[#40e6b9]" size={20} />
