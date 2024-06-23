@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -8,12 +9,16 @@ interface CardSectionProps {
     jobTitle: string;
     LocationName: string;
     // lastUpdated: Date;
+    workType? : string;
     jobDescription: string;
     payment: number;
+    datePosted? : string;
+    slug? : string;
+    jobType ? : string
   }
   
 
-const CardSection: React.FC <CardSectionProps>= ({companyLogo, companyName, LocationName, jobTitle, jobDescription, payment}) => {
+const CardSection: React.FC <CardSectionProps>= ({companyLogo, jobType, slug, datePosted, companyName, LocationName, jobTitle, jobDescription, payment, workType}) => {
   const [lastUpdated, setLastUpdated] = useState<string>('');
   
   useEffect(() => {
@@ -34,12 +39,13 @@ const CardSection: React.FC <CardSectionProps>= ({companyLogo, companyName, Loca
          <p className='text-[10px] text-[#646A73] font-sans font-semilight tracking-[0.5px] w-[100px]'>{LocationName}</p>
          </div>
          </div>
-         <p className="text-[12px] text-[#646A73] font-sans font-semilight tracking-[0.5px] w-[100px]">{lastUpdated}</p>
+         <p className="text-[12px] text-[#646A73] font-sans font-semilight tracking-[0.5px] w-[100px]">{moment(datePosted).format("MMM, DD")}</p>
         </section>
         <div className='flex items-center gap-[0.5rem] mt-[1rem] '>
-          <p className='text-[12px] text-center font-sans my-2 tracking-wider rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>Hybrid</p>
-          <p className='text-[12px] text-center font-sans my-2 tracking-wider  rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>Remote</p>
-          <p className='text-[12px] text-center font-sans my-2 tracking-wider  rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>Onsite</p>
+          <p className='text-[12px] text-center font-sans my-2 tracking-wider rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>{workType}</p>
+          <p className='text-[12px] text-center font-sans my-2 tracking-wider rounded-[4px] p-1 w-[80px] text-[#333]  bg-[#efcfe3]'>{jobType}</p>
+          {/* <p className='text-[12px] text-center font-sans my-2 tracking-wider  rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>Remote</p> */}
+          {/* <p className='text-[12px] text-center font-sans my-2 tracking-wider  rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>Onsite</p> */}
         </div>
           <div className="flex items-center space-x-4 py-4 rounded-lg">
       <div>
@@ -48,7 +54,7 @@ const CardSection: React.FC <CardSectionProps>= ({companyLogo, companyName, Loca
         <p className="text-[12px] mt-[0.5rem] text-[#646A73] font-sans font-semilight tracking-[0.5px]">{jobDescription}</p>
         <div className='mt-[2rem] flex justify-center space-x-[6rem]'>
         <p className="text-[#ee009d] mt-[0.5rem] text-[12px] font-sans font-semibold">${payment.toLocaleString()}<span className='text-[12px] text-[#2aa100]'>/month</span></p>
-      <Link to="/application-details">
+      <Link to={"/job-details/"+slug}>
               <button className="font-sans text-[12px] font-medium text-[#ee009d] border-[1px] border-[#ee009d] hover:text-[#EE009D] py-[4px] px-[10px] rounded-[5px] ">Apply Now</button>
             </Link>
       </div>

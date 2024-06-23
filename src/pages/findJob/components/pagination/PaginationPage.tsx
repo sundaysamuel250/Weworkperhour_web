@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Pagination from '../Pagination';
 import FindJobCardSection from '../FindJobCardSection';
 import Images from '../../../../components/constant/Images';
+import { httpGetWithoutToken } from '../../../../utils/http_utils';
+import { useLocation } from 'react-router-dom';
 
 const jobData = [
     {
@@ -271,47 +273,124 @@ const jobData = [
     // Add more job data here if needed
 ];
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 12;
 
 const PaginationPage: React.FC = () => {
+    const {search} = useLocation();
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = Math.ceil(jobData.length / ITEMS_PER_PAGE);
-
+    const [isLoading, setIsLoading] = useState(true);
+    const [noJobs, setNoJobs] = useState(false);
+    const [totalPages, setTotalPages] = useState(0);
+    const [title, setTitle] = useState("")
+    const [jobType, setJobType] = useState("")
+    const [location, setLocation] = useState("")
+    const [displayedJobs, setDisplayedJobs] = useState([]);
+    // const displayedJobs = jobData.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+    const demoJobs = jobData[0];
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
 
     useEffect(() => {
-        if (jobData.length > ITEMS_PER_PAGE) {
-            setCurrentPage(prevPage => Math.min(prevPage + 1, totalPages));
-        }
-    }, [totalPages]);
+        window.scrollTo(0, 0);
+    }, [currentPage]);
+    // useEffect(()=> {
+    //     getJobs()
+    // }, [])
+    useEffect(()=> {
+        const search_ = (search.replace('?', '')).split("&")
+        setIsLoading(true)
+        let searchQuery = "";
+        let loc = "";
+        let jtype = "";
+        if(search_.length > 0){
+          search_.forEach(s => {
+            if(s.includes("title=")) {
+                searchQuery  = s.replace("title=", "")
+                setTitle(s.replace("title=", ""))
+            }
 
-    const displayedJobs = jobData.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+            if(s.includes("jobType=")) {
+                jtype = s.replace("jobType=", "")
+                setJobType(s.replace("jobType=", ""))
+            }
+
+            if(s.includes("location=")) {
+                loc = s.replace("location=", "");
+                setLocation(s.replace("location=", ""))
+            }
+          });
+        }
+            getJobs(searchQuery, loc, jtype)
+        
+    }, [search])
+    const getJobs = async (searchQuery ="", loc = "", jtype="") => {
+        setTimeout(async () => {
+            let url = `jobs?limit=${ITEMS_PER_PAGE}&title=${searchQuery}&location=${loc}&jobType=${jtype}`;
+        let resp:any = await httpGetWithoutToken(url);
+        setIsLoading(true)
+        if(resp.status == "success") {
+            setCurrentPage(1);
+            setDisplayedJobs(resp.data)
+            setIsLoading(false)
+            setTotalPages(Math.ceil(resp.data.length / ITEMS_PER_PAGE));
+            setNoJobs(resp.data.length == 0)
+        }else{
+            setIsLoading(false)
+        }
+        })
+    }
+
 
     return (
         <div style={{ padding: '30px' }}>
             <section>
                 <div className="flex justify-center">
-                    <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:items-center justify-center gap-[2rem] py-[4rem]">
-                        {displayedJobs.map((job, index) => (
-                            <FindJobCardSection
-                                key={index}
-                                companyLogo={job.companyLogo}
-                                companyName={job.companyName}
-                                LocationName={job.LocationName}
-                                jobTitle={job.jobTitle}
-                                jobDescription={job.jobDescription}
-                                payment={job.payment}
-                                jobStyleOne={job.jobStyleOne}
-                                jobStyleTwo={job.jobStyleTwo}
-                                jobStyleThree={job.jobStyleThree}
-                            />
-                        ))}
-                    </div>
+                    {
+                        isLoading 
+                        ?
+                        <div className='h-[300px] flex justify-center items-center'>
+                            <p>searching jobs...</p>
+                        </div>
+                        :
+                        <>
+                        {
+                            noJobs
+                            ?
+                            <div className='h-[300px] flex justify-center items-center'>
+                            <p>No job found...</p>
+                            </div>
+                            :
+                        <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:items-center justify-center gap-[2rem] py-[4rem]">
+                            {displayedJobs.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE).map((job:any, index) => (
+                                <FindJobCardSection
+                                    key={index}
+                                    jobStyleOne={demoJobs.jobStyleOne}
+                                    jobStyleTwo={demoJobs.jobStyleTwo}
+                                    jobStyleThree={demoJobs.jobStyleThree}
+                                    companyLogo={job.company.avatar}
+                                    companyName={job.company.name}
+                                    LocationName={`${job.location.substring(0, 20)} ...`}
+                                    jobTitle={job.title}
+                                    jobDescription={`${job.description.substring(0, 64)}${job.description.length > 64 ? '...' : ''}`}
+                                    payment={job.salary} // example payment amount in Naira
+                                    workType={job.work_type.title}
+                                    jobType={job.job_type.title}
+                                    datePosted={job.date_posted}
+                                    slug={job.slug}
+                                />
+                            ))}
+                        </div>
+                        }
+                        </>
+                    }
                 </div>
             </section>
-            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+                        {
+                            !isLoading && !noJobs &&
+                            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+                        }
+
         </div>
     );
 };

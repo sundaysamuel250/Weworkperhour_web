@@ -32,6 +32,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
             pageNumbers.push(
                 <button
                     key={i}
+                    className='mt-1'
                     onClick={() => handlePageClick(i)}
                     disabled={i === currentPage}
                     style={{
@@ -51,12 +52,12 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
     };
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '20px 0' }}>
-            <button onClick={handlePrevious} disabled={currentPage === 1} className='flex items-center  border-[1px] border-[#EE009d] text-[14px] rounded-[5px] px-[16px] py-[8px] gap-2'>
+        <div style={{ display: 'flex', flexWrap : "wrap", gap : 2, justifyContent: 'center', alignItems: 'center', margin: '20px auto' }} className='w-[300px] lg:w-[800px] mx-auto'>
+            <button onClick={handlePrevious} disabled={currentPage === 1} className='mt-1 flex items-center  border-[1px] border-[#EE009d] text-[14px] rounded-[5px] px-[16px] py-[8px] gap-2'>
             <BiChevronLeft size={18} /> Prevs
             </button>
             {renderPageNumbers()}
-            <button onClick={handleNext} disabled={currentPage === totalPages} className='flex items-center  border-[1px] border-[#EE009d] text-[14px] rounded-[5px] px-[16px] py-[8px] gap-2'>
+            <button onClick={handleNext} disabled={currentPage === totalPages} className='mt-1 flex items-center  border-[1px] border-[#EE009d] text-[14px] rounded-[5px] px-[16px] py-[8px] gap-2'>
                 Next <BiChevronRight size={18} />
             </button>
         </div>

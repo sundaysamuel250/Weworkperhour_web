@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dropdown from '../../../components/reusable/DropDownButton';
+import { useNavigate } from 'react-router-dom';
+import { httpGetWithoutToken } from '../../../utils/http_utils';
 
 const FindJobSearchSection: React.FC = () => {
   const [jobQuery, setJobQuery] = useState('');
+  const [jobTypes, setJobTypes] = useState([]);
   const [locationQuery, setLocationQuery] = useState('');
   const [selectedOption, setSelectedOption] = useState('Full-time');
-  
+  const navigate = useNavigate()
 
   const handleJobChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setJobQuery(e.target.value);
@@ -19,11 +22,20 @@ const FindJobSearchSection: React.FC = () => {
     setSelectedOption(e.target.value);
   };
 
+  useEffect(()=> {
+    fetchJobTypes()
+  }, [])
+  const fetchJobTypes = async () => {
+    let resp = await httpGetWithoutToken("fetch-job-types")
+    if(resp.status == "success") {
+      setJobTypes(resp.data);
+    }
+  }
  
 
   const handleSearch = () => {
     // Here you can perform the search based on jobQuery, locationQuery, and selectedOption
-    console.log('Searching for job:', jobQuery, 'in location:', locationQuery, 'with option:', selectedOption);
+    navigate("/find-job?title="+jobQuery+"&location="+locationQuery+"&jobType="+selectedOption+"&rand="+Math.random()*10000)
   };
 
   return (
@@ -53,10 +65,13 @@ const FindJobSearchSection: React.FC = () => {
             onChange={handleOptionChange}
             className="w-[100%] p-4 rounded-[px] focus:outline-none bg-[#fff] shadow-md text-[#646A73] text-[16px]"
           >
-            <option className='text-[#646A73] text-[14px]' value="Full-time">Full-time</option>
-            <option value="Part-time">Part-time</option>
-            <option value="Contract">Contract</option>
-            <option value="Freelance">Freelance</option>
+            <option className='text-[#646A73] text-[14px]' value="">Select job type</option>
+            {
+              jobTypes.map((jt:any , i) => (
+                <option className='text-[#646A73] text-[14px]' value={jt.title}>{jt.title}</option>
+              ))
+            }
+            
           </select>
         </div>
       <div className='flex gap-2'>

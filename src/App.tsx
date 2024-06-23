@@ -41,7 +41,8 @@ function Main() {
         <Route path="login" element={<LoginForm />} />
         <Route path="register" element={<RegisterForm />} />
         <Route path="talent" element={<TalentForm />} />
-        <Route path="application-details" element={<JobDataPage />} />
+        {/* <Route path="job-details" element={<JobDataPage />} /> */}
+        <Route path="job-details/:slug" element={<JobDataPage />} />
         <Route path="dashboard" element={<AdminDashboard />} />
       </Routes>
     </div>

@@ -5,59 +5,28 @@ import Images from '../../../../components/constant/Images';
 
 
 
-const RecentSection: React.FC= () => {
-
+const RecentSection: React.FC< {jobs : any[]}>= ({jobs}) => {
  return (
   <div className="flex justify-center">
   <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:items-center justify-center gap-[2rem] py-[4rem]">
-    <CardSection
-      companyLogo={Images.GoogleImage}
-      companyName='Google'
-      LocationName='New York, USA'
-      jobTitle="Software Engineer"
-      jobDescription="We are looking for a talented software engineer to join our team..."
-      payment={700} // example payment amount in Naira
-    />
-    <CardSection
-      companyLogo={Images.NetflixImage}
-      companyName='Netflix'
-      LocationName='New York, USA'
-      jobTitle="React Developer"
-      jobDescription="We are looking for a talented software engineer to join our team..."
-      payment={1500} // example payment amount in Naira
-    />
-    <CardSection
-      companyLogo={Images.FacebookImage}
-      companyName='Facebook'
-      LocationName='New York, USA'
-      jobTitle="Software Engineer"
-      jobDescription="We are looking for a talented software engineer to join our team..."
-      payment={1500} // example payment amount in Naira
-    />
-    <CardSection
-      companyLogo={Images.TwitterImage}
-      companyName='Twiiter'
-      LocationName='New York, USA'
-      jobTitle="Back-end Engineer"
-      jobDescription="We are looking for a talented software engineer to join our team..."
-      payment={1500} // example payment amount in Naira
-    />
-    <CardSection
-      companyLogo={Images.AppleImage}
-      companyName='Apple'
-      LocationName='New York, USA'
-      jobTitle="Quality Assurance"
-      jobDescription="We are looking for a talented software engineer to join our team..."
-      payment={1500} // example payment amount in Naira
-    />
-    <CardSection
-      companyLogo={Images.MicrosoftImage}
-      companyName='Mircrosoft'
-      LocationName='New York, USA'
-      jobTitle="DevOps Engineer"
-      jobDescription="We are looking for a talented DevOps engineer to join our team..."
-      payment={1500} // example payment amount in Naira
-    />
+    {
+      jobs.map((job, i)=> (
+            <CardSection
+            companyLogo={job.company.avatar}
+            companyName={job.company.name}
+            LocationName={`${job.location.substring(0, 20)} ...`}
+            jobTitle={job.title}
+            jobDescription={`${job.description.substring(0, 64)}${job.description.length > 64 ? '...' : ''}`}
+            payment={job.salary} // example payment amount in Naira
+            workType={job.work_type.title}
+            jobType={job.job_type.title}
+            datePosted={job.date_posted}
+            slug={job.slug}
+          />
+           
+      ))
+    }
+
   </div>
 </div>
   );
