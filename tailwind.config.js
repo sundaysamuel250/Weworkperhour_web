@@ -20,6 +20,9 @@ module.exports = {
     fontFamily: {
       'sans': ['Noto Sans', 'sans-serif'],
       'neuton': ['Neuton', 'sans-serif'],
+      'poppins': ["Poppins", " sans-serif"],
+      'fairs': ["Playfair Display", 'serif'],
+      'merri': ["Merriweather", 'serif']
     },
 
   },

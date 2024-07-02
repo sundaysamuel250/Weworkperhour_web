@@ -11,14 +11,16 @@ import LoginForm from './components/registration/LoginForm';
 import RegisterForm from './components/registration/RegisterForm';
 import TalentForm from './components/registration/TalentForm';
 import ScrollToTop from './components/constant/ScrollToTop';
-import JobDetails from './pages/findJob/job-details/JobDetails';
 import JobDataPage from './pages/findJob/job-details/JobDataPage';
-import AdminDashboard from './components/admin/AdminDashboard';
+import AdminLayout from './components/admin/AdminLayout';
+import Dashboard from './components/admin/Dashboard';
+import ProfileDetails from './components/admin/ProfileDetails';
+import ResumeSection from './components/admin/ResumeSection';
 
 function App() {
   return (
     <Router>
-        <ScrollToTop />
+      <ScrollToTop />
       <Main />
     </Router>
   );
@@ -26,7 +28,7 @@ function App() {
 
 function Main() {
   const location = useLocation();
-  const hideNavbarPaths = ['/login', '/register', '/dashboard'];
+  const hideNavbarPaths = ['/login', '/register', '/dashboard', '/profile-list', '/resume-page'];
 
   return (
     <div>
@@ -41,9 +43,13 @@ function Main() {
         <Route path="login" element={<LoginForm />} />
         <Route path="register" element={<RegisterForm />} />
         <Route path="talent" element={<TalentForm />} />
+
         {/* <Route path="job-details" element={<JobDataPage />} /> */}
         <Route path="job-details/:slug" element={<JobDataPage />} />
-        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="application-details" element={<JobDataPage />} />
+        <Route path="dashboard" element={<AdminLayout element={<Dashboard />} />} />
+        <Route path="profile-list" element={<AdminLayout element={<ProfileDetails />} />} />
+        <Route path="resume-page" element={<AdminLayout element={<ResumeSection />} />} />
       </Routes>
     </div>
   );

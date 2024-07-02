@@ -13,6 +13,7 @@ import FooterSection from '../../components/reusable/FooterSection'
 
 
 
+
 export const Home = () => {
   return (
     <>
@@ -32,7 +33,6 @@ export const Home = () => {
     <SimpleProcessSection />
     <OurPlatformSection />
     <FeaturesJobSection />
-    {/* <CreateJobPost /> */}
     <TabSection />
     <ComeJoinUsSection />
     <FooterSection />
