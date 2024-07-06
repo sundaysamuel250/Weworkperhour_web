@@ -1,15 +1,15 @@
 import React from 'react';
 
 interface ProgressBarProps {
-  percentage: number;
+  progress: number;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ percentage }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
   return (
-    <div className="w-full bg-gray-300 rounded-full h-6">
+    <div className="w-full bg-[#D1FFBD] rounded-[20px] h-[5px]">
       <div
-        className="bg-blue-500 h-6 rounded-full"
-        style={{ width: `${percentage}%` }}
+        className="bg-[#2aa100] h-[5px] rounded-[20px] transition-all duration-300"
+        style={{ width: `${progress}%` }}
       ></div>
     </div>
   );

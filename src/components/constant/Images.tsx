@@ -160,9 +160,7 @@ const assets: Assets = {
   AboutHeroImage,
   LoginImage,
 JobSearchImage,
-ProfileImage
- 
-  
+ProfileImage,
 };
 
 export default assets;
