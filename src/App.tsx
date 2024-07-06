@@ -16,6 +16,7 @@ import AdminLayout from './components/admin/AdminLayout';
 import Dashboard from './components/admin/Dashboard';
 import ProfileDetails from './components/admin/ProfileDetails';
 import ResumeSection from './components/admin/ResumeSection';
+import Message from './components/admin/message/Message';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
 
 function Main() {
   const location = useLocation();
-  const hideNavbarPaths = ['/login', '/register', '/dashboard', '/profile-list', '/resume-page'];
+  const hideNavbarPaths = ['/login', '/register', '/dashboard', '/profile-list', '/resume-page', '/messages'];
 
   return (
     <div>
@@ -50,6 +51,7 @@ function Main() {
         <Route path="dashboard" element={<AdminLayout element={<Dashboard />} />} />
         <Route path="profile-list" element={<AdminLayout element={<ProfileDetails />} />} />
         <Route path="resume-page" element={<AdminLayout element={<ResumeSection />} />} />
+        <Route path="messages" element={<AdminLayout element={<Message />} />} />
       </Routes>
     </div>
   );
