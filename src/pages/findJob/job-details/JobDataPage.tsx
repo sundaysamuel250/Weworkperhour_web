@@ -4,6 +4,7 @@ import Images from '../../../components/constant/Images';
 import Suggestion from './suggestion-jobs/Suggestion';
 import { Link } from 'react-router-dom';
 import FooterSection from '../../../components/reusable/FooterSection';
+import JobDetailss from './JobDetails1';
 
 const JobDataPage: React.FC = () => {
   const jobData = [
@@ -35,15 +36,16 @@ const JobDataPage: React.FC = () => {
   return (
     <div className="container mx-auto">
       <h1 className="text-3xl font-bold my-4">Job Listings</h1>
-      {jobData.map((job, index) => (
+      {/* {jobData.map((job, index) => (
         <JobDetails key={index} {...job} />
-      ))}
+      ))} */}
+      <JobDetailss />
        <div className="mt-10">
         <div className='flex items-center justify-between border-[2px] max-w-6xl mx-auto px-[2rem] rounded'>
-        <h2 className="text-2xl font-sans font-semibold my-4">Suggested Jobs</h2>
-        <Link to='/find-job' target="_blank" rel="noopener noreferrer">
+        <h2 className="text-2xl font-sans font-semibold my-4">Similar Jobs</h2>
+        {/* <Link to='/find-job' target="_blank" rel="noopener noreferrer">
               <button className="font-sans text-[18px] font-medium text-[#2AA100] border-none hover:text-[#EE009D] py-[6px] px-[16px] rounded-[5px]">See All</button>
-            </Link>
+            </Link> */}
         </div>
         <Suggestion />
         <FooterSection />

@@ -9,11 +9,14 @@ interface SuggestionCardrops {
     LocationName: string;
     // lastUpdated: Date;
     jobDescription: string;
+    slug?: string;
     payment: number;
+    workType? : string,
+    jobType? : string,
   }
   
 
-const SuggestionCrad: React.FC <SuggestionCardrops>= ({companyLogo, companyName, LocationName, jobTitle, jobDescription, payment}) => {
+const SuggestionCrad: React.FC <SuggestionCardrops>= ({workType, jobType, companyLogo, companyName, LocationName, jobTitle, jobDescription, payment, slug}) => {
   const [lastUpdated, setLastUpdated] = useState<string>('');
   
   useEffect(() => {
@@ -37,9 +40,8 @@ const SuggestionCrad: React.FC <SuggestionCardrops>= ({companyLogo, companyName,
          <p className="text-[12px] text-[#646A73] font-sans font-semilight tracking-[0.5px] w-[100px]">{lastUpdated}</p>
         </section>
         <div className='flex items-center gap-[0.5rem] mt-[1rem] '>
-          <p className='text-[12px] text-center font-sans my-2 tracking-wider rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>Hybrid</p>
-          <p className='text-[12px] text-center font-sans my-2 tracking-wider  rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>Remote</p>
-          <p className='text-[12px] text-center font-sans my-2 tracking-wider  rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>Onsite</p>
+          <p className='text-[12px] text-center font-sans my-2 tracking-wider rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>{workType}</p>
+          <p className='text-[12px] text-center font-sans my-2 tracking-wider rounded-[4px] p-1 w-[80px] text-[#333]  bg-[#efcfe3]'>{jobType}</p>
         </div>
           <div className="flex items-center space-x-4 py-4 rounded-lg">
       <div>
@@ -48,7 +50,7 @@ const SuggestionCrad: React.FC <SuggestionCardrops>= ({companyLogo, companyName,
         <p className="text-[12px] mt-[0.5rem] text-[#646A73] font-sans font-semilight tracking-[0.5px]">{jobDescription}</p>
         <div className='mt-[2rem] flex justify-center space-x-[6rem]'>
         <p className="text-[#ee009d] mt-[0.5rem] text-[12px] font-sans font-semibold">${payment.toLocaleString()}<span className='text-[12px] text-[#2aa100]'>/month</span></p>
-      <Link to="/application-details">
+      <Link to={"/job-details/"+slug}>
               <button className="font-sans text-[12px] font-medium text-[#ee009d] border-[1px] border-[#ee009d] hover:text-[#EE009D] py-[4px] px-[10px] rounded-[5px] ">Apply Now</button>
             </Link>
       </div>
