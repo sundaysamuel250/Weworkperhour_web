@@ -2,6 +2,7 @@ import React from 'react';
 import { faEye, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Job } from './Job';
 import { FaCircle } from 'react-icons/fa6';
+import { BiDotsHorizontalRounded } from 'react-icons/bi';
 
 
 interface DropdownProps {
@@ -21,13 +22,7 @@ const Dropdown: React.FC<DropdownProps> = ({ job, onViewDetails, onUpdateStatus,
   return (
     <div className="relative">
       <button onClick={toggleDropdown} className=" rounded">
-      <div className='flex gap-1'>
-      <FaCircle size={5} color='#646A73' className="" />
-      <FaCircle size={5} color='#646A73' className="" />
-      <FaCircle size={5} color='#646A73' className="" />
-
-      
-      </div>
+      <BiDotsHorizontalRounded size={25} color='#646A73' className="" />
       </button>
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg">
