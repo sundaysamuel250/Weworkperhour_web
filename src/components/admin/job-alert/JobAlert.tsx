@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import JobAlertTable from "./components/JobAlertTable";
 
 const JobAlert: React.FC = () => {
   return (
-    <div>JobAlert</div>
-  )
-}
+    <div className="">
+      <JobAlertTable />
+    </div>
+  );
+};
 
-export default JobAlert
+export default JobAlert;

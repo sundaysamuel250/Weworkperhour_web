@@ -40,6 +40,15 @@ const SideNav: React.FC = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleDelete = () => {
+    // Perform delete action here
+    console.log('Account deleted');
+    setModalOpen(false);
+  };
+ 
+
   return (
     <div>
       <div className="lg:hidden p-4 text-white absolute left-0 top-2 flex justify-between items-center">
@@ -105,14 +114,14 @@ const SideNav: React.FC = () => {
                 <IoBookmarkOutline size={25} /> Saved Job
               </li>
             </Link>
-            <Link to='/account-settings'>
+            <Link to='/account-setting'>
               <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/account-settings') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
                 <UilSetting size={25} /> Account Settings
               </li>
             </Link>
             <Link to='/delete-account'>
               <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/delete-account') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
-                <UilTrash size={25} /> Delete Account
+                <UilTrash size={25}  /> Delete Account
               </li>
             </Link>
           </ul>

@@ -17,6 +17,12 @@ import Dashboard from './components/admin/Dashboard';
 import ProfileDetails from './components/admin/ProfileDetails';
 import ResumeSection from './components/admin/ResumeSection';
 import Message from './components/admin/message/Message';
+import JobAlert from './components/admin/job-alert/JobAlert';
+import SavedJobs from './components/admin/saved-job/SavedJobs';
+import AccountSettings from './components/admin/account-settings/AccountSettings';
+import DeleteModal from './components/admin/delete-account/DeleteModal';
+import DeletePage from './components/admin/delete-account/DeletePage';
+
 
 function App() {
   return (
@@ -29,7 +35,7 @@ function App() {
 
 function Main() {
   const location = useLocation();
-  const hideNavbarPaths = ['/login', '/register', '/dashboard', '/profile-list', '/resume-page', '/messages'];
+  const hideNavbarPaths = ['/login', '/register', '/dashboard', '/profile-list', '/resume-page', '/messages', '/job-alerts',  '/saved-jobs', '/account-setting', '/delete-account'];
 
   return (
     <div>
@@ -52,6 +58,10 @@ function Main() {
         <Route path="profile-list" element={<AdminLayout element={<ProfileDetails />} />} />
         <Route path="resume-page" element={<AdminLayout element={<ResumeSection />} />} />
         <Route path="messages" element={<AdminLayout element={<Message />} />} />
+        <Route path="job-alerts" element={<AdminLayout element={<JobAlert />} />} />
+        <Route path="saved-jobs" element={<AdminLayout element={<SavedJobs />} />} />
+        <Route path="account-setting" element={<AdminLayout element={<AccountSettings />} />} />
+        <Route path="delete-account" element={<AdminLayout element={<DeletePage />} />} />
       </Routes>
     </div>
   );
