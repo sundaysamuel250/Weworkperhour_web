@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UilAngleDown, UilAngleUp, UilEye, UilShare, UilTrashAlt } from "@iconscout/react-unicons";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { httpGetWithToken, httpPostWithToken } from "../../../../utils/http_utils";
+import { useNavigate } from "react-router-dom";
+import { Button, Toast, useToast } from "@chakra-ui/react";
 
 interface JobAlert {
   title: string;
@@ -78,21 +81,32 @@ const categories = [
 ];
 
 const JobAlertTable: React.FC = () => {
-  const [jobAlerts, setJobAlerts] = useState<JobAlert[]>(initialJobAlerts);
+  const [jobAlerts, setJobAlerts] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [selectedAlert, setSelectedAlert] = useState<JobAlert | null>(null);
+  const [selectedAlert, setSelectedAlert] = useState<any | null>(null);
   const [action, setAction] = useState<string | null>(null);
   const [showDropdown, setShowDropdown] = useState<number | null>(null);
   const [filterType, setFilterType] = useState<string>("");
   const [filterValue, setFilterValue] = useState<string>("");
+  const [shareEmail, setShareEmail] = useState<string>("");
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [shareLoading, setShareLoading] = useState(false);
+  const toast = useToast();
   const [selectedOption, setSelectedOption] = useState<string>("");
-
+  const navigate = useNavigate()
   const itemsPerPage = 5;
   const totalPages = Math.ceil(jobAlerts.length / itemsPerPage);
-
+  const getJobAlert = async () => {
+    const res = await httpGetWithToken("jobs-alert");
+    if(res.status == "success") {
+      setJobAlerts(res.data)
+    }
+    console.log(res)
+  }
+  
   useEffect(() => {
+    getJobAlert()
     const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
@@ -112,7 +126,7 @@ const JobAlertTable: React.FC = () => {
     setCurrentPage(page);
   };
 
-  const handleActionClick = (alert: JobAlert, actionType: string) => {
+  const handleActionClick = (alert: any, actionType: string) => {
     setSelectedAlert(alert);
     setAction(actionType);
     setShowDropdown(null);
@@ -124,6 +138,28 @@ const JobAlertTable: React.FC = () => {
       setSelectedAlert(null);
       setAction(null);
     }
+  };
+
+  
+  const shareJob = async () => {
+      const resp = await httpPostWithToken("job/share/"+selectedAlert.id, {
+        to : shareEmail
+      });
+      if(resp.status == "success") {
+        toast({
+          status : "success",
+          title : resp.message,
+          isClosable : true,
+        })
+      }else{
+        toast({
+          status : "error",
+          title : resp.error,
+          isClosable : true,
+        })
+      }
+      setSelectedAlert(null);
+      setAction(null);
   };
 
   const displayAlerts = jobAlerts
@@ -161,7 +197,8 @@ const JobAlertTable: React.FC = () => {
         <h2 className="text-green-700 text-2xl sm:text-3xl md:text-4xl font-poppins font-semibold">
           Job Alerts
         </h2>
-        <div className="w-full md:w-auto flex flex-col md:flex-row items-center gap-2 mb-4">
+        {/* md:w-auto flex flex-col md:flex-row items-center gap-2 mb-4 */}
+        <div className="w-full hidden">
           <label className="block font-medium text-green-600 text-md mb-2 md:mb-0">
             Sort by:
           </label>
@@ -199,8 +236,8 @@ const JobAlertTable: React.FC = () => {
               <tr className="text-green-700 font-poppins font-medium">
                 <th className="py-2 px-4 text-left">Title</th>
                 <th className="py-2 px-4 text-left">Alert</th>
-                <th className="py-2 px-4 text-left">Job</th>
-                <th className="py-2 px-4 text-left">Time</th>
+                <th className="py-2 px-4 text-left">Empl. Type</th>
+                <th className="py-2 px-4 text-left">Type</th>
                 <th className="py-2 px-4 text-left">Action</th>
               </tr>
             </thead>
@@ -211,12 +248,12 @@ const JobAlertTable: React.FC = () => {
                     {alert.title}
                   </td>
                   <td className="py-8 px-4 text-green-700">
-                    {alert.alert}
+                    {alert.title ? alert.title : alert.job_role}
                     <p className="text-gray-800">{alert.salary}</p>
-                    <p className="text-gray-800">{alert.categories}</p>
+                    <p className="text-gray-800">{alert.departments[0].title}</p>
                   </td>
-                  <td className="py-8 px-4 text-gray-800">{alert.jobsFound}</td>
-                  <td className="py-8 px-4 text-gray-800">{alert.frequency}</td>
+                  <td className="py-8 px-4 text-gray-800">{alert.work_type.title}</td>
+                  <td className="py-8 px-4 text-gray-800">{alert.job_type.title}</td>
                   <td className="py-8 px-4 text-gray-800 relative">
                     <button onClick={() => setShowDropdown(index)}>
                       <BiDotsVerticalRounded size={25} color="#ABB2B9" />
@@ -238,12 +275,7 @@ const JobAlertTable: React.FC = () => {
                         >
                           <UilShare size="18" /> Share
                         </button>
-                        <button
-                          onClick={() => handleActionClick(alert, "Delete")}
-                          className="w-full flex items-center gap-2 text-left text-gray-600 font-poppins px-4 py-2 hover:bg-gray-200"
-                        >
-                          <UilTrashAlt size="18" /> Delete
-                        </button>
+                       
                       </div>
                     )}
                   </td>
@@ -261,7 +293,7 @@ const JobAlertTable: React.FC = () => {
                     {selectedAlert.title}
                   </h3>
                   <p className="text-gray-700">
-                    <strong>Alert:</strong> {selectedAlert.alert}
+                    <strong>Alert:</strong> {selectedAlert.job_role}
                   </p>
                   <p className="text-gray-700">
                     <strong>Salary:</strong> {selectedAlert.salary}
@@ -270,26 +302,25 @@ const JobAlertTable: React.FC = () => {
                     <strong>Location:</strong> {selectedAlert.location}
                   </p>
                   <p className="text-gray-700">
-                    <strong>Categories:</strong> {selectedAlert.categories}
+                    <strong>Categories:</strong> {selectedAlert.departments[0].title}
                   </p>
                   <p className="text-gray-700">
-                    <strong>Jobs Found:</strong> {selectedAlert.jobsFound}
+                    <strong>Jobs Type:</strong> {selectedAlert.job_type.title}
                   </p>
                   <p className="text-gray-700">
-                    <strong>Frequency:</strong> {selectedAlert.frequency}
+                    <strong>Employment type:</strong> {selectedAlert.work_type.title}
                   </p>
                 </>
               )}
               {action === "Share" && (
                 <div className="flex items-center gap-4">
                   <input
+                  value={shareEmail}
+                  onChange={(e)=>setShareEmail(shareEmail)}
                     type="text"
                     className="border p-2 rounded-md flex-grow"
                     placeholder="Enter email address"
                   />
-                  <button className="bg-green-600 text-white px-4 py-2 rounded-md">
-                    Send
-                  </button>
                 </div>
               )}
               {action === "Delete" && (
@@ -313,6 +344,26 @@ const JobAlertTable: React.FC = () => {
                   </div>
                 </div>
               )}
+              {
+                action == "View"
+                &&
+              <button
+                onClick={() => navigate("/job-details/"+selectedAlert.slug)}
+                className="mt-4 px-4 py-2 bg-green-600 text-white rounded-md"
+              >
+                Job Details
+              </button>
+              }
+              {
+                action == "Share"
+
+                &&
+                <Button onClick={shareJob} isLoading={shareLoading} bg={"green"} color={"white"} px={4} py={2} rounded={2}>
+                Send
+              </Button>
+              }
+
+              <span className="mx-3"></span>
               <button
                 onClick={() => setSelectedAlert(null)}
                 className="mt-4 px-4 py-2 bg-green-600 text-white rounded-md"

@@ -2,7 +2,7 @@ import { Badge, Divider, useToast } from "@chakra-ui/react";
 import images from "../../../components/constant/Images";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { httpGetWithoutToken } from "../../../utils/http_utils";
+import { httpGetWithoutToken, httpPostWithToken } from "../../../utils/http_utils";
 import moment from "moment/moment";
 const JobDetailss = () => {
     const [job, setJob] = useState<any>({})
@@ -13,7 +13,19 @@ const JobDetailss = () => {
         fetchJob()
     }, [])
     const toast = useToast();
+    const saveJob = async () => {
+        const resp = await httpPostWithToken("jobs/saved/"+job?.id);
+        if(resp.status == "success") {
+            toast({
+                status : "success",
+                title : "Job saved!",
+                isClosable : true,
+              })
+        }else{
+        }
+        setLoading(false)
 
+    }
     const fetchJob = async () => {
         const resp = await httpGetWithoutToken("jobs/"+params.slug);
         if(resp.status == "success") {
@@ -47,7 +59,7 @@ const JobDetailss = () => {
                             <div className="flex justify-between items-center flex-col md:flex-row lg:flex-row my-5">
                                 <h3 className="text-[28px] font-bold">{job.title}</h3>
                                 <div className="flex gap-3">
-                                    {/* <button className="font-sans text-[13px] font-medium min-w-[100px] text-[#ee009d] border-[1px] border-[#ee009d] hover:text-[#EE009D] h-[35px] px-[10px] rounded-[5px] ">Report Job</button> */}
+                                    <button onClick={saveJob} className="font-sans text-[13px] font-medium min-w-[100px] text-[#ee009d] border-[1px] border-[#ee009d] hover:text-[#EE009D] h-[35px] px-[10px] rounded-[5px] ">Save Job</button>
                                     <button className="font-sans text-[13px] font-medium min-w-[100px] text-[#fff] border-[1px] border-[#ee009d] bg-[#ee009d] hover:text-[#ccc] h-[35px] px-[10px] rounded-[5px] ">Apply Now</button>
                                 </div>
                             </div>

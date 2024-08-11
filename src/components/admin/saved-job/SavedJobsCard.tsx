@@ -3,6 +3,7 @@ import React from 'react';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 
 interface SavedJobsCardProps {
+  id: string;
   companyLogo: string;
   jobTitle: string;
   jobType: string;
@@ -17,6 +18,7 @@ interface SavedJobsCardProps {
 }
 
 const SavedJobsCard: React.FC<SavedJobsCardProps> = ({
+  id,
   companyLogo,
   jobTitle,
   jobType,
@@ -81,6 +83,7 @@ const SavedJobsCard: React.FC<SavedJobsCardProps> = ({
             >
               <button
                 onClick={() => handleActionClick({
+                  id,
                   companyLogo,
                   jobTitle,
                   jobType,
@@ -95,6 +98,7 @@ const SavedJobsCard: React.FC<SavedJobsCardProps> = ({
               </button>
               <button
                 onClick={() => handleActionClick({
+                  id,
                   companyLogo,
                   jobTitle,
                   jobType,
@@ -109,6 +113,7 @@ const SavedJobsCard: React.FC<SavedJobsCardProps> = ({
               </button>
               <button
                 onClick={() => handleActionClick({
+                  id,
                   companyLogo,
                   jobTitle,
                   jobType,

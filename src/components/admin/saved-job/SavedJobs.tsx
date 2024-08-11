@@ -1,108 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { UilAngleDown, UilAngleUp } from "@iconscout/react-unicons";
 import SavedJobsCard from "./SavedJobsCard";
-import Images from "../../constant/Images";
+import { httpGetWithToken, httpPostWithToken } from "../../../utils/http_utils";
+import { useToast } from "@chakra-ui/react";
 
 const SavedJobs: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedOption, setSelectedOption] = useState('');
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState<number | null>(null);
   const [selectedAlert, setSelectedAlert] = useState<any>(null);
   const [action, setAction] = useState<string | null>(null);
-  const [savedJobs, setSavedJobs] = useState([
-    {
-      companyLogo: Images.UberImage,
-      jobTitle: "Chief Human Resource Officer",
-      jobType: "Part-Time",
-      salary: 3500,
-      paymentTime: "Monthly. Fresher",
-      location: "USA, Palo Alto",
-      category: "Management, Product",
-    },
-    {
-      companyLogo: Images.NetflixImage,
-      jobTitle: "Software Engineer",
-      jobType: "Freelance",
-      salary: 50,
-      paymentTime: "Hourly. intermediate",
-      location: "Canada, Toronto",
-      category: "IT, Software",
-    },
-    {
-      companyLogo: Images.FirstBankImage,
-      jobTitle: "Marketing Specialist",
-      jobType: "Full-Time",
-      salary: 4500,
-      paymentTime: "Monthly. Senior level",
-      location: "USA, New York",
-      category: "Marketing, Sales",
-    },
-    {
-      companyLogo: Images.AccessbankImage,
-      jobTitle: "Data Analyst",
-      jobType: "Contract",
-      salary: 3000,
-      paymentTime: "Monthly. Entry Level",
-      location: "UK, London",
-      category: "Data, Analytics",
-    },
-    {
-      companyLogo: Images.FacebookImage,
-      jobTitle: "UX/UI Designer",
-      jobType: "Fixed-Price",
-      salary: 4000,
-      paymentTime: "Monthly. Intermediate",
-      location: "Australia, Sydney",
-      category: "Design, Creative",
-    },
-    {
-      companyLogo: Images.AppleImage,
-      jobTitle: "Project Manager",
-      jobType: "Fixed-Price",
-      salary: 5000,
-      paymentTime: "Monthly. Senior level",
-      location: "Germany, Berlin",
-      category: "Management, Product",
-    },
-    {
-      companyLogo: Images.SamsungImage,
-      jobTitle: "Content Writer",
-      jobType: "Hourly",
-      salary: 30,
-      paymentTime: "Hourly",
-      location: "India, Bangalore",
-      category: "Content, Writing",
-    },
-    {
-      companyLogo: Images.OracleImage,
-      jobTitle: "Customer Support Specialist",
-      jobType: "Fixed-Price",
-      salary: 2500,
-      paymentTime: "Monthly",
-      location: "USA, Austin",
-      category: "Customer Support",
-    },
-    {
-      companyLogo: Images.MoniepointImage,
-      jobTitle: "Product Manager",
-      jobType: "Fixed-Price",
-      salary: 6000,
-      paymentTime: "Monthly",
-      location: "France, Paris",
-      category: "Management, Product",
-    },
-    {
-      companyLogo: Images.AmazonImage,
-      jobTitle: "Financial Analyst",
-      jobType: "Contract",
-      salary: 5500,
-      paymentTime: "Monthly",
-      location: "Japan, Tokyo",
-      category: "Finance, Accounting",
-    },
-  ]);
-
+  const [savedJobs, setSavedJobs] = useState([]);
+  const toast = useToast();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const jobsPerPage = 5;
 
@@ -111,10 +19,6 @@ const SavedJobs: React.FC = () => {
   const currentJobs = savedJobs.slice(indexOfFirstJob, indexOfLastJob);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-  const handleOptionChange = (option: string) => {
-    setSelectedOption(option);
-    setDropdownOpen(false);
-  };
 
   const handleActionClick = (job: any, action: string) => {
     setSelectedAlert(job);
@@ -122,12 +26,14 @@ const SavedJobs: React.FC = () => {
     setShowDropdown(null);
   };
 
-  const handleDelete = () => {
-    setSavedJobs(savedJobs.filter((job) => job !== selectedAlert));
+  const handleDelete = async () => {
+    await handleDeleteSaved(selectedAlert.id)
     setSelectedAlert(null);
+    fetchSavedJobs();
   };
 
   useEffect(() => {
+    fetchSavedJobs()
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setShowDropdown(null);
@@ -144,43 +50,48 @@ const SavedJobs: React.FC = () => {
     { value: "Category", label: "Category", color: "#ff9900" },
     { value: "Job-Type", label: "Job Type", color: "#40E0D0" },
   ];
-
+  const fetchSavedJobs = async () => {
+    const res = await httpGetWithToken("jobs/saved");
+    if(res.status == "success") {
+      let jobs = res.data.map((d:any)=> {
+        return {
+          id : d.id,
+          companyLogo: d.company.avatar,
+          jobTitle: d.title,
+          jobType: d.job_type.title,
+          salary: d.salary,
+          paymentTime: "monthly",
+          location: d.location,
+          category: d.departments.title,
+        }
+      })
+      setSavedJobs(jobs)
+    } 
+  }
+  const handleDeleteSaved = async (id : string) => {
+    await httpPostWithToken("jobs/saved/delete/"+id)
+    toast({
+      status : "success",
+      title : "Job deleted!",
+      isClosable : true,
+    })
+  }
   return (
     <div className="container mx-auto mt-[8rem] px-4 md:px-4 lg:px-8">
       <section className="flex flex-col md:flex-row items-center justify-between md:space-x-4">
         <h2 className="text-[#2aa100] text-[24px] sm:text-[38px] font-poppins font-semibold mb-4 md:mb-0">Saved Jobs</h2>
-        <div className="w-full md:w-1/3 lg:w-1/6 relative">
-          <button
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="w-full py-1 px-4 rounded-[20px] focus:outline-none bg-[#fff] shadow-md text-[#646A73] text-[16px] flex justify-between items-center"
-          >
-            <span style={{ color: categories.find(cat => cat.value === selectedOption)?.color }}>
-              {selectedOption || "New"}
-            </span>
-            {dropdownOpen ? <UilAngleUp /> : <UilAngleDown />}
-          </button>
-          {dropdownOpen && (
-            <ul className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-md shadow-lg">
-              {categories.map((category) => (
-                <li
-                  key={category.value}
-                  onClick={() => handleOptionChange(category.value)}
-                  className="px-4 py-2 cursor-pointer text-[#646A73] hover:bg-gray-100"
-                  style={{ color: category.color }}
-                >
-                  {category.label}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
       </section>
       <div className="py-8">
         <div className="flex justify-center">
           <div className="flex flex-col flex-1 space-y-4">
-            {currentJobs.map((job, index) => (
+            {
+              currentJobs.length == 0
+              &&
+              <p>No saved jobs found!</p>
+            }
+            {currentJobs.map((job:any, index) => (
               <SavedJobsCard
-                key={index}
+                id={job.id}
                 companyLogo={job.companyLogo}
                 jobTitle={job.jobTitle}
                 jobType={job.jobType}

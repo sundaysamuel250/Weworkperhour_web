@@ -74,7 +74,7 @@ import AboutHeroImage from "../../images/video.png"
 import LoginImage from "../../images/login.png"
 import JobSearchImage from "../../images/job-search.png"
 import ProfileImage from "../../images/profile.png"
-
+import delete_basket_y from "../../images/delete_basket_y.png";
 
 
 
@@ -108,6 +108,7 @@ const assets: Assets = {
   IBMImage,
   SportifyImage,
   MicrosoftImage,
+  delete_basket_y,
   NetflixImage,
   AmazonImage,
   OracleImage,

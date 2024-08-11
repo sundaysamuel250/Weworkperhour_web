@@ -1,10 +1,11 @@
-import React, { useReducer, useState } from 'react';
+import React, { useContext, useReducer, useState } from 'react';
 import Images from '../constant/Images';
 import { FaGoogle, FaApple, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { httpPostWithoutToken } from '../../utils/http_utils';
 import { useToast } from '@chakra-ui/react';
 import ls from "localstorage-slim";
+import { AppContext } from '../../global/state';
 
 // Define the State interface
 interface State {
@@ -50,7 +51,7 @@ const LoginForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
-
+  const {updateUser}:any = useContext(AppContext)
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     let d = {
@@ -69,8 +70,9 @@ const LoginForm: React.FC = () => {
       })
       ls.set("wwph_token", response.access_token, {encrypt : true});
       ls.set("wwph_usr", response.user, {encrypt : true});
+      updateUser(response.user)
       setTimeout(() => {
-        navigate("/")
+        navigate("/resume-page")
       }, 1000);
     }else{
       dispatch({ type: 'SET_ERROR', payload: response.message });
