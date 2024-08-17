@@ -14,7 +14,6 @@ const ComeJoinUsSection: React.FC = () => {
     console.log('Submitted email:', email);
     // Add your logic to send the email here
   };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -59,6 +58,7 @@ const ComeJoinUsSection: React.FC = () => {
         </div>
       </section>
     </motion.section>
+
   );
 };
 

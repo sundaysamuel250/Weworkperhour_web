@@ -23,7 +23,6 @@ const JobSearch: React.FC = () => {
     // Here you can perform the search based on jobQuery, locationQuery, and selectedOption
     console.log('Searching for job:', jobQuery, 'in location:', locationQuery, 'with option:', selectedOption);
   };
-
   const { ref, inView } = useInView({
     triggerOnce: false,
     threshold: 0.1,

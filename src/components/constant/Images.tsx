@@ -99,6 +99,7 @@ import ProfileLogoSixteen from "../../images/Design 40 (16).png"
 
 
 
+
 interface Assets {
   [key: string]: string;
 }
@@ -196,7 +197,6 @@ ProfileLogoThirteen,
 ProfileLogoForteen,
 ProfileLogoFifteen,
 ProfileLogoSixteen
-
 };
 
 export default assets;

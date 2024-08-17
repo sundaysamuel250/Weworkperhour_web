@@ -155,8 +155,11 @@ const EasyStepSection: React.FC = () => {
           </Link>
         </div>
       </motion.section>
-    </section>
+      </section>
   );
+
 };
 
 export default EasyStepSection;
+
+;

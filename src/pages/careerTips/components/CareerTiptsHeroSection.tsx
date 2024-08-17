@@ -88,7 +88,7 @@ const CareerTipsHeroSection: FC = () => {
           lastUpdated='March 2024'
         />
       </Slider>
-    </motion.div>
+      </motion.div>
   );
 };
 

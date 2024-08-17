@@ -20,8 +20,9 @@ const FooterSection: React.FC = () => {
       transition={{ duration: 2 }}
       className='bg-[#ffffff]'
     >
+    <section className='bg-[#ffffff]'>
       <div className='lg:flex justify-center lg:px-[1rem] md:px-4 py-[8rem] xl:gap-[4rem] lg:gap-[2rem] space-y-[2rem]'>
-        <div className='w-full md:w-1/2 lg:w-[50%] lg:px-0 px-[2rem]'>
+        <div className='w-full md:w-1/2 lg:w-[50%] lg:px-0 px-[2rem] '>
           <Link to="/" className="logo">
             <img src={Images.Logo} alt="logo" className="w-32 md:w-40 h-auto" />
           </Link>
@@ -65,6 +66,7 @@ const FooterSection: React.FC = () => {
       </div>
       <div className='xl:max-w-[1200px] lg:max-w-[900px] mx-auto border-[1px] border-[#2AA100] mt-[-4rem]'/>
       <section className='flex lg:flex-row xl:flex-row flex-col-reverse md:flex justify-center xl:gap-[20rem] lg:gap-[4rem] py-[4rem] lg:px-0 px-[2rem]'>
+
         <p className='text-sm md:text-base sm:mb-0 lg:mt-0 xl:mt-0 mt-[2rem] text-gray-600'>@Copyright WWPH 2022. All rights reserved.</p>
         <div className='lg:flex xl:gap-[4rem] lg:gap-[2rem] justify-center lg:space-y-0 space-y-[2rem]'> 
           <h2 className='text-black text-[14px] md:text-lg font-semibold'>Privacy Policy</h2>
@@ -72,8 +74,10 @@ const FooterSection: React.FC = () => {
           <h2 className='text-black text-base md:text-lg font-semibold'>Cookies Policy</h2>
         </div>
       </section>
+      </section>
     </motion.section>
   );
-}
+
+  };
 
 export default FooterSection;

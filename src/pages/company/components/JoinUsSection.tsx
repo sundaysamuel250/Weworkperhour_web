@@ -51,7 +51,7 @@ const JoinUsSection: React.FC = () => {
         </motion.div>
       </motion.section>
     </section>
+
   );
 };
-
 export default JoinUsSection;

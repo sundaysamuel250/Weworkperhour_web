@@ -10,6 +10,7 @@ const FindJobSearchSection: React.FC = () => {
   const [jobTypes, setJobTypes] = useState([]);
   const [locationQuery, setLocationQuery] = useState('');
   const [selectedOption, setSelectedOption] = useState('Full-time');
+
   const navigate = useNavigate();
 
   const handleJobChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +59,7 @@ const FindJobSearchSection: React.FC = () => {
       transition={{ duration: 1.5, ease: 'easeInOut' }}
       className="flex justify-center items-center"
     >
-      <div className="lg:flex md:flex justify-center items-center w-full lg:mx-[2rem] mx-[2rem] py-[2rem] lg:space-y-0 md:space-y-0 space-y-[1rem]">
+      <div className="lg:flex md:flex  justify-center items-center w-full lg:mx-[2rem] mx-[2rem] py-[2rem] lg:space-y-0 md:space-y-0 space-y-[1rem] ">
         <div className="w-[100%]">
           <input
             type="text"

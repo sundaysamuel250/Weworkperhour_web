@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Images from '../../../components/constant/Images';
@@ -59,3 +60,4 @@ const EasyManageSection: React.FC = () => {
 }
 
 export default EasyManageSection;
+

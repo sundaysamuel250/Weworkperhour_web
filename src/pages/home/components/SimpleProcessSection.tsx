@@ -68,7 +68,7 @@ const SimpleProcessSection: React.FC = () => {
             >
               Get Started <FaArrowRightLong />
             </motion.button>
-          </Link>
+            </Link>
         </div>
       </section>
     </section>

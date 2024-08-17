@@ -21,7 +21,7 @@ const OurPlatformSection: React.FC = () => {
           animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : -50 }}
           transition={{ duration: 1 }}
         >
-          <p className="bg-[#D1FFBD] flex items-center font-sans font-medium text-[#2aa100] gap-[0.2] w-[120px] text-center px-[0.5rem] py-[0.5rem] rounded-[5px] ">
+          <p className="bg-[#D1FFBD] flex items-center font-sans font-mdeium text-[#2aa100]  gap-[0.2] w-[120px] text-center px-[0.5rem] py-[0.5rem] rounded-[5px] ">
             <MdOutlineTipsAndUpdates />
             Career Tips
           </p>
@@ -35,7 +35,7 @@ const OurPlatformSection: React.FC = () => {
           </p>
           <div className="py-[1rem]">
             <Link to="/">
-              <button className="font-sans text-[14px] font-medium text-[#FFFFFF] bg-[#EE009D] hover:bg-[#2AA100] py-[8px] px-[10px] rounded-[5px] flex items-center justify-center gap-[0.5rem]">
+              <button className="font-sans text-[14px] font-medium  text-[#FFFFFF]  bg-[#EE009D] hover:bg-[#2AA100] py-[8px] px-[10px] rounded-[5px] flex items-center justify-center gap-[0.5rem] ">
                 Learn more <FaArrowRightLong />
               </button>
             </Link>

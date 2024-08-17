@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -36,6 +37,8 @@ import SavedCandidate from "./components/employer-admin/saved-candidate/SavedCan
 import EmployersAccountSettings from "./components/employer-admin/account-settings/EmplyersAccountSetting";
 import EmployersDeleteAccount from "./components/employer-admin/delete-account/EmployersDeleteAccount";
 import CandidatesHireTalent from "./components/hire-talent/HireTalent";
+
+
 
 function App() {
   return (
@@ -79,7 +82,6 @@ function Main() {
         <Route path="register" element={<RegisterForm />} />
         <Route path="talent" element={<TalentForm />} />
         <Route path="hire-talent" element={<CandidatesHireTalent />} />
-
         {/* <Route path="job-details" element={<JobDataPage />} /> */}
         <Route path="job-details/:slug" element={<JobDataPage />} />
         <Route path="application-details" element={<JobDataPage />} />
@@ -150,7 +152,6 @@ function Main() {
           element={<EmployersLayout element={<EmployersDeleteAccount/>} />}
         />
       </Routes>
-      
     </div>
   );
 }

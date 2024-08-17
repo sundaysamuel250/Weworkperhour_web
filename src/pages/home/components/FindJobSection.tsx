@@ -48,5 +48,4 @@ const FindJobSection: React.FC = () => {
     </section>
   );
 };
-
 export default FindJobSection;

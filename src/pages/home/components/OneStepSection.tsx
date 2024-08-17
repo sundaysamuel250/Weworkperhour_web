@@ -49,8 +49,8 @@ const OneStepSection: React.FC = () => {
             </Link>
           </div>
         </motion.div>
-      </section>
-    </section>
+        </section>
+        </section>
   );
 };
 
