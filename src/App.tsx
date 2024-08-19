@@ -37,6 +37,7 @@ import SavedCandidate from "./components/employer-admin/saved-candidate/SavedCan
 import EmployersAccountSettings from "./components/employer-admin/account-settings/EmplyersAccountSetting";
 import EmployersDeleteAccount from "./components/employer-admin/delete-account/EmployersDeleteAccount";
 import CandidatesHireTalent from "./components/hire-talent/HireTalent";
+import CandidateProfile from "./components/hire-talent/candidate-profile/CandidateProfile";
 
 
 
@@ -82,6 +83,7 @@ function Main() {
         <Route path="register" element={<RegisterForm />} />
         <Route path="talent" element={<TalentForm />} />
         <Route path="hire-talent" element={<CandidatesHireTalent />} />
+        <Route path="candidate-profile" element={<CandidateProfile />} />
         {/* <Route path="job-details" element={<JobDataPage />} /> */}
         <Route path="job-details/:slug" element={<JobDataPage />} />
         <Route path="application-details" element={<JobDataPage />} />
