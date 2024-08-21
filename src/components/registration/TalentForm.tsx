@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
 import Images from '../constant/Images';
+import { Link } from 'react-router-dom';
 
 // Define the State interface
 interface State {
@@ -132,12 +133,14 @@ const TalentForm: React.FC = () => {
               </div>
             </div>
             <div>
+              <Link to="/hire-talent">
               <button
                 type="submit"
                 className="w-full px-6 py-3 text-white bg-[#ee009d] rounded-md hover:bg-[#2AA100] focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 Book a demo
               </button>
+              </Link>
             </div>
           </form>
         </div>

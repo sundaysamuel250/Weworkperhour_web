@@ -3,9 +3,10 @@ import React from 'react';
 import { FaRegUser } from 'react-icons/fa6';
 import { IoBookmarkOutline } from 'react-icons/io5';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
-import ChartData from './barchart/ChartData';
+import ChartData from '../../candidate-admin/barchart/ChartData';
 
-const Dashboard: React.FC = () => {
+
+const EmployersDashboard: React.FC = () => {
   return (
     <div className='mt-[8rem]'>
       <h2 className='px-[2rem] text-[#2aa100] text-[38px] font-sans font-semibold'>Dashboard</h2>
@@ -53,4 +54,4 @@ const Dashboard: React.FC = () => {
   );
 }
 
-export default Dashboard;
+export default EmployersDashboard;

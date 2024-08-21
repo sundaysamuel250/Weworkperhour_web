@@ -75,6 +75,25 @@ import LoginImage from "../../images/login.png"
 import JobSearchImage from "../../images/job-search.png"
 import ProfileImage from "../../images/profile.png"
 import delete_basket_y from "../../images/delete_basket_y.png";
+import ProfileLogoOne from "../../images/Design 40 (1).png"
+import ProfileLogoTwo from "../../images/Design 40 (2).png"
+import ProfileLogoThree from "../../images/Design 40 (3).png"
+import ProfileLogoFour from "../../images/Design 40 (4).png"
+import ProfileLogoFive from "../../images/Design 40 (5).png"
+import ProfileLogoSix from "../../images/Design 40 (6).png"
+import ProfileLogoSeven from "../../images/Design 40 (7).png"
+import ProfileLogoEight from "../../images/Design 40 (8).png"
+import ProfileLogoNine from "../../images/Design 40 (9).png"
+import ProfileLogoTen from "../../images/Design 40 (10).png"
+import ProfileLogoEleven from "../../images/Design 40 (11).png"
+import ProfileLogoTwelve from "../../images/Design 40 (12).png"
+import ProfileLogoThirteen from "../../images/Design 40 (13).png"
+import ProfileLogoForteen from "../../images/Design 40 (14).png"
+import ProfileLogoFifteen from "../../images/Design 40 (15).png"
+import ProfileLogoSixteen from "../../images/Design 40 (16).png"
+
+
+
 
 
 
@@ -162,6 +181,22 @@ const assets: Assets = {
   LoginImage,
 JobSearchImage,
 ProfileImage,
+ProfileLogoOne,
+ProfileLogoTwo,
+ProfileLogoThree,
+ProfileLogoFour,
+ProfileLogoFive,
+ProfileLogoSix,
+ProfileLogoSeven,
+ProfileLogoEight,
+ProfileLogoNine,
+ProfileLogoTen,
+ProfileLogoEleven,
+ProfileLogoTwelve,
+ProfileLogoThirteen,
+ProfileLogoForteen,
+ProfileLogoFifteen,
+ProfileLogoSixteen
 };
 
 export default assets;

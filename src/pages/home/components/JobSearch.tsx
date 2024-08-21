@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
 
 const JobSearch: React.FC = () => {
   const [jobQuery, setJobQuery] = useState('');
@@ -21,9 +23,19 @@ const JobSearch: React.FC = () => {
     // Here you can perform the search based on jobQuery, locationQuery, and selectedOption
     console.log('Searching for job:', jobQuery, 'in location:', locationQuery, 'with option:', selectedOption);
   };
+  const { ref, inView } = useInView({
+    triggerOnce: false,
+    threshold: 0.1,
+  });
 
   return (
-    <div className="flex justify-center items-center">
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : -50 }}
+      transition={{ duration: 3 }}
+      className="flex justify-center items-center"
+    >
       <div className="lg:flex md:flex justify-center items-center w-full lg:mx-[8rem] mx-[2rem] py-[2rem] lg:space-y-0 md:space-y-0 space-y-[1rem] ">
         <div className="w-[100%]">
           <input
@@ -61,7 +73,7 @@ const JobSearch: React.FC = () => {
           Search
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,29 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaCircle, FaBars, FaFileAlt } from 'react-icons/fa';
 import { UilCreateDashboard, UilSetting, UilSignout, UilTimes, UilTrash } from '@iconscout/react-unicons';
-import Images from '../constant/Images';
 import { FaBarsStaggered, FaEnvelope, FaRegUser } from 'react-icons/fa6';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { IoBookmarkOutline, IoNotificationsOutline } from 'react-icons/io5';
-import ProgressBar from '../reusable/ProgressBar';
-import { AppContext } from '../../global/state';
-import { iProfile } from '../../models/profle';
+import Images from '../../constant/Images';
+import ProgressBar from '../../reusable/ProgressBar';
 
 
-interface iContext {
-  user? : iProfile
-}
 const SideNav: React.FC = () => {
   const location = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const targetProgress = 87; // Set the target progress value here
-  const { user } : iContext = useContext(AppContext);
 
   useEffect(() => {
-    console.log(user)
     const interval = setInterval(() => {
       setProgress(prevProgress => {
         if (prevProgress < targetProgress) {
@@ -73,9 +66,9 @@ const SideNav: React.FC = () => {
          <img src={Images.Logo} alt="logo" className="w-full max-w-[150px] h-auto mb-4" />
          </Link>
           <FaCircle className="relative w-[10px] h-[10px] top-6 left-6 text-[#40e6b9]" size={20} />
-          <img className="sm:h-[50px] sm:w-[50px] w-[25px] h-[25px] rounded-full mb-4" src={user?.avatar ? user.avatar : Images.ProfileImage} alt="Profile" />
+          <img className="sm:h-[50px] sm:w-[50px] w-[25px] h-[25px] rounded-full mb-4" src={Images.ProfileImage} alt="Profile" />
           <div className='flex items-center gap-[0.3rem]'>
-            <h1 className="text-md font-bold text-[#2aa100] cursor-pointer" onClick={toggleDropdown}>{user?.name}</h1>
+            <h1 className="text-md font-bold text-[#2aa100] cursor-pointer" onClick={toggleDropdown}>Jeff Samuel</h1>
             <button className="mt-2 text-gray-400 hover:text-white" onClick={toggleDropdown}>
               <IoMdArrowDropdown size="25" color='#2aa100' />
             </button>
@@ -92,42 +85,42 @@ const SideNav: React.FC = () => {
         </div>
         <nav className="mt-4 flex-1">
           <ul>
-            <Link to='/dashboard'>
+            <Link to='/employers-dashboard'>
               <li className={`py-2 hover:bg-[#F5E2EF] hover:rounded-lg hover:px-[1rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/dashboard') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] mx-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
                 <UilCreateDashboard size={25} color={isActive('/dashboard') ? '#2aa100' : '#2aa100'} /> Dashboard
               </li>
             </Link>
-            <Link to='/profile-list'>
+            <Link to='/employers-profile'>
               <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/profile-list') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
                 <FaRegUser size={25} /> My Profile
               </li>
             </Link>
-            <Link to='/resume-page'>
+            <Link to='/my-jobs'>
               <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/resume') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
-                <FaFileAlt size={25} /> Resume
+                <FaFileAlt size={25} /> My Jobs
               </li>
             </Link>
-            <Link to='/messages'>
+            <Link to='/employers-messages'>
               <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/messages') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
                 <FaEnvelope size={25} /> Message
               </li>
             </Link>
-            <Link to='/job-alerts'>
+            <Link to='/submit-jobs'>
               <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/job-alerts') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
-                <IoNotificationsOutline size={25} /> Job Alert
+                <IoNotificationsOutline size={25} /> Submit Job
               </li>
             </Link>
-            <Link to='/saved-jobs'>
+            <Link to='/saved-candidate'>
               <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/saved-jobs') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
-                <IoBookmarkOutline size={25} /> Saved Job
+                <IoBookmarkOutline size={25} /> Saved Candidate
               </li>
             </Link>
-            <Link to='/account-setting'>
+            <Link to='/employers-account-settings'>
               <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/account-settings') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
                 <UilSetting size={25} /> Account Settings
               </li>
             </Link>
-            <Link to='/delete-account'>
+            <Link to='/employers-delete-account'>
               <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/delete-account') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
                 <UilTrash size={25}  /> Delete Account
               </li>

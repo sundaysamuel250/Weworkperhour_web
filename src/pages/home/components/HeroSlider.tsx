@@ -93,7 +93,7 @@ const HeroSlider: FC = () => {
                 <h1 className="font-sans lg:text-[48px] md:text-[38px] text-[20px] text-[#2AA100] font-bold">{slide.title}</h1>
                 <p className='text-md text-[#646A73] tracking-[0.5px] font-sans font-normal'>{slide.content}</p>
                <div className='py-[1rem]'>
-               <Link to="/">
+               <Link to="/find-job">
                   <button className="font-sans text-center text-[16px] font-medium text-[#FFFFFF] bg-[#EE009D] hover:bg-[#2AA100] py-[6px] px-[10px] rounded-[5px]">{slide.buttonText}</button>
                 </Link>
                </div>
