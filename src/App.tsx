@@ -15,7 +15,6 @@ import LearnMoreSection from "./pages/careerTips/components/LearnMoreSection";
 import About from "./pages/about/About";
 import LoginForm from "./components/registration/LoginForm";
 import RegisterForm from "./components/registration/RegisterForm";
-import TalentForm from "./components/registration/TalentForm";
 import ScrollToTop from "./components/constant/ScrollToTop";
 import JobDataPage from "./pages/findJob/job-details/JobDataPage";
 import AdminLayout from "./components/candidate-admin/AdminLayout";
@@ -81,7 +80,6 @@ function Main() {
         <Route path="about" element={<About />} />
         <Route path="login" element={<LoginForm />} />
         <Route path="register" element={<RegisterForm />} />
-        <Route path="talent" element={<TalentForm />} />
         <Route path="hire-talent" element={<CandidatesHireTalent />} />
         <Route path="candidate-profile" element={<CandidateProfile />} />
         {/* <Route path="job-details" element={<JobDataPage />} /> */}

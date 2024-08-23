@@ -87,7 +87,7 @@ const Navbar: React.FC = () => {
                 <button className="font-sans mr-2 text-[14px] font-medium text-[#000000] border-2 border-[#2AA100] hover:text-[#EE009D] py-[4px] px-[10px] rounded-[5px] ease-in duration-300 ">Sign Up</button>
               </Link>
             }
-            <Link to="talent" onClick={toggleMenu}>
+            <Link to="hire-talent" onClick={toggleMenu}>
               <button className="font-sans text-[14px] font-medium  text-[#FFFFFF]  bg-[#EE009D] hover:bg-[#2AA100] py-[6px] px-[10px] rounded-[5px] justify-center ease-in duration-300 ">Hire Talent</button>
             </Link>
           </div>
