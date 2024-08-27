@@ -42,7 +42,7 @@ const OneStepSection: React.FC = () => {
             next adventure.
           </p>
           <div className="py-[1rem]">
-            <Link to="/find-job">
+            <Link to="/career-tips">
               <button className="font-sans text-[14px] font-medium text-[#FFFFFF] bg-[#EE009D] hover:bg-[#2AA100] py-[8px] px-[10px] rounded-[5px] flex items-center justify-center gap-[0.5rem]">
                 Learn more <FaArrowRightLong />
               </button>

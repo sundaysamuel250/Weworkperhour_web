@@ -15,7 +15,7 @@ const FeaturesJobSection: React.FC = () => {
         </div>
         <div className='text-center'>
         <h1 className='lg:text-[38px] md:text-[28px] text-[20px] mt-[0.5rem] font-sans font-semibold tracking-[1px]' ><span className='text-[#EE009D]' >Featured</span> job of the week.</h1>
-        <p className='lg:text-[14px] md:text-[16px] text-[10px] text-[#646A73] font-sans font-normal mt-[0.5rem]'>Find more than 500k job vacancies of your dreams,<br /> from startup companies, unions, to bonafides</p>
+        <p className='lg:text-[14px] md:text-[16px] text-[10px] text-[#646A73] font-sans font-normal mt-[0.5rem]'>Find more than 500 job vacancies of your dreams,<br /> from startup companies, unions, to bonafides</p>
       </div>
             </div>
         </section>

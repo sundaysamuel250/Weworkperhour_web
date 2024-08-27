@@ -24,21 +24,21 @@ const ProductivitySection: React.FC = () => {
           <div className='text-center'>
             <h6 className='text-[14px] text-[#646A73] font-sans font-normal'>Jobs</h6>
             <h1 className='text-[#000000] font-sans font-bold lg:text-[38px] md:text-[28px] text-[24px]'>
-              <span className='text-[#EE009D] font-extrabold'>+</span>150K
+              <span className='text-[#EE009D] font-extrabold'>+</span>20
             </h1>
           </div>
           <div className="border-[1px] h-[50px] border-[#EE009D] opacity-[0.5]"/>
           <div className='text-center'>
             <h6 className='text-[14px] text-[#646A73] font-sans font-normal'>Start Ups</h6>
             <h1 className='text-[#000000] font-sans font-bold lg:text-[38px] md:text-[28px] text-[24px]'>
-              <span className='text-[#EE009D] font-extrabold'>+</span>10K
+              <span className='text-[#EE009D] font-extrabold'>+</span>10
             </h1>
           </div>
           <div className="border-[1px] h-[50px] border-[#EE009D] opacity-[0.5]"/>
           <div className='text-center'>
             <h6 className='text-[14px] text-[#646A73] font-sans font-normal'>Recruitment</h6>
             <h1 className='text-[#000000] font-sans font-bold lg:text-[38px] md:text-[28px] text-[24px]'>
-              <span className='text-[#EE009D] font-extrabold'>+</span>345K
+              <span className='text-[#EE009D] font-extrabold'>+</span>50
             </h1>
           </div>
         </section>

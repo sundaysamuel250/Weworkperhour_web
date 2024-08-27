@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaCircle, FaBars, FaFileAlt } from 'react-icons/fa';
-import { UilCreateDashboard, UilSetting, UilSignout, UilTimes, UilTrash } from '@iconscout/react-unicons';
+import { UilCreateDashboard, UilSetting, UilSignout, UilTimes, UilTrash, UilWallet } from '@iconscout/react-unicons';
 import Images from '../constant/Images';
 import { FaBarsStaggered, FaEnvelope, FaRegUser } from 'react-icons/fa6';
 import { IoMdArrowDropdown } from 'react-icons/io';
@@ -120,6 +120,11 @@ const SideNav: React.FC = () => {
             <Link to='/saved-jobs'>
               <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/saved-jobs') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
                 <IoBookmarkOutline size={25} /> Saved Job
+              </li>
+            </Link>
+            <Link to='/candidate-wallet-account'>
+              <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/candidate-wallet-account') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
+                <UilWallet size={25} /> Wallet
               </li>
             </Link>
             <Link to='/account-setting'>
