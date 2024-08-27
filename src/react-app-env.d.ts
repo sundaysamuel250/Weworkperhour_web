@@ -2,6 +2,22 @@
 
 declare module '@iconscout/react-unicons' {
     import { SVGProps } from 'react';
+    // src/types/react-paystack.d.ts
+declare module 'react-paystack' {
+  export const usePaystackPayment: any;
+}
+
+    
+    
+    declare interface PaystackPop {
+      setup(options: PaystackOptions): {
+        openIframe(): void;
+      };
+    }
+    
+    interface Window {
+      PaystackPop: PaystackPop;
+    }
   
     export type IconProps = {
       color?: string;

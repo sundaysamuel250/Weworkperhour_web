@@ -72,7 +72,7 @@ const LoginForm: React.FC = () => {
       ls.set("wwph_usr", response.user, {encrypt : true});
       updateUser(response.user)
       setTimeout(() => {
-        navigate("/resume-page")
+        navigate("/employers-dashboard")
       }, 1000);
     }else{
       dispatch({ type: 'SET_ERROR', payload: response.message });

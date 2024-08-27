@@ -39,7 +39,7 @@ const SimpleProcessSection: React.FC = () => {
             { img: Images.RegisterImage, title: 'Registration', desc: 'Build your reputation by creating a professional resume' },
             { img: Images.ApplyImage, title: 'Apply for Job', desc: 'Find your dream job and send a resume according to your field.' },
             { img: Images.InterviewImage, title: 'Interview', desc: 'Point out your skills and strengths at the interview.' },
-            { img: Images.CongratulationImage, title: 'Congratulations', desc: 'You have completed step by step; it\'s time for an employment contract.' }
+            { img: Images.CongratulationImage, title: 'Congratulations', desc: 'You have completed step by step; it is time for an employment contract.' }
           ].map((item, index) => (
             <motion.div
               key={index}

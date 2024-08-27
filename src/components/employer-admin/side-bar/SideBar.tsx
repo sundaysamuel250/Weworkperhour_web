@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaCircle, FaBars, FaFileAlt } from 'react-icons/fa';
-import { UilCreateDashboard, UilSetting, UilSignout, UilTimes, UilTrash } from '@iconscout/react-unicons';
+import { UilCreateDashboard, UilSetting, UilSignout, UilTimes, UilTrash, UilWallet } from '@iconscout/react-unicons';
 import { FaBarsStaggered, FaEnvelope, FaRegUser } from 'react-icons/fa6';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { IoBookmarkOutline, IoNotificationsOutline } from 'react-icons/io5';
@@ -86,7 +86,7 @@ const SideNav: React.FC = () => {
         <nav className="mt-4 flex-1">
           <ul>
             <Link to='/employers-dashboard'>
-              <li className={`py-2 hover:bg-[#F5E2EF] hover:rounded-lg hover:px-[1rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/dashboard') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] mx-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
+              <li className={`py-2 hover:bg-[#F5E2EF] hover:rounded-lg hover:px-[1rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/employers-dashboard') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] mx-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
                 <UilCreateDashboard size={25} color={isActive('/dashboard') ? '#2aa100' : '#2aa100'} /> Dashboard
               </li>
             </Link>
@@ -113,6 +113,11 @@ const SideNav: React.FC = () => {
             <Link to='/saved-candidate'>
               <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/saved-jobs') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
                 <IoBookmarkOutline size={25} /> Saved Candidate
+              </li>
+            </Link>
+            <Link to='/employers-wallet-account'>
+              <li className={`py-2 hover:text-[#2aa100] mt-[1.5rem] hover:rounded-lg mx-[2rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${isActive('/employers-wallet-account') ? 'bg-[#F5E2EF] rounded-lg px-[1rem] text-[#2aa100]' : 'text-[#ee009d] hover:text-[#2aa100]'}`}>
+                <UilWallet size={25} /> Wallet Account
               </li>
             </Link>
             <Link to='/employers-account-settings'>

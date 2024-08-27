@@ -27,14 +27,14 @@ const OurPlatformSection: React.FC = () => {
           </p>
           <h1 className="lg:text-[38px] md:text-[28px] text-[20px] mt-[1rem] font-sans font-semibold tracking-[1px]">
             One platform for multiple <br />
-            solutions. <span className="text-[#ee009d]">your future.</span>
+            solutions. <span className="text-[#ee009d]">Your future.</span>
           </h1>
           <p className="lg:text-[14px] md:text-[14px] lg:w-[85%] text-[10px] text-[#646A73] font-sans tracking-[0.5px] font-normal mt-[1rem]">
             You can find various solutions just by accessing our platform. Because
             we are committed to maintaining the quality of user service.
           </p>
           <div className="py-[1rem]">
-            <Link to="/">
+            <Link to="/career-tips">
               <button className="font-sans text-[14px] font-medium  text-[#FFFFFF]  bg-[#EE009D] hover:bg-[#2AA100] py-[8px] px-[10px] rounded-[5px] flex items-center justify-center gap-[0.5rem] ">
                 Learn more <FaArrowRightLong />
               </button>

@@ -23,7 +23,8 @@ const FindJobSection: React.FC = () => {
             #Find a Job that suits your interest and skill
           </p>
           <h1 className='lg:text-[38px] md:text-[28px] text-[20px] mt-[1rem] font-sans font-semibold tracking-[1px]'>
-            Discover the Perfect Job Match for <span className='text-[#EE009D]'>Your Passion</span> and Expertise!
+          Discover the perfect job that matches 
+           <span className='text-[#EE009D]'> your skills</span> and expertise.
           </h1>
           <p className='lg:text-[14px] md:text-[14px] text-[10px] text-[#646A73] font-sans font-normal mt-[1rem]'>
             Explore thousands of job opportunities with all the information you<br /> need and manage all your job applications from start to finish.

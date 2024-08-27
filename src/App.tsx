@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -37,8 +36,8 @@ import EmployersAccountSettings from "./components/employer-admin/account-settin
 import EmployersDeleteAccount from "./components/employer-admin/delete-account/EmployersDeleteAccount";
 import CandidatesHireTalent from "./components/hire-talent/HireTalent";
 import CandidateProfile from "./components/hire-talent/candidate-profile/CandidateProfile";
-
-
+import CandidateWallet from "./components/candidate-admin/candidate-payment-account/CandidteWallet";
+import EmployersWallet from "./components/employer-admin/employers-payment-account/EmployersWallet";
 
 function App() {
   return (
@@ -65,7 +64,8 @@ function Main() {
     "/employers-dashboard",
     "/employers-profile",
     "/submit-jobs",
-    "/saved-candidate"
+    "/saved-candidate",
+    "/employers-wallet-account"
   ];
 
   return (
@@ -118,6 +118,12 @@ function Main() {
           path="delete-account"
           element={<AdminLayout element={<DeletePage />} />}
         />
+
+        <Route
+          path="candidate-wallet-account"
+          element={<AdminLayout element={<CandidateWallet />} />}
+        />
+
         {/* Employers Admin routing section */}
         <Route
           path="employers-dashboard"
@@ -145,13 +151,18 @@ function Main() {
         />
         <Route
           path="employers-account-settings"
-          element={<EmployersLayout element={<EmployersAccountSettings/>} />}
+          element={<EmployersLayout element={<EmployersAccountSettings />} />}
+        />
+        <Route
+          path="employers-delete-account"
+          element={<EmployersLayout element={<EmployersDeleteAccount />} />}
         />
          <Route
-          path="employers-delete-account"
-          element={<EmployersLayout element={<EmployersDeleteAccount/>} />}
+          path="employers-wallet-account"
+          element={<AdminLayout element={<EmployersWallet />} />}
         />
       </Routes>
+      
     </div>
   );
 }
