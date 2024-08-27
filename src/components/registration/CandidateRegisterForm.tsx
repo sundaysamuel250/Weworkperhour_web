@@ -70,6 +70,7 @@ const CandidateRegisterForm: React.FC = () => {
     try {
       let data = {
         first_name: state.firstName,
+        role: "user",
         last_name: state.lastName,
         email: state.email,
         password: state.password,

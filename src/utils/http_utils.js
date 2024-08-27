@@ -4,7 +4,7 @@ import ls from "localstorage-slim";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 export const APP_API_URL = window.location.host.includes("localhost")
-? "https://api.weworkperhour.com/api/v1"
+? "http://localhost:8000/api/v1"
   : "https://api.weworkperhour.com/api/v1";
 export const validatePasswordRegex =
   // /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;

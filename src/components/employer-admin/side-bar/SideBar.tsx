@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaCircle, FaBars, FaFileAlt } from 'react-icons/fa';
 import { UilCreateDashboard, UilSetting, UilSignout, UilTimes, UilTrash, UilWallet } from '@iconscout/react-unicons';
@@ -7,14 +7,19 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import { IoBookmarkOutline, IoNotificationsOutline } from 'react-icons/io5';
 import Images from '../../constant/Images';
 import ProgressBar from '../../reusable/ProgressBar';
+import { AppContext } from '../../../global/state';
+import { iProfileCompany } from '../../../models/profle';
 
-
+interface iContext {
+  user? : iProfileCompany
+}
 const SideNav: React.FC = () => {
   const location = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const targetProgress = 87; // Set the target progress value here
+  const { user } : iContext = useContext(AppContext);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -65,10 +70,10 @@ const SideNav: React.FC = () => {
          <Link to="/">
          <img src={Images.Logo} alt="logo" className="w-full max-w-[150px] h-auto mb-4" />
          </Link>
-          <FaCircle className="relative w-[10px] h-[10px] top-6 left-6 text-[#40e6b9]" size={20} />
-          <img className="sm:h-[50px] sm:w-[50px] w-[25px] h-[25px] rounded-full mb-4" src={Images.ProfileImage} alt="Profile" />
+         <FaCircle className="relative w-[10px] h-[10px] top-6 left-6 text-[#40e6b9]" size={20} />
+          <img className="sm:h-[50px] sm:w-[50px] w-[25px] h-[25px] rounded-full mb-4" src={user?.avatar ? user.avatar : Images.ProfileImage} alt="Profile" />
           <div className='flex items-center gap-[0.3rem]'>
-            <h1 className="text-md font-bold text-[#2aa100] cursor-pointer" onClick={toggleDropdown}>Jeff Samuel</h1>
+            <h1 className="text-md font-bold text-[#2aa100] cursor-pointer" onClick={toggleDropdown}>{user?.name}</h1>
             <button className="mt-2 text-gray-400 hover:text-white" onClick={toggleDropdown}>
               <IoMdArrowDropdown size="25" color='#2aa100' />
             </button>

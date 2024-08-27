@@ -64,9 +64,10 @@ const EmployersRegisterForm: React.FC = () => {
     }
     try {
       let data = {
-        company_name: state.CompanyName,
+        name: state.CompanyName,
         email: state.email,
         password: state.password,
+        role: "company",
       }
       setIsSubmitting(true)
       const response = await httpPostWithoutToken("register", data)
