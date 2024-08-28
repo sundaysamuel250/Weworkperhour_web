@@ -38,6 +38,9 @@ import CandidatesHireTalent from "./components/hire-talent/HireTalent";
 import CandidateProfile from "./components/hire-talent/candidate-profile/CandidateProfile";
 import CandidateWallet from "./components/candidate-admin/candidate-payment-account/CandidteWallet";
 import EmployersWallet from "./components/employer-admin/employers-payment-account/EmployersWallet";
+import PrivacyPolicy from "./components/reusable/privacy/PrivacyPolicy";
+import ForCompany from "./components/reusable/for-company/ForCompany";
+import Faq from "./components/reusable/faq/Faq";
 
 function App() {
   return (
@@ -65,7 +68,7 @@ function Main() {
     "/employers-profile",
     "/submit-jobs",
     "/saved-candidate",
-    "/employers-wallet-account"
+    "/employers-wallet-account",
   ];
 
   return (
@@ -85,6 +88,9 @@ function Main() {
         {/* <Route path="job-details" element={<JobDataPage />} /> */}
         <Route path="job-details/:slug" element={<JobDataPage />} />
         <Route path="application-details" element={<JobDataPage />} />
+        <Route path="privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="for-company-footer" element={<ForCompany />} />
+        <Route path="faq" element={<Faq />} />
         {/* Candidates Admin routing section */}
         <Route
           path="candidate-dashboard"

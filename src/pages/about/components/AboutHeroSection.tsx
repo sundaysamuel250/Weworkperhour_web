@@ -22,9 +22,8 @@ const AboutHeroSection: React.FC = () => {
             We are here to assist <br /> you <span className="text-[#ee009d]">in recruiting.</span>
           </h1>
           <p className="lg:text-[14px] md:text-[14px] text-[10px] text-[#646A73] font-sans font-normal mt-[1rem] lg:w-[65%] md:w-[75%]">
-            We are a recruitment agency with the belief that recruitment is a
-            basic company activity and recruitment should be simple, fast,
-            transparent and easy for anyone to particiapte.
+          WeWorkPerHour will make recruiting full-time staff, remote or freelance workers a walk in the park for
+          your business. Our recruitment process is fast and transparent
           </p>
         </div>
       </section>

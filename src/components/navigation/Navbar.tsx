@@ -32,10 +32,11 @@ const Navbar: React.FC = () => {
   const navigationLinks: NavLink[] = useMemo(
     () => [
       { label: "Home", path: "/" },
+      { label: "About Us", path: "about" },
       { label: "For Company", path: "company" },
       { label: "Find Jobs", path: "find-job" },
       { label: "Career Tips", path: "career-tips" },
-      { label: "About Us", path: "about" },
+     
       { label: "Log in", path: "login" },
       // Add more links here
     ],
