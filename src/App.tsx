@@ -41,6 +41,7 @@ import EmployersWallet from "./components/employer-admin/employers-payment-accou
 import PrivacyPolicy from "./components/reusable/privacy/PrivacyPolicy";
 import ForCompany from "./components/reusable/for-company/ForCompany";
 import Faq from "./components/reusable/faq/Faq";
+import TestimonialsPage from "./components/reusable/testimonial/TestimonialPage";
 
 function App() {
   return (
@@ -91,6 +92,7 @@ function Main() {
         <Route path="privacy-policy" element={<PrivacyPolicy />} />
         <Route path="for-company-footer" element={<ForCompany />} />
         <Route path="faq" element={<Faq />} />
+        <Route path="testimonial" element={<TestimonialsPage />} />
         {/* Candidates Admin routing section */}
         <Route
           path="candidate-dashboard"

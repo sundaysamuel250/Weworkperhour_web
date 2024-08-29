@@ -53,7 +53,7 @@ const WhatTheySayingSection: React.FC = () => {
             transition={{ duration: 1.5, delay: 0.8, ease: 'easeInOut' }}
             className='py-[1rem]'
           >
-            <Link to="/">
+            <Link to="/testimonial">
               <button className="font-sans text-[14px] flex gap-4 items-center justify-center font-medium text-[#FFFFFF] bg-[#EE009D] hover:bg-[#2AA100] py-[6px] px-[10px] rounded-[5px]">
                 View All <FaArrowRightLong />
               </button>

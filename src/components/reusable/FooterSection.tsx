@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { FaXTwitter } from 'react-icons/fa6';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
+import { UilEnvelope, UilMailbox } from '@iconscout/react-unicons';
 
 const FooterSection: React.FC = () => {
   const { ref, inView } = useInView({
@@ -29,18 +30,31 @@ const FooterSection: React.FC = () => {
           <p className='text-sm md:text-base lg:w-[50%] py-[2rem] text-gray-600'>
             Explore thousands of job opportunities with all the information you need, and manage all your job applications from start to finish.
           </p>
+          <div className='w-full md:w-1/8 lg:w-auto lg:px-0  mb-8'>
+          <ul className='text-sm lg:flex items-center gap-4'>
+            <li className='flex items-center gap-2'><UilEnvelope size={20} className="rounded-full" color="#2aa100" />weworkperhour.com</li>
+            <li className='flex items-center gap-2'><UilEnvelope size={20} className="rounded-full" color="#2aa100" />contact@weworkperhour.com</li>
+          </ul>
+        </div>
           <div className="flex mt-4 space-x-4">
-            <FaFacebook className="w-8 h-8 rounded-full" color="#2aa100" />
-            <FaLinkedin className="w-8 h-8 rounded-full" color="#2aa100" />
-            <FaInstagram className="w-8 h-8 rounded-full" color="#2aa100" />
-            <FaXTwitter className="w-8 h-8 rounded-full" color="#2aa100" />
+            <Link to="/">
+            <FaFacebook size={20} className="rounded-full" color="#2aa100" />
+            </Link>
+            <Link to="/">
+            <FaLinkedin size={20} className="rounded-full" color="#2aa100" />
+            </Link>
+          <Link to="https://www.instagram.com/weworkperhourng">
+          <FaInstagram size={20} className="rounded-full" color="#2aa100" />
+          </Link>
+           <Link to="https://x.com/weworkperhour"> <FaXTwitter size={20} className="rounded-full" color="#2aa100" /></Link>
           </div>
         </div>
+        
         <div className='border-[1px] lg:hidden block border-[#2aa100] w-[100%]'/>
         <div className='w-full md:w-1/8 lg:w-auto lg:px-0 px-[2rem]'>
           <h2 className='text-black text-base md:text-lg font-semibold mb-4'>Company</h2>
           <ul className='text-sm'>
-            <li><Link to="/" className='text-gray-600'>Testimonial</Link></li>
+            <li><Link to="/testimonial" className='text-gray-600'>Testimonial</Link></li>
             <li className='py-[1rem]'><Link to="/for-company-footer" className='text-gray-600'>For Jobseeker</Link></li>
             <li><Link to="/for-company-footer" className='text-gray-600'>For Company</Link></li>
           </ul>
