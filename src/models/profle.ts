@@ -33,6 +33,7 @@ export interface iProfileCompany {
         "zipcode"?: string,
         "city"?: string,
         "state"?:  string,
+        "wallet"?:  string,
         "company_size"?:  string,
         "social_medias"?: iSocial[]
 }

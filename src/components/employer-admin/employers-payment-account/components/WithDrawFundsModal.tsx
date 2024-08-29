@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { iProfileCompany } from '../../../../models/profle';
 
 interface WithdrawFundsModalProps {
   onClose: () => void;
   onWithdraw: (amount: number, bankCode: string, accountNumber: string, recipientName: string) => void;
+  profile : iProfileCompany
 }
 
 const WithdrawFundsModal: React.FC<WithdrawFundsModalProps> = ({ onClose, onWithdraw }) => {

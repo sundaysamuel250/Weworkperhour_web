@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { UilAngleDown, UilAngleUp } from "@iconscout/react-unicons";
 import Images from "../../constant/Images";
 import SavedCandidatesCard from "./components/SavedCandidatesCard";
+import { httpGetWithToken } from "../../../utils/http_utils";
 
 const SavedCandidates: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,134 +11,16 @@ const SavedCandidates: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState<number | null>(null);
   const [selectedAlert, setSelectedAlert] = useState<any>(null);
   const [action, setAction] = useState<string | null>(null);
-  const [savedJobs, setSavedJobs] = useState([
-    {
-      profileLogo: Images.ProfileLogoOne,
-      profileName: "Daniel John",
-      jobTitle: "Chief Human Resource Officer",
-      experience: '2+',
-      skills: ['Digital', 'Design', 'UI'],
-      salary: '$30k-$50k/yr',
-      location: "USA, Palo Alto",
-    },
-    {
-      profileLogo: Images.ProfileLogoTwo,
-      profileName: "Daniel John",
-      jobTitle: "Chief Human Resource Officer",
-      experience: '2+',
-      skills: ['Digital', 'Design', 'UI'],
-      salary: '$30k-$50k/yr',
-      location: "USA, Palo Alto",
-    },
-    {
-      profileLogo: Images.ProfileLogoThree,
-      profileName: "Daniel John",
-      jobTitle: "Chief Human Resource Officer",
-      experience: '2+',
-      skills: ['Digital', 'Design', 'UI'],
-      salary: '$30k-$50k/yr',
-      location: "USA, Palo Alto",
-    },
-    {
-      profileLogo: Images.ProfileLogoFour,
-      profileName: "Sarah Smith",
-      jobTitle: "Senior Software Engineer",
-      experience: '5+',
-      skills: ['JavaScript', 'React', 'Node.js'],
-      salary: '$80k-$100k/yr',
-      location: "USA, San Francisco",
-    },
-    {
-      profileLogo: Images.ProfileLogoFive,
-      profileName: "Michael Brown",
-      jobTitle: "Product Manager",
-      experience: '7+',
-      skills: ['Product Management', 'Agile', 'Scrum'],
-      salary: '$90k-$120k/yr',
-      location: "USA, New York",
-    },
-    {
-      profileLogo: Images.ProfileLogoSix,
-      profileName: "Emily Davis",
-      jobTitle: "UX Designer",
-      experience: '3+',
-      skills: ['UX Research', 'Wireframing', 'Prototyping'],
-      salary: '$60k-$80k/yr',
-      location: "USA, Austin",
-    },
-    {
-      profileLogo: Images.ProfileLogoSeven,
-      profileName: "David Wilson",
-      jobTitle: "Data Scientist",
-      experience: '4+',
-      skills: ['Python', 'Ml', 'Data Analysis'],
-      salary: '$70k-$90k/yr',
-      location: "USA, Seattle",
-    },
-    {
-      profileLogo: Images.ProfileLogoEight,
-      profileName: "Laura Johnson",
-      jobTitle: "Marketing Director",
-      experience: '10+',
-      skills: ['Digital Marketing', 'SEO', 'Content Strategy'],
-      salary: '$100k-$150k/yr',
-      location: "USA, Chicago",
-    },
-    {
-      profileLogo: Images.ProfileLogoNine,
-      profileName: "Daniel John",
-      jobTitle: "Chief Human Resource Officer",
-      experience: '2+',
-      skills: ['Digital', 'Design', 'UI'],
-      salary: '$30k-$50k/yr',
-      location: "USA, Palo Alto",
-    },
-    {
-      profileLogo: Images.ProfileLogoTen,
-      profileName: "Sarah Smith",
-      jobTitle: "Senior Software Engineer",
-      experience: '5+',
-      skills: ['JavaScript', 'React', 'Node.js'],
-      salary: '$80k-$100k/yr',
-      location: "USA, San Francisco",
-    },
-    {
-      profileLogo: Images.ProfileLogoEleven,
-      profileName: "Michael Brown",
-      jobTitle: "Product Manager",
-      experience: '7+',
-      skills: ['Product Management', 'Agile', 'Scrum'],
-      salary: '$90k-$120k/yr',
-      location: "USA, New York",
-    },
-    {
-      profileLogo: Images.ProfileLogoTwelve,
-      profileName: "Emily Davis",
-      jobTitle: "UX Designer",
-      experience: '3+',
-      skills: ['UX Research', 'Wireframing', 'Prototyping'],
-      salary: '$60k-$80k/yr',
-      location: "USA, Austin",
-    },
-    {
-      profileLogo: Images.ProfileLogoThirteen,
-      profileName: "David Wilson",
-      jobTitle: "Data Scientist",
-      experience: '4+',
-      skills: ['Python', 'Machine Learning', 'Data Analysis'],
-      salary: '$70k-$90k/yr',
-      location: "USA, Seattle",
-    },
-    {
-      profileLogo: Images.ProfileLogoForteen,
-      profileName: "Laura Johnson",
-      jobTitle: "Marketing Director",
-      experience: '10+',
-      skills: ['Digital Marketing', 'SEO', 'Content Strategy'],
-      salary: '$100k-$150k/yr',
-      location: "USA, Chicago",
-    },
-  ]);
+  const [savedJobs, setSavedJobs] = useState<any[]>([]);
+  // {
+  //   profileLogo: Images.ProfileLogoForteen,
+  //   profileName: "Laura Johnson",
+  //   jobTitle: "Marketing Director",
+  //   experience: '10+',
+  //   skills: ['Digital Marketing', 'SEO', 'Content Strategy'],
+  //   salary: '$100k-$150k/yr',
+  //   location: "USA, Chicago",
+  // },
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const jobsPerPage = 5;
@@ -180,12 +63,20 @@ const SavedCandidates: React.FC = () => {
     { value: "Category", label: "Category", color: "#ff9900" },
     { value: "Job-Type", label: "Job Type", color: "#40E0D0" },
   ];
-
+  const fetchCandidates = async () => {
+    const res = await httpGetWithToken("employer/saved-candidate")
+    if(res.status == "success") {
+      setSavedJobs(res.data)
+    }
+  }
+  useEffect(()=> {
+    fetchCandidates()
+  }, [])
   return (
     <div className="container mx-auto mt-[8rem] px-4 md:px-4 lg:px-8">
       <section className="flex flex-col md:flex-row items-center justify-between md:space-x-4">
         <h2 className="text-[#2aa100] text-[24px] sm:text-[38px] font-poppins font-semibold mb-4 md:mb-0">Saved Candidate</h2>
-        <div className="w-full md:w-1/3 lg:w-1/6 relative">
+        { false && <div className="w-full md:w-1/3 lg:w-1/6 relative">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="w-full py-1 px-4 rounded-[20px] focus:outline-none bg-[#fff] shadow-md text-[#646A73] text-[16px] flex justify-between items-center"
@@ -210,11 +101,12 @@ const SavedCandidates: React.FC = () => {
             </ul>
           )}
         </div>
+        }
       </section>
       <div className="py-8">
         <div className="flex justify-center">
           <div className="flex flex-col flex-1 space-y-4">
-            {currentJobs.map((job, index) => (
+            {savedJobs.map((job, index) => (
               <SavedCandidatesCard
                 key={index}
                 profileLogo={job.profileLogo}

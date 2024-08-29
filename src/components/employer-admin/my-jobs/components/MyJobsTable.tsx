@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UilAngleDown, UilAngleUp, UilEye, UilShare, UilTrashAlt } from "@iconscout/react-unicons";
 import { FaCheckCircle, FaCircle, FaHourglassHalf, FaTimesCircle } from "react-icons/fa";
+import { httpGetWithToken } from "../../../../utils/http_utils";
+import moment from "moment";
 
 
 interface JobAlert {
@@ -94,7 +96,7 @@ const categories = [
 ];
 
 const SubmitJobsTable: React.FC = () => {
-  const [jobAlerts, setJobAlerts] = useState<JobAlert[]>(initialJobAlerts);
+  const [jobAlerts, setJobAlerts] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedAlert, setSelectedAlert] = useState<JobAlert | null>(null);
   const [action, setAction] = useState<string | null>(null);
@@ -104,8 +106,8 @@ const SubmitJobsTable: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>("");
-
-  const itemsPerPage = 4;
+  const [status, setStatus] = useState<string>("");
+  const itemsPerPage = 10;
   const totalPages = Math.ceil(jobAlerts.length / itemsPerPage);
 
   useEffect(() => {
@@ -142,14 +144,8 @@ const SubmitJobsTable: React.FC = () => {
     }
   };
 
-  const displayAlerts = jobAlerts
-    .filter((alert) => {
-      if (filterValue) {
-        return alert.status === filterValue;
-      }
-      return true;
-    })
-    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+   
+    //.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
 
   const handleFilterValueChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -164,6 +160,7 @@ const SubmitJobsTable: React.FC = () => {
 
   const handleOptionChange = (value: string) => {
     setSelectedOption(value);
+    setStatus(value)
     setDropdownOpen(false);
   };
 
@@ -180,7 +177,15 @@ const SubmitJobsTable: React.FC = () => {
     }
   };
 
-
+  useEffect(()=> {
+    async function fetchJobs() {
+      const rsp  = await httpGetWithToken('employer/jobs?status='+status)
+      if(rsp.status == "success") {
+        setJobAlerts(rsp.data)
+      }
+    }
+    fetchJobs()
+  }, [status])
   return (
     <section className="mt-[8rem] px-[2.5rem]">
       <section className="flex flex-col md:flex-row gap-4 md:gap-12 justify-between items-center">
@@ -189,18 +194,7 @@ const SubmitJobsTable: React.FC = () => {
         </h2>
         <div className="w-full md:w-auto flex flex-col md:flex-row items-center gap-2 mb-4">
         <div className="flex justify-center">
-        <button
-          onClick={() => handleTabChange("All")}
-          className={`px-4 py-[2px] mx-2 text-[14px] rounded-[50px] ${filterType === "All" ? "bg-green-600 text-white" : "bg-gray-200 text-gray-800"}`}
-        >
-          All
-        </button>
-        <button
-          onClick={() => handleTabChange("New")}
-          className={`px-4 py-2 mx-2 rounded-[50px] ${filterType === "New" ? "bg-green-600 text-white" : "bg-gray-200 text-gray-800"}`}
-        >
-          New
-        </button>
+       
       </div>
           <label className="block font-medium text-green-600 text-md mb-2 md:mb-0">
             Sort by:
@@ -245,18 +239,18 @@ const SubmitJobsTable: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {displayAlerts.map((alert, index) => (
+              {jobAlerts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((alert, index) => (
                 <tr key={index} className="text-left border-b">
                   <td className="py-4 px-4 text-green-900 font-sans font-semibold">
                     <p>{alert.title}</p>
-                    <p className="text-[#646a73] text-[14px] font-sans font-light">{alert.jobType}
+                    <p className="text-[#646a73] text-[14px] font-sans font-light">{alert.job_type?.title}
                        {alert.location}
                     </p>
                   </td>
                   <td className="py-8 px-4 text-green-700">
-                   {alert.dateCreated}
+                   {moment(alert.date_created).format("Do MMM, y")}
                   </td>
-                  <td className="py-8 px-4 text-gray-800">{alert.applicate}</td>
+                  <td className="py-8 px-4 text-gray-800">{alert.applicants.length}</td>
                   <td className="py-8 px-4 text-gray-800 flex items-center gap-2">
                     {getStatusIcon(alert.status)}
                     {alert.status}
@@ -294,6 +288,11 @@ const SubmitJobsTable: React.FC = () => {
                   </td>
                 </tr>
               ))}
+              {
+                jobAlerts.length == 0 
+                && 
+                <p className="text-red-700">No job found!</p>
+              }
             </tbody>
           </table>
         </div>
