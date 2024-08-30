@@ -23,7 +23,6 @@ const SideNav: React.FC = () => {
   const { user } : iContext = useContext(AppContext);
 
   useEffect(() => {
-    console.log(user)
     const interval = setInterval(() => {
       setProgress(prevProgress => {
         if (prevProgress < targetProgress) {
