@@ -42,6 +42,7 @@ import PrivacyPolicy from "./components/reusable/privacy/PrivacyPolicy";
 import ForCompany from "./components/reusable/for-company/ForCompany";
 import Faq from "./components/reusable/faq/Faq";
 import TestimonialsPage from "./components/reusable/testimonial/TestimonialPage";
+import TrainingPage from "./components/reusable/training/TrainingPage";
 
 function App() {
   return (
@@ -93,6 +94,7 @@ function Main() {
         <Route path="for-company-footer" element={<ForCompany />} />
         <Route path="faq" element={<Faq />} />
         <Route path="testimonial" element={<TestimonialsPage />} />
+        <Route path="free-training" element={<TrainingPage />} />
         {/* Candidates Admin routing section */}
         <Route
           path="candidate-dashboard"

@@ -42,6 +42,7 @@ const Navbar: React.FC = () => {
       { label: "For Company", path: "company" },
       { label: "Find Jobs", path: "find-job" },
       { label: "Career Tips", path: "career-tips" },
+      { label: "Free Training", path: "free-training" },
       { label: "Log in", path: "login" },
       // Add more links here
     ],
