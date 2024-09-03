@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     let u:any = ls.get("wwph_usr", {decrypt : true});
-    setRole(u.role);
+    if(u) setRole(u.role);
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       setIsScrolled(scrollTop > 0);

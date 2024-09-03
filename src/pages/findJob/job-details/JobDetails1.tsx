@@ -1,18 +1,29 @@
 import { Badge, Divider, useToast } from "@chakra-ui/react";
 import images from "../../../components/constant/Images";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { httpGetWithoutToken, httpPostWithToken } from "../../../utils/http_utils";
+import { useNavigate, useParams } from "react-router-dom";
+import { httpGetWithoutToken, httpGetWithToken, httpPostWithToken } from "../../../utils/http_utils";
 import moment from "moment/moment";
+import ls from "localstorage-slim";
+
 const JobDetailss = () => {
     const [job, setJob] = useState<any>({})
     const [departments, setDepartments] = useState<string[]>([])
     const [loading, setLoading] = useState(true)
     const params = useParams();
+    const [isUser, setIsUser] = useState(true);
+
     useEffect(()=> {
+        let u:any = ls.get("wwph_usr", {decrypt : true});
+        if(u) {
+            if(u.role == "Company"){
+                setIsUser(false)
+            }
+        } 
         fetchJob()
     }, [])
     const toast = useToast();
+    const navigate = useNavigate();
     const saveJob = async () => {
         const resp = await httpPostWithToken("jobs/saved/"+job?.id);
         if(resp.status == "success") {
@@ -35,12 +46,49 @@ const JobDetailss = () => {
                 return item.title;
             })
             setDepartments(depts)
+            setLoading(false)
 
         }else{
-            console.log(resp.error)
+            toast({
+                status : "error",
+                title : "Job not found!",
+                isClosable : true,
+                duration : 5000
+              })
+              navigate("/");
         }
-        setLoading(false)
 
+    }
+    const applyJob = async () => {
+
+        let u:any = ls.get("wwph_usr", {decrypt : true});
+        if(!u) {
+            return toast({
+                status : "error",
+                title : "Please login first",
+                isClosable : true,
+                duration : 5000
+              })
+        }
+        const resp = await httpPostWithToken("jobs/apply", {
+            job : job.id
+        });
+        if(resp.status == "success") {
+             toast({
+                status : "success",
+                title : "Job application sent",
+                isClosable : true,
+                duration : 5000
+              })
+              return navigate("/candidate-dashboard")
+        }else{
+            return toast({
+                status : "error",
+                title : resp.error,
+                isClosable : true,
+                duration : 5000
+              })
+        }
     }
     return (
         <>
@@ -60,7 +108,7 @@ const JobDetailss = () => {
                                 <h3 className="text-[28px] font-bold">{job.title}</h3>
                                 <div className="flex gap-3">
                                     <button onClick={saveJob} className="font-sans text-[13px] font-medium min-w-[100px] text-[#ee009d] border-[1px] border-[#ee009d] hover:text-[#EE009D] h-[35px] px-[10px] rounded-[5px] ">Save Job</button>
-                                    <button className="font-sans text-[13px] font-medium min-w-[100px] text-[#fff] border-[1px] border-[#ee009d] bg-[#ee009d] hover:text-[#ccc] h-[35px] px-[10px] rounded-[5px] ">Apply Now</button>
+                                    <button onClick={applyJob} className="font-sans text-[13px] font-medium min-w-[100px] text-[#fff] border-[1px] border-[#ee009d] bg-[#ee009d] hover:text-[#ccc] h-[35px] px-[10px] rounded-[5px] ">Apply Now</button>
                                 </div>
                             </div>
 
