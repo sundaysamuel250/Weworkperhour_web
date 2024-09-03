@@ -63,8 +63,8 @@ const FooterSection: React.FC = () => {
         <div className='w-full md:w-1/2 lg:w-auto lg:px-0 px-[2rem]'>
           <h2 className='text-black text-base md:text-lg font-semibold mb-4'>Product</h2>
           <ul className='text-sm'>
-            <li><Link to="/" className='text-gray-600'>Career Tips</Link></li>
-            <li className='py-[1rem]'><Link to="/" className='text-gray-600'>Trending Job</Link></li>
+            <li><Link to="/career-tips" className='text-gray-600'>Career Tips</Link></li>
+            <li className='py-[1rem]'><Link to="/find-job" className='text-gray-600'>Trending Job</Link></li>
             <li><Link to="/" className='text-gray-600'>Bonafide Company</Link></li>
           </ul>
         </div>
@@ -73,7 +73,7 @@ const FooterSection: React.FC = () => {
           <h2 className='text-black text-base md:text-lg font-semibold mb-4'>Resources</h2>
           <ul className='text-sm'>
             <li><Link to="/faq" className='text-gray-600'>FAQ</Link></li>
-            <li className='py-[1rem]'><Link to="/" className='text-gray-600'>About Us</Link></li>
+            <li className='py-[1rem]'><Link to="/about" className='text-gray-600'>About Us</Link></li>
             <li><Link to="/" className='text-gray-600'>Call Center</Link></li>
           </ul>
         </div>

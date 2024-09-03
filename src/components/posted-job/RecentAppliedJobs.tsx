@@ -88,7 +88,7 @@ const RecentAppliedJobs: React.FC = () => {
   };
 
   return (
-    <div className=" px-[2rem] lg:w-[400px] rounded-[20px] py-4 bg-[#ffffff] ">
+    <div className="px-[2rem] w-[400px] rounded-[20px] py-4 bg-[#ffffff] ">
       <div>
         {jobs.map((job) => (
           <JobCard

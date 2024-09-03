@@ -30,7 +30,7 @@ const Header: React.FC = () => {
           className="lg:px-[2.5rem] xl:px-[2.5rem] md:px-[2.5rem] py-[0.5rem] w-[300px] font-sans font-light xl:px[8rem] lg:py-[0.5rem] pl-[2px] rounded-[50px] bg-[#FFFFFF] text-[#646A73] placeholder-gray-400"
         />
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2">
       <div className="relative">
       <FaBell
         className="cursor-pointer text-[#2AA100]"
@@ -50,7 +50,7 @@ const Header: React.FC = () => {
         )}
       </AnimatePresence>
     </div>
-        <MotionLink
+        {/* <MotionLink
       to="/post-job"
       className="bg-[#ee009d] hover:bg-[#2aa100] text-white font-bold py-2 px-4 rounded-[50px] flex items-center gap-2"
       whileHover={{ scale: 1.1 }}
@@ -58,7 +58,7 @@ const Header: React.FC = () => {
     >
       <FaPlus />
       Post Job
-    </MotionLink>
+    </MotionLink> */}
       </div>
     </header>
   );

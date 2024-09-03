@@ -43,6 +43,8 @@ import ForCompany from "./components/reusable/for-company/ForCompany";
 import Faq from "./components/reusable/faq/Faq";
 import TestimonialsPage from "./components/reusable/testimonial/TestimonialPage";
 import TrainingPage from "./components/reusable/training/TrainingPage";
+import LogoutPage from "./components/candidate-admin/logout/LogoutPage";
+import EmployersLogoutPage from "./components/employer-admin/employers-logout/EmployersLogoutPage";
 
 function App() {
   return (
@@ -71,6 +73,9 @@ function Main() {
     "/submit-jobs",
     "/saved-candidate",
     "/employers-wallet-account",
+    "/candidate-dashboard",
+    "/candidate-wallet-account",
+    "/logout-account",
   ];
 
   return (
@@ -133,6 +138,10 @@ function Main() {
           path="candidate-wallet-account"
           element={<AdminLayout element={<CandidateWallet />} />}
         />
+        <Route
+          path="logout-account"
+          element={<AdminLayout element={<LogoutPage />} />}
+        />
 
         {/* Employers Admin routing section */}
         <Route
@@ -170,6 +179,10 @@ function Main() {
          <Route
           path="employers-wallet-account"
           element={<EmployersLayout element={<EmployersWallet />} />}
+        />
+        <Route
+          path="employers-logout-account"
+          element={<EmployersLayout element={<EmployersLogoutPage />} />}
         />
       </Routes>
       
