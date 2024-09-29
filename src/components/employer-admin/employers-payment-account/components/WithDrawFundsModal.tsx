@@ -51,7 +51,7 @@ const WithdrawFundsModal: React.FC<WithdrawFundsModalProps> = ({ onClose, onWith
         />
         <button
           onClick={handleWithdrawClick}
-          className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 w-full mb-2"
+          className="text-white bg-[#ee009d] font-sans font-light text-[16px]  py-2 px-4 rounded-[5px] hover:bg-[#ee009d] transform transition-transform duration-300 hover:scale-105 w-full mb-2"
         >
           Withdraw
         </button>

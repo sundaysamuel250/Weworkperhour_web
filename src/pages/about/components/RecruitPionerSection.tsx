@@ -11,7 +11,7 @@ const jobData = [
     sliderDescription:
       "Weworkperhour is committed to providing a fun and transparent experience for finding work with a focus on their ethos, skills and aspirations. If you desire to work remotely as a full-time staff or a freelancer then we are your number one plug.",
     buttonName: "View All",
-    link: "/job-seekers",
+    link: "/find-job",
   },
   {
     personImage: <FaUsers color="#ee009d" size={20} />,
@@ -19,7 +19,7 @@ const jobData = [
     sliderTitle: "For Companies",
     sliderDescription: "If you are looking for a smart way to recruit a freelancer to assist you with that project or a full-time remote talent to join your team, then Weworkperhour is your go-to. At Weworkperhour we make recruitment seamless by matching quality candidates with companies at the snap of a finger.",
     buttonName: "View All",
-    link: "/for-companies",
+    link: "/hire-talent",
   },
 ];
 

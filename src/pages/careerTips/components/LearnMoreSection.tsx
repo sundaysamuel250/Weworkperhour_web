@@ -59,123 +59,107 @@ const LearnMoreSection: React.FC = () => {
           />
         </div>
       </section>
-      <section className="flex items-center justify-center xl:space-x-[50rem] lg:space-x-[28rem] md:space-x-[20rem] space-x-[2rem]">
-        <div className="flex items-center gap-4 bg-[#fff] w-[220px] sm:w-[250px] rounded-[50px] py-[0.2rem] shadow-lg px-[1rem] ">
-          <img
-            src={Images.CareerCardImageFifteen}
-            alt="Person"
-            className="w-6 h-6 border border-[#ee009d] rounded-full"
-          />
-          <div className="w-full">
-            <h2 className="text-[12px] sm:text-[14px] font-medium tracking-wide">
-              Allaya Cooks-Campbell
-            </h2>
-          </div>
-        </div>
-        <p className="text-xs text-gray-500 bg-[#fff] py-[0.5rem] flex items-center justify-center gap-[0.5rem]  rounded-[50px] sm:text-right w-[120px]">
-          {" "}
-          <FaCalendarDays color="#ee009d" /> May 2022
-        </p>
-      </section>
+      <section className="flex items-center justify-center xl:space-x-[50rem] lg:space-x-[28rem] md:space-x-[20rem] space-x-[2rem]"></section>
       <section className="flex items-center justify-center">
         <div className="mt-4 xl:max-w-[1200px] lg:max-w-[900px] md:max-w-[700px] max-w-[350px] mx-auto  ">
           <h1 className="text-[16px] sm:text-[24px] font-sans font-semibold tracking-wide">
-            Setting Your Rates as a Virtual Assistant
+            CAREER TIPS ON BECOMING VIRTUAL ASSISTANT
           </h1>
           <p className="text-xs sm:text-[14px] leading-[20px] text-gray-500 mt-2 tracking-[0.5px]">
-            Determining your rates as a virtual assistant can be challenging,
-            but it is crucial for your business success. Start by researching
-            the average rates for VAs with similar skills and experience in your
-            region. Consider your expertise, the complexity of the tasks, and
-            the time required to complete them. Decide whether to charge hourly
-            or per project, keeping in mind that project-based pricing can often
-            be more beneficial for both parties. Be transparent with clients
-            about your rates and any additional costs. Don't undervalue your
-            services; remember that your skills and time are valuable. As you
-            gain more experience and skills, gradually increase your rates to
-            reflect your growing expertise.
+            Becoming a virtual assistant (VA) offers flexibility, a diverse
+            workload, the opportunity to manage a variety of tasks, and the
+            potential to carve out a rewarding career in a growing field.
+            Whether you're starting out or enhancing your skills, these tips can
+            help you succeed as a virtual assistant.
           </p>
         </div>
       </section>
       <section className="">
-        <div className="mt-4 xl:max-w-[1200px] lg:max-w-[900px] md:max-w-[700px] max-w-[350px] mx-auto">
-          <h1 className="text-[16px] sm:text-[24px] font-sans font-semibold tracking-wide">
-            Advice for entering the workforce{" "}
-          </h1>
-          <p className="text-xs sm:text-[14px] leading-[20px] text-gray-500 mt-2">
-            "Opportunities does not happen, you create them." -Chris Grosser
-          </p>
-        </div>
         {/* create vision section */}
         <div className="mt-4 xl:max-w-[1200px] lg:max-w-[900px] md:max-w-[700px] max-w-[350px] mx-auto">
           <h1 className="text-[16px] sm:text-[22px] font-sans font-medium tracking-wide">
-            1. Building a Client Base as a Virtual Assistant{" "}
+            1. Identify Your Niche
           </h1>
           <p className="text-xs sm:text-[14px] leading-[20px] xl:w-[60%] lg:w-[60%] text-gray-500 mt-2 tracking-[0.5px]">
-            Building a solid client base is essential for a successful virtual
-            assistant career. Start by networking within your existing circles,
-            including friends, family, and professional connections, to find
-            potential clients. Utilize social media platforms, particularly
-            LinkedIn, to showcase your services and engage with potential
-            clients. Consider offering a free or discounted initial service to
-            new clients to demonstrate your value. Join online communities and
-            forums related to your niche to connect with business owners in need
-            of assistance. Consistently delivering high-quality work and
-            maintaining good relationships with clients will lead to referrals
-            and a growing client base.
+            Virtual assistants can perform a broad range of tasks, from
+            administrative duties to specialized services like social media
+            management, bookkeeping, or customer support. Identifying a niche
+            allows you to target your marketing efforts and build a reputation
+            as an expert in a specific area.
           </p>
         </div>
         {/* Plan ahead section */}
         <div className="mt-4 xl:max-w-[1200px] lg:max-w-[900px] md:max-w-[700px] max-w-[350px] mx-auto">
           <h1 className="text-[16px] sm:text-[22px] font-sans font-medium tracking-wide">
-            2. Getting Started as a Virtual Assistant{" "}
+            2. Develop Essential Skills
           </h1>
           <p className="text-xs sm:text-[14px] leading-[20px] xl:w-[60%] lg:w-[60%] text-gray-500 mt-2 tracking-[0.5px]">
-            Starting a career as a virtual assistant (VA) is an excellent option
-            for those seeking flexibility and the opportunity to work from
-            anywhere. To begin, assess your skills and identify the services you
-            can offer, such as administrative support, social media management,
-            or customer service. Create a professional online presence with a
-            well-crafted LinkedIn profile and a simple website highlighting your
-            expertise. Join freelancing platforms like WeWorkPerHour, Upwork or
-            Fiverr to find your first clients. Don&#39;t forget to invest in
-            reliable technology, including a good computer and stable internet
-            connection, to ensure you can work efficiently. As you gain
-            experience, ask for testimonials to build credibility and attract
-            more clients.
+            To thrive as a VA, you need a mix of hard and soft skills.
+            Proficiency in office software (like Microsoft Office or Google
+            Workspace), strong communication abilities, and excellent time
+            management are crucial. Additionally, familiarity with project
+            management tools (such as Trello or Asana), social media platforms,
+            and basic graphic design can give you an edge. Soft skills like
+            reliability, adaptability, and a proactive attitude are equally
+            important.
           </p>
         </div>
         {/* Learn as much as you can section */}
         <div className="mt-4 xl:max-w-[1200px] lg:max-w-[900px] md:max-w-[700px] max-w-[350px] mx-auto">
           <h1 className="text-[16px] sm:text-[22px] font-sans font-medium tracking-wide">
-            3. Essential Skills for Virtual Assistants{" "}
+            3. Set Up a Professional Workspace
           </h1>
           <p className="text-xs sm:text-[14px] leading-[20px] xl:w-[60%] lg:w-[60%] text-gray-500 mt-2 tracking-[0.5px]">
-            To thrive as a virtual assistant, certain skills are indispensable.
-            First, strong communication skills are crucial since you&#39;ll
-            often interact with clients remotely. Excellent organizational
-            abilities help manage multiple tasks and deadlines effectively.
-            Familiarize yourself with common digital tools like Microsoft
-            Office, Google Workspace, and project management software such as
-            Trello or Asana. Time management is also vital; using tools like
-            Calendly or Toggl can help you stay on top of your schedule. Lastly,
-            problem-solving skills and adaptability will enable you to handle
-            unexpected challenges efficiently. Continuously improving these
-            skills will enhance your service quality and client satisfaction.
+            Even though you're working remotely, having a dedicated, quiet
+            workspace is essential. Invest in a comfortable chair, a reliable
+            computer, high-speed internet, and any other tools you might need. A
+            professional environment boosts productivity and helps you maintain
+            a work-life balance.
           </p>
         </div>
         <div className="mt-4 xl:max-w-[1200px] lg:max-w-[900px] md:max-w-[700px] max-w-[350px] mx-auto">
           <h1 className="text-[16px] sm:text-[22px] font-sans font-medium tracking-wide">
-            4. Leverage Prints
+            4. Market Yourself Effectively
           </h1>
           <p className="text-xs sm:text-[14px] leading-[20px] xl:w-[60%] lg:w-[60%] text-gray-500 mt-2 tracking-[0.5px]">
-            Partnering with WeWorkPerHour for virtual assistant services
-            has been fantastic for our printing and branding business.
-            They have taken over administrative tasks, handled customer
-            orders, and managed our schedule seamlessly. It's freed up our
-            team to concentrate on producing high- quality prints and expanding
-            our services. We're thrilled with the efficiency and
-            professionalism they bring to the table!;
+            Marketing is key to growing your VA business. Develop a compelling
+            elevator pitch and craft a professional portfolio that highlights
+            your expertise. Use social media, blogging, and email newsletters to
+            reach potential clients. Don’t be afraid to ask for referrals from
+            satisfied clients—word of mouth can be incredibly powerful.
+          </p>
+        </div>
+        <div className="mt-4 xl:max-w-[1200px] lg:max-w-[900px] md:max-w-[700px] max-w-[350px] mx-auto">
+          <h1 className="text-[16px] sm:text-[22px] font-sans font-medium tracking-wide">
+            5. Set Clear Boundaries
+          </h1>
+          <p className="text-xs sm:text-[14px] leading-[20px] xl:w-[60%] lg:w-[60%] text-gray-500 mt-2 tracking-[0.5px]">
+            Working remotely can blur the lines between work and personal life.
+            Set clear boundaries to avoid burnout. Establish specific working
+            hours and communicate them to your clients. Take regular breaks and
+            ensure you have time for personal activities to maintain a healthy
+            work-life balance.
+          </p>
+        </div>
+        <div className="mt-4 xl:max-w-[1200px] lg:max-w-[900px] md:max-w-[700px] max-w-[350px] mx-auto">
+          <h1 className="text-[16px] sm:text-[22px] font-sans font-medium tracking-wide">
+            6. Provide Exceptional Service
+          </h1>
+          <p className="text-xs sm:text-[14px] leading-[20px] xl:w-[60%] lg:w-[60%] text-gray-500 mt-2 tracking-[0.5px]">
+            Providing exceptional service is the best way to retain clients and
+            attract new ones. Be responsive, meet deadlines, and go the extra
+            mile to exceed client expectations. Building a reputation for
+            reliability and quality work will help you stand out in a
+            competitive market.
+          </p>
+          <p className="text-xs sm:text-[14px] leading-[20px] xl:w-[60%] lg:w-[60%] text-gray-500 py-[2rem] mt-2 tracking-[0.5px]">
+            In conclusion, Becoming a successful virtual assistant requires a
+            blend of skill, strategy, and perseverance. By identifying your
+            niche, continually improving your skills, and building strong client
+            relationships, you can create a thriving VA career. Remember,
+            success doesn’t happen overnight, but with dedication and hard work,
+            you can achieve your goals and enjoy a fulfilling career as a
+            virtual assistant.
           </p>
         </div>
         <div className=" ml-[7.5rem] w-[50%]   border-[1px] border-[#2AA100] mt-[2rem]" />
@@ -191,12 +175,9 @@ const LearnMoreSection: React.FC = () => {
                 {jobData.map((job, index) => (
                   <LearnMoreCard
                     key={index}
-                    personImage={job.personImage}
-                    personName={job.personName}
                     sliderDescription={job.sliderDescription}
                     sliderImage={job.sliderImage}
                     sliderTitle={job.sliderTitle}
-                    lastUpdated={job.lastUpdated}
                   />
                 ))}
               </div>

@@ -1,13 +1,16 @@
 import React from 'react';
 
-const WalletCard: React.FC = () => {
-  const publicKey = 'pk_test_8f31522a6130568a751f67e690000ec9d9b8738a'; // Replace with your Paystack public key
-  const email = 'orinamesunday360@gmail.com'; // Replace with the user's email
+interface WalletCardProps {
+  email: string; // The user's email will be passed as a prop
+}
+
+const WalletCard: React.FC<WalletCardProps> = ({ email }) => {
+  const publicKey = 'pk_live_b9775a07f7874d2ffbbc7f87ace22b250eecc535'; // Replace with your Paystack public key
 
   const handlePaystackWithdrawal = () => {
     const handler = (window as any).PaystackPop.setup({
       key: publicKey,
-      email,
+      email, // Using the email from props
       amount: 0, // Set the amount to 0 since this is a withdrawal
       currency: 'NGN',
       channels: ['bank'], // Restrict to bank transfer channel only
@@ -29,7 +32,7 @@ const WalletCard: React.FC = () => {
       <p className="text-3xl font-bold text-green-500 font-merri">₦500,000.00</p> {/* Updated to Naira */}
       <button
         onClick={handlePaystackWithdrawal}
-        className="mt-4 bg-[#EE009D] text-white font-sans font-light text-[16px]  py-2 px-4 rounded-[5px] hover:bg-[#2AA100] transform transition-transform duration-300 hover:scale-105"
+        className="mt-4 bg-[#EE009D] text-white font-sans font-light text-[16px] py-2 px-4 rounded-[5px] hover:bg-[#2AA100] transform transition-transform duration-300 hover:scale-105"
       >
         Withdraw Funds
       </button>

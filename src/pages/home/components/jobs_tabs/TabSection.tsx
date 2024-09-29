@@ -44,7 +44,7 @@ useEffect(()=> {
   return (
     <section className="py-[4rem]">
       <section className="flex justify-center items-center">
-        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-[2rem]">
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-[2rem]">
             <li
               className={`list-none lg:text-[18px] md:text-[16px] text-[14px] text-center ${
                 toggle === "recent" ? "text-[#EE009D]" : "text-[#646A73]"
@@ -61,7 +61,7 @@ useEffect(()=> {
                 } cursor-pointer lg:hover:text-[18px] md:hover:text-[16px] hover:text-[14px] hover:text-[#EE009D] font-sans font-semibold tracking-[0.5px]`}
                 onClick={() => updateToggle(dept.title)}
               >
-                {dept.title.split(" ")[0]}
+                {dept.title}
               </li>
               ))
             }

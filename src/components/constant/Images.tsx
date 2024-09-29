@@ -91,6 +91,14 @@ import ProfileLogoThirteen from "../../images/Design 40 (13).png"
 import ProfileLogoForteen from "../../images/Design 40 (14).png"
 import ProfileLogoFifteen from "../../images/Design 40 (15).png"
 import ProfileLogoSixteen from "../../images/Design 40 (16).png"
+import LeverageTestimonialLogo from "../../images/leverage-img.jpeg"
+import CoraTestimonialLogo from "../../images/cora-img.jpeg"
+import BluwayTestimonialLogo from "../../images/bluway-logo.jpeg"
+import RedLenceTestimonialLogo from "../../images/rec-Lence-logo.jpeg"
+import TheWomenTestimonialLogo from "../../images/the-women-img.jpeg"
+import CollaborateAfricaTestimonialLogo from "../../images/collaborate-img.jpeg"
+import LeveragePrintTestimonialLogo from "../../images/leverage_print-img.jpeg"
+
 
 
 
@@ -196,7 +204,14 @@ ProfileLogoTwelve,
 ProfileLogoThirteen,
 ProfileLogoForteen,
 ProfileLogoFifteen,
-ProfileLogoSixteen
+ProfileLogoSixteen,
+LeverageTestimonialLogo,
+CoraTestimonialLogo,
+BluwayTestimonialLogo,
+TheWomenTestimonialLogo,
+RedLenceTestimonialLogo,
+CollaborateAfricaTestimonialLogo,
+LeveragePrintTestimonialLogo,
 };
 
 export default assets;
