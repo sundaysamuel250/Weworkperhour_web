@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 const SimpleProcessSection: React.FC = () => {
   const { ref, inView } = useInView({
     triggerOnce: false,
-    threshold: 0.1,
+    threshold: 0.4,
   });
 
   return (

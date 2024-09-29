@@ -5,52 +5,24 @@ import CareerPagination from './CareerPagination';
 
 const jobData = [
     {
-        personImage: Images.SliderImageOne,
         sliderImage: Images.CareerCardImageFour,
         sliderTitle: 'Setting Your Rates as a Virtual Assistant',
-        sliderDescription: "Determining your rates as a virtual assistant can be challenging, but it is crucial for your business success. Start by researching the average rates for VAs with similar skills and experience in your region. Consider your expertise, the complexity of the tasks, and the time required to complete them...",
-        personName: 'John Daniel',
-        lastUpdated: 'March 2024',
+        sliderDescription: "Determining your rates as a virtual assistant can be challenging, but it's crucial for your business success. Start by researching the average rates for VAs with similar skills and experience in your region. Consider your expertise, the complexity of the tasks, and the time required to complete them. Decide whether to charge hourly or per project, keeping in mind that project-based pricing can often be more beneficial for both parties. Be transparent with clients about your rates and any additional costs. Don't undervalue your services; remember that your skills and time are valuable. As you gain more experience and skills, gradually increase your rates to reflect your growing expertise."
     },
     {
-        personImage: Images.SliderImageOne,
         sliderImage: Images.CareerCardImageFive,
         sliderTitle: 'Building a Client Base as a Virtual Assistant',
-        sliderDescription: "Building a solid client base is essential for a successful virtual assistant career. Start by networking within your existing circles, including friends, family, and professional connections, to find potential clients. Utilize social media platforms, particularly LinkedIn, to showcase your...",
-        personName: 'Harrison Jean',
-        lastUpdated: 'April 2023',
+        sliderDescription: "Building a solid client base is essential for a successful virtual assistant career. Start by networking within your existing circles, including friends, family, and professional connections, to find potential clients. Utilize social media platforms, particularly LinkedIn, to showcase your services and engage with potential clients. Consider offering a free or discounted initial service to new clients to demonstrate your value. Join online communities and forums related to your niche to connect with business owners in need of assistance. Consistently delivering high-quality work and maintaining good relationships with clients will lead to referrals and a growing client base.",
     },
     {
-        personImage: Images.SliderImageOne,
         sliderImage: Images.CareerCardImageSix,
         sliderTitle: 'Essential Skills for Virtual Assistants',
-        sliderDescription: "To thrive as a virtual assistant, certain skills are indispensable. First, strong communication skills are crucial since you will often interact with clients remotely. Excellent organizational abilities help manage multiple tasks and deadlines effectively...",
-        personName: 'Marie Johnson',
-        lastUpdated: 'Jan 2024',
+        sliderDescription: "To thrive as a virtual assistant, certain skills are indispensable. First, strong communication skills are crucial since you&#39;ll often interact with clients remotely. Excellent organizational abilities help manage multiple tasks and deadlines effectively. Familiarize yourself with common digital tools like Microsoft Office, Google Workspace, and project management software such as Trello or Asana. Time management is also vital; using tools like Calendly or Toggl can help you stay on top of your schedule. Lastly, problem-solving skills and adaptability will enable you to handle unexpected challenges efficiently. Continuously improving these skills will enhance your service quality and client satisfaction."
     },
     {
-        personImage: Images.SliderImageOne,
         sliderImage: Images.CareerCardImageSeven,
         sliderTitle: 'Getting Started as a Virtual Assistant',
-        sliderDescription: "Starting a career as a virtual assistant (VA) is an excellent option for those seeking flexibility and the opportunity to work from anywhere. To begin, assess your skills and identify the services you can offer, such as administrative support, social media management, or customer service...",
-        personName: 'James Henry',
-        lastUpdated: 'Feb 2024',
-    },
-    {
-        personImage:Images.SliderImageOne,
-        sliderImage: Images.CareerCardImageEight,
-        sliderTitle: 'Leverage Prints',
-        sliderDescription: "Partnering with WeWorkPerHour for virtual assistant services has been fantastic for our printing and branding business. They have taken over administrative tasks, handled customer orders, and managed our schedule seamlessly. It is freed up our team to concentrate on producing high-quality prints and expanding our services...",
-        personName: 'John Daniel',
-        lastUpdated: 'March 2024',
-    },
-    {
-        personImage: Images.SliderImageOne,
-        sliderImage: Images.CareerCardImageNine,
-        sliderTitle: 'Managing Work-Life Balance as a Virtual Assistant',
-        sliderDescription: "One of the biggest challenges for virtual assistants is maintaining a healthy work-life balance. Start by setting clear boundaries between work and personal time. Establish a dedicated workspace to help mentally separate work from home life. Create a daily schedule that includes regular breaks and stick to it as much as possible. Use productivity...",
-        personName: 'John Alexander',
-        lastUpdated: 'March 2024',
+        sliderDescription: "Starting a career as a virtual assistant (VA) is an excellent option for those seeking flexibility and the opportunity to work from anywhere. To begin, assess your skills and identify the services you can offer, such as administrative support, social media management, or customer service. Create a professional online presence with a well-crafted LinkedIn profile and a simple website highlighting your expertise. Join freelancing platforms like WeWorkPerHour, Upwork or Fiverr to find your first clients. Don't forget to invest in reliable technology, including a good computer and stable internet connection, to ensure you can work efficiently. As you gain experience, ask for testimonials to build credibility and attract more clients."
     },
 ];
 
@@ -80,12 +52,9 @@ const PaginationSection: React.FC = () => {
                         {displayedJobs.map((job, index) => (
                             <CareerTipSCardSection
                                 key={index}
-                                personImage={job.personImage}
-                                personName={job.personName}
                                 sliderDescription={job.sliderDescription}
                                 sliderImage={job.sliderImage}
                                 sliderTitle={job.sliderTitle}
-                                lastUpdated={job.lastUpdated}
                             />
                         ))}
                     </div>

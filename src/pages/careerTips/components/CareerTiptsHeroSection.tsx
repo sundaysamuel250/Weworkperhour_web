@@ -64,28 +64,23 @@ const CareerTipsHeroSection: FC = () => {
     >
       <Slider {...settings}>
         <CardSliderCareer 
-          personImage={Images.SliderImageOne}
           sliderImage={Images.CareerSliderImageOne}
-          sliderTitle='4 Pieces of the best career advice'
-          sliderDescription="When we are young, we spend so much time thinking about what we will become when we grow up. We imagined what it would be like to work in various fields. We dream of the difference we want to make...."
-          personName='John Daniel'
-          lastUpdated='March 2024'
+          sliderTitle="CAREER TIPS ON BECOMING VIRTUAL ASSISTANT
+"
+          sliderDescription="Becoming a virtual assistant (VA) offers flexibility, a diverse workload, the opportunity to manage a variety of tasks, and the potential to carve out a rewarding career in a growing field. Whether you're starting out or enhancing your..."
         />
         <CardSliderCareer 
-          personImage={Images.SliderImageTwo}
           sliderImage={Images.CareerSliderImageTwo}
-          sliderTitle='4 Pieces of the best career advice'
-          sliderDescription="When we are young, we spend so much time thinking about what we will become when we grow up. We imagined what it would be like to work in various fields. We dream of the difference we want to make...."
-          personName='John Daniel'
-          lastUpdated='March 2024'
+          sliderTitle="CAREER TIPS ON BECOMING VIRTUAL ASSISTANT
+"
+          sliderDescription="Becoming a virtual assistant (VA) offers flexibility, a diverse workload, the opportunity to manage a variety of tasks, and the potential to carve out a rewarding career in a growing field. Whether you're starting out or enhancing your..."
+         
         />
         <CardSliderCareer 
-          personImage={Images.SliderImageThree}
           sliderImage={Images.CareerSliderImageThree}
-          sliderTitle='4 Pieces of the best career advice'
-          sliderDescription="When we are young, we spend so much time thinking about what we will become when we grow up. We imagined what it would be like to work in various fields. We dream of the difference we want to make...."
-          personName='John Daniel'
-          lastUpdated='March 2024'
+          sliderTitle="CAREER TIPS ON BECOMING VIRTUAL ASSISTANT
+"
+          sliderDescription="Becoming a virtual assistant (VA) offers flexibility, a diverse workload, the opportunity to manage a variety of tasks, and the potential to carve out a rewarding career in a growing field. Whether you're starting out or enhancing your..."
         />
       </Slider>
       </motion.div>

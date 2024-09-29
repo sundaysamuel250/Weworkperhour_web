@@ -42,14 +42,16 @@ import PrivacyPolicy from "./components/reusable/privacy/PrivacyPolicy";
 import ForCompany from "./components/reusable/for-company/ForCompany";
 import Faq from "./components/reusable/faq/Faq";
 import TestimonialsPage from "./components/reusable/testimonial/TestimonialPage";
-import TrainingPage from "./components/reusable/training/TrainingPage";
 import LogoutPage from "./components/candidate-admin/logout/LogoutPage";
 import EmployersLogoutPage from "./components/employer-admin/employers-logout/EmployersLogoutPage";
+import Loader from "./components/reusable/loader/loader";
+import Courses from "./components/reusable/training/Courses";
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
+      <Loader />
       <Main />
     </Router>
   );
@@ -99,7 +101,7 @@ function Main() {
         <Route path="for-company-footer" element={<ForCompany />} />
         <Route path="faq" element={<Faq />} />
         <Route path="testimonial" element={<TestimonialsPage />} />
-        <Route path="free-training" element={<TrainingPage />} />
+        <Route path="free-courses" element={<Courses />} />
         {/* Candidates Admin routing section */}
         <Route
           path="candidate-dashboard"
