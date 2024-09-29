@@ -11,7 +11,7 @@ const FindJobSearchSection: React.FC = () => {
   const [location, setLocation] = useState<any[]>([]);
   const [locationQuery, setLocationQuery] = useState('');
   const [selectedOption, setSelectedOption] = useState('Full-time');
-
+// location
   const navigate = useNavigate();
 
   const handleJobChange = (e: React.ChangeEvent<HTMLInputElement>) => {
