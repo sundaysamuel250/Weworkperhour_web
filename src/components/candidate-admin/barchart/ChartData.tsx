@@ -56,8 +56,8 @@ const options = {
 
 const App: React.FC = () => {
   return (
-    <div className="py-10 px-4 md:py-20 md:px-8 flex flex-col lg:flex-row gap-8">
-      <div className="bg-gray-100 p-4 md:p-6 rounded-[30px] shadow-lg w-3/5">
+    <div className="py-10 px-4 md:py-16 md:px-6 lg:py-20 lg:px-8 flex flex-col lg:flex-row gap-6 lg:gap-8">
+      <div className="bg-gray-100 p-4 sm:p-5 md:p-6 rounded-lg shadow-lg w-full lg:w-3/5">
         <BarChart data={data} options={options} />
       </div>
       <div className="w-full lg:w-2/5">

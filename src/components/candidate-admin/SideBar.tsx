@@ -72,7 +72,7 @@ const SideNav: React.FC = () => {
          <img src={Images.Logo} alt="logo" className="w-full max-w-[150px] h-auto mb-4" />
          </Link>
           <FaCircle className="relative w-[10px] h-[10px] top-6 left-6 text-[#40e6b9]" size={20} />
-          <img className="sm:h-[50px] sm:w-[50px] w-[25px] h-[25px] rounded-full mb-4" src={user?.avatar ? user.avatar : Images.ProfileImage} alt="Profile" />
+          <img className="sm:h-[50px] sm:w-[50px] w-[25px] h-[25px] rounded-full object-cover mb-4" src={user?.avatar ? user.avatar : Images.ProfileImage} alt="Profile" />
           <div className='flex items-center gap-[0.3rem]'>
             <h1 className="text-md font-bold text-[#2aa100] cursor-pointer" onClick={toggleDropdown}>{user?.name}</h1>
             <button className="mt-2 text-gray-400 hover:text-white" onClick={toggleDropdown}>
@@ -82,9 +82,15 @@ const SideNav: React.FC = () => {
           {isDropdownOpen && (
             <div className="absolute bg-gray-700 text-white rounded shadow-md mt-[12rem] w-48 z-10">
               <ul>
+                <Link to="/profile-list">
                 <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Profile</li>
-                <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Settings</li>
-                <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Logout</li>
+                </Link>
+               <Link to="/account-settings">
+               <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Settings</li>
+               </Link>
+              <Link to="/logout-account">
+              <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Logout</li>
+              </Link>
               </ul>
             </div>
           )}
@@ -142,7 +148,9 @@ const SideNav: React.FC = () => {
             <ProgressBar progress={progress} />
             <p className='text-[12px] text-[#646A73] font-sans font-normal py-[0.2rem]'>Profile complete</p>
             <div className='mt-[4rem]'>
-              <button className='text-[#2aa100] text-[18px] font-sans font-medium flex items-center gap-2'><UilSignout />Logout</button>
+             <Link to="/logout-account">
+             <button className='text-[#2aa100] text-[18px] font-sans font-medium flex items-center gap-2'><UilSignout />Logout</button>
+             </Link>
             </div>
           </div>
         </nav>

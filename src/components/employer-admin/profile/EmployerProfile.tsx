@@ -232,7 +232,7 @@ const EmployerProfile: React.FC = () => {
               ?
               <div className="flex items-center justify-center gap-4">
                 <img
-                  className="h-16 w-16 md:h-20 md:w-20 rounded-full"
+                  className="h-16 w-16 md:h-20 md:w-20 rounded-full bg-center bg-no-repeat object-cover"
                   src={image ? image as string : profile.avatar}
                   alt="Profile"
                 />
