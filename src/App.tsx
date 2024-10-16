@@ -46,6 +46,8 @@ import LogoutPage from "./components/candidate-admin/logout/LogoutPage";
 import EmployersLogoutPage from "./components/employer-admin/employers-logout/EmployersLogoutPage";
 import Loader from "./components/reusable/loader/loader";
 import Courses from "./components/reusable/training/Courses";
+import ForgotPassword from "./components/registration/ForgetPass";
+import AccountVerification from "./components/registration/Verification";
 
 function App() {
   return (
@@ -102,6 +104,11 @@ function Main() {
         <Route path="faq" element={<Faq />} />
         <Route path="testimonial" element={<TestimonialsPage />} />
         <Route path="free-courses" element={<Courses />} />
+        <Route path="forget-password" element={<ForgotPassword />} />
+        <Route path="verify-account" element={<AccountVerification/>} />
+
+
+
         {/* Candidates Admin routing section */}
         <Route
           path="candidate-dashboard"

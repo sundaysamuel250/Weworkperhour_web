@@ -85,7 +85,7 @@ const SideNav: React.FC = () => {
                 <Link to="/profile-list">
                 <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Profile</li>
                 </Link>
-               <Link to="/account-settings">
+               <Link to="/account-setting">
                <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Settings</li>
                </Link>
               <Link to="/logout-account">

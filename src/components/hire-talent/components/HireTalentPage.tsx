@@ -331,7 +331,7 @@ const CandidatesHireTalent: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-[4rem]">
       <div className="bg-[#f5f5f5] py-[2rem]">
-      <h1 className="text-[#2aa100] text-[24px] sm:text-[38px] text-center font-poppins font-semibold mb-4 md:mb-0">Candidates</h1>
+      <h1 className="text-[#2aa100] text-[24px] sm:text-[38px] text-center font-poppins font-semibold mb-4 md:mb-0">Hire a Talent</h1>
       <p className="text-center text-lg text-gray-600 mb-6">
         Find your desired talents & make your work done
       </p>
