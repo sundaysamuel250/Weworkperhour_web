@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState ("")
   const [role, setRole] = useState ("")
-  const activeToken = ls.get("wwph_token", {decrypt : true})
+  const activeToken = sessionStorage.getItem("wwph_token")
   
 
   useEffect(() => {

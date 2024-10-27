@@ -68,6 +68,8 @@ const LoginForm: React.FC = () => {
         title : "Login successful!",
         isClosable : true,
       })
+      sessionStorage.setItem("wwph_token", response.access_token);
+      sessionStorage.setItem("wwph_usr", JSON.stringify(response.user));
       ls.set("wwph_token", response.access_token, {encrypt : true});
       ls.set("wwph_usr", response.user, {encrypt : true});
       updateUser(response.user)
