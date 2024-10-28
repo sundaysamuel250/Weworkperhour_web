@@ -10,7 +10,7 @@ const AccountVerification: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/verify-account", {
+      const response = await fetch("verify-account", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

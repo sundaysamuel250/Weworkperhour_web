@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
+  Navigate,
 } from "react-router-dom";
 import Navbar from "./components/navigation/Navbar";
 import { Home } from "./pages/home/Home";
@@ -48,18 +49,32 @@ import Loader from "./components/reusable/loader/loader";
 import Courses from "./components/reusable/training/Courses";
 import ForgotPassword from "./components/registration/ForgetPass";
 import AccountVerification from "./components/registration/Verification";
+import PasswordVerificationCode from "./components/registration/PasswordVerificationCode";
+import MsAdminDashboard from "./components/master-admin/MsAdminDashboard";
+import AdminLogin from "./components/master-admin/components/AdminLogin";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
   return (
     <Router>
       <ScrollToTop />
       <Loader />
-      <Main />
+      <Main isLoggedIn={isLoggedIn} handleLoginSuccess={handleLoginSuccess} />
     </Router>
   );
 }
 
-function Main() {
+function Main({
+  isLoggedIn,
+  handleLoginSuccess,
+}: {
+  isLoggedIn: boolean;
+  handleLoginSuccess: () => void;
+}) {
   const location = useLocation();
   const hideNavbarPaths = [
     "/login",
@@ -80,8 +95,10 @@ function Main() {
     "/candidate-dashboard",
     "/candidate-wallet-account",
     "/logout-account",
+    "/verify-account",
+    "/verification-code",
+    "/forget-password",
   ];
-
   return (
     <div>
       {!hideNavbarPaths.includes(location.pathname) && <Navbar />}
@@ -105,10 +122,17 @@ function Main() {
         <Route path="testimonial" element={<TestimonialsPage />} />
         <Route path="free-courses" element={<Courses />} />
         <Route path="forget-password" element={<ForgotPassword />} />
-        <Route path="verify-account" element={<AccountVerification/>} />
+        <Route path="verify-account" element={<AccountVerification />} />
+       <Route path="verification-code" element={<PasswordVerificationCode length={6} />} />
 
-
-
+       
+       {/* Master Admin Routing Section */}
+       {!isLoggedIn ? (
+          <Route path="admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
+        ) : (
+          <Route path="master-admin-dashboard" element={<MsAdminDashboard />} />
+        )}
+  
         {/* Candidates Admin routing section */}
         <Route
           path="candidate-dashboard"
@@ -191,7 +215,7 @@ function Main() {
         />
         <Route
           path="employers-logout-account"
-          element={<EmployersLayout element={<EmployersLogoutPage />} />}
+          element={<EmployersLayout element={<EmployersLogoutPage  />} />}
         />
       </Routes>
       

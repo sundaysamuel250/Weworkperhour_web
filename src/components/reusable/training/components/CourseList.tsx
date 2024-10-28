@@ -7,7 +7,7 @@ const courses = [
     description: 'WeWorkPerHour Virtual Assistant Intro.',
     price: 49.99,
     instructor: 'John Doe',
-    videoUrl: Videos.CardOneVi,
+    videoUrl: "https://www.tiktok.com/@smartbartending/video/7021123400877788421", // Replace with actual working link
     content: [
       'Introduction to Virtual Assistant',
       'JSX & Components',
@@ -19,10 +19,10 @@ const courses = [
   },
   {
     title: 'Conclusion',
-    description: 'in conclusion of our virtual assistant course',
+    description: 'In conclusion of our virtual assistant course',
     price: 59.99,
     instructor: 'Jane Smith',
-    videoUrl: Videos.CardTwoVi,
+    videoUrl: "https://example.com/your-conclusion-video-link", // Replace with actual link
     content: [
       'TypeScript Basics',
       'Interfaces & Types',
@@ -34,10 +34,10 @@ const courses = [
   },
   {
     title: 'ESSENTIAL TOOLS NEEDED AS A VIRTUAL ASSISTANT',
-    description: 'Here are the list of the essential needed to become a virtual assistant',
+    description: 'Here are the list of the essentials needed to become a virtual assistant',
     price: 59.99,
     instructor: "John",
-    videoUrl: Videos.CardThreeVi,
+    videoUrl: "https://example.com/essential-tools-video-link", // Replace with actual link
     content: [
       'TypeScript Basics',
       'Interfaces & Types',
@@ -49,10 +49,10 @@ const courses = [
   },
   {
     title: 'HOW TO BUILD THE PERFECT PORTFOLIO AS A VIRTUAL ASSISTANT',
-    description: 'Here are the .',
+    description: 'Here is how to build the perfect portfolio.',
     price: 59.99,
     instructor: 'Jane Smith',
-    videoUrl: Videos.CardFourVi,
+    videoUrl: "https://example.com/portfolio-building-video-link", // Replace with actual link
     content: [
       'TypeScript Basics',
       'Interfaces & Types',
@@ -67,7 +67,7 @@ const courses = [
     description: 'Master TypeScript for large-scale applications.',
     price: 59.99,
     instructor: 'Jane Smith',
-    videoUrl: Videos.CardFiveVi,
+    videoUrl: "https://example.com/advanced-typescript-video-link", // Replace with actual link
     content: [
       'TypeScript Basics',
       'Interfaces & Types',
@@ -82,7 +82,7 @@ const courses = [
     description: 'Master TypeScript for large-scale applications.',
     price: 59.99,
     instructor: 'Jane Smith',
-    videoUrl: Videos.CardSixVi,
+    videoUrl: "https://example.com/advanced-typescript-2-video-link", // Replace with actual link
     content: [
       'TypeScript Basics',
       'Interfaces & Types',
@@ -97,7 +97,7 @@ const courses = [
     description: 'Master TypeScript for large-scale applications.',
     price: 59.99,
     instructor: 'Jane Smith',
-    videoUrl: Videos.CardSevenVi,
+    videoUrl: "https://example.com/advanced-typescript-3-video-link", // Replace with actual link
     content: [
       'TypeScript Basics',
       'Interfaces & Types',
@@ -112,7 +112,7 @@ const courses = [
     description: 'Master TypeScript for large-scale applications.',
     price: 59.99,
     instructor: 'Jane Smith',
-    videoUrl: Videos.CardEightVi,
+    videoUrl: "https://example.com/advanced-typescript-4-video-link", // Replace with actual link
     content: [
       'TypeScript Basics',
       'Interfaces & Types',
@@ -127,7 +127,7 @@ const courses = [
     description: 'Master TypeScript for large-scale applications.',
     price: 59.99,
     instructor: 'Jane Smith',
-    videoUrl: Videos.CardNineVi,
+    videoUrl: "https://example.com/advanced-typescript-5-video-link", // Replace with actual link
     content: [
       'TypeScript Basics',
       'Interfaces & Types',
@@ -137,8 +137,8 @@ const courses = [
       'Building a Large-Scale Project',
     ],
   },
-  // Add more courses here
 ];
+
 
 
 const COURSES_PER_PAGE = 8; // Number of courses per page
