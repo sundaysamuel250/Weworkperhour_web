@@ -88,7 +88,7 @@ const HeroSlider: FC = () => {
       <Slider {...settings}>
         {slidesData.map((slide, index) => (
           <section key={index} className='flex items-center justify-center mt-[2rem]'>
-            <div className='relative lg:max-h-[600px] flex items-center justify-center gap-[12rem] ' >
+            <div className='relative lg:max-h-[900px] flex items-center justify-center gap-[12rem] ' >
               <div className="text-white slide-item lg:relative absolute top-[30%] left-[6%] w-[70%]">
                 <h1 className="font-sans lg:text-[48px] md:text-[38px] text-[20px] text-[#2AA100] font-bold">{slide.title}</h1>
                 <p className='text-md text-[#646A73] tracking-[0.5px] font-sans font-normal'>{slide.content}</p>

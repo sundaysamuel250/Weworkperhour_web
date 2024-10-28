@@ -1,5 +1,5 @@
 export const paystackConfig = {
-    publicKey: 'pk_test_8f31522a6130568a751f67e690000ec9d9b8738a',  // Replace with your Paystack public key
+    publicKey: 'pk_live_b9775a07f7874d2ffbbc7f87ace22b250eecc535',  // Replace with your Paystack public key
     currency: 'NGN',
   };
   

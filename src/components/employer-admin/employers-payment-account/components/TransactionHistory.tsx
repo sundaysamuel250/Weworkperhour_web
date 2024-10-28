@@ -36,7 +36,7 @@ const TransactionHistory: React.FC = () => {
               <td className="py-2">{moment(transaction.create_at).format("Do MMM, y")}</td>
               <td className="py-2">{"Fund wallet"}</td>
               <td className={`py-2 ${transaction.status == "pending" ? 'text-red-500' : 'text-green-500'}`}>
-                ${Math.abs(transaction.amount)}
+              ₦{Math.abs(transaction.amount)}
               </td>
             </tr>
           ))}

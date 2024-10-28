@@ -9,9 +9,10 @@ import { IoBookmarkOutline, IoNotificationsOutline } from 'react-icons/io5';
 import ProgressBar from '../reusable/ProgressBar';
 import { AppContext } from '../../global/state';
 import { iProfile } from '../../models/profle';
-import { httpGetWithToken } from '../../utils/http_utils';
+import { httpGetWithToken, httpPostWithToken } from '../../utils/http_utils';
 import ls from "localstorage-slim";
 import { useToast } from '@chakra-ui/react';
+import SwitchAccountModal from './delete-account/switch_account';
 
 interface iContext {
   user? : iProfile,
@@ -52,25 +53,22 @@ const SideNav: React.FC = () => {
   };
 
   const [isModalOpen, setModalOpen] = useState(false);
-
-  const handleDelete = () => {
-    // Perform delete action here
-    console.log('Account deleted');
-    setModalOpen(false);
-  };
+ 
+  const handleOpenModal = () => setModalOpen(true);
+  const handleCloseModal = () => setModalOpen(false);
 
   const switchAccount =async (role : string) => {
-    var resp = await httpGetWithToken("switch-account/"+role);
+    var resp = await httpPostWithToken("switch-account/"+role);
     if(resp.status == "success") {
       sessionStorage.setItem("wwph_usr", JSON.stringify(resp.data));
       ls.set("wwph_usr", resp.data, {encrypt : true});
       updateUser(resp.data)
-      navigate("/resume-page");
+      navigate("/employers-profile");
     }else {
       toast({
         status : "error",
-        title : "Unauthorized",
-        description : "Please login first",
+        title : "Something went wrong!",
+        description : "Unable to to switich account",
         isClosable : true,
         duration : 5000
       })
@@ -79,6 +77,14 @@ const SideNav: React.FC = () => {
 
   return (
     <div>
+       <SwitchAccountModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onConfirm={()=> {
+          switchAccount("candidate");
+        }}
+        role='Company'
+      />
       <div className="lg:hidden p-4 text-white absolute left-0 top-2 flex justify-between items-center">
         <button onClick={toggleSidebar}>
           {isSidebarOpen ? <UilTimes color='#2aa100' className='text-[#2aa100]' size={24} /> : <FaBarsStaggered size={25} color='#2aa100' className='font-bold' />}
@@ -106,10 +112,10 @@ const SideNav: React.FC = () => {
                 <Link to="/profile-list">
                 <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Profile</li>
                 </Link>
-               <Link to="/account-settings">
+               <Link to="/account-setting">
                <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Settings</li>
                </Link>
-               <Link to="#?" onClick={()=> switchAccount("company")}>
+               <Link to="#?" onClick={()=> handleOpenModal()}>
                <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Switch to Employer</li>
                </Link>
               <Link to="/logout-account">

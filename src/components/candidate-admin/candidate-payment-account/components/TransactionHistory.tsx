@@ -24,7 +24,7 @@ const TransactionHistory: React.FC = () => {
               <td className="py-2">{transaction.date}</td>
               <td className="py-2">{transaction.description}</td>
               <td className={`py-2 ${transaction.amount < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                {transaction.amount < 0 ? '-' : '+'}${Math.abs(transaction.amount)}
+                {transaction.amount < 0 ? '-' : '+'}₦{Math.abs(transaction.amount)}
               </td>
             </tr>
           ))}

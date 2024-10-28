@@ -52,10 +52,13 @@ const CardSection: React.FC <CardSectionProps>= ({companyLogo, jobType, slug, da
         <h2 className="text-[16px] font-semibold font-sans">{jobTitle}</h2>
        
         <p className="text-[12px] mt-[0.5rem] text-[#646A73] font-sans font-semilight tracking-[0.5px]">{jobDescription}</p>
-        <div className='mt-[2rem] flex justify-center space-x-[6rem]'>
-        <p className="text-[#ee009d] mt-[0.5rem] text-[12px] font-sans font-semibold">${payment.toLocaleString()}<span className='text-[12px] text-[#2aa100]'>/month</span></p>
+        <div className='mt-[2rem] flex justify-center space-x-[4rem]'>
+        <p className="text-[#ee009d] mt-[0.5rem] text-[12px] font-sans font-semibold">₦{payment.toLocaleString()}<span className='text-[12px] text-[#2aa100]'>/month</span></p>
       <Link to={"/job-details/"+slug}>
-              <button className="font-sans text-[12px] font-medium text-[#ee009d] border-[1px] border-[#ee009d] hover:text-[#EE009D] py-[4px] px-[10px] rounded-[5px] ">Apply Now</button>
+      <button className="font-sans text-xs font-medium text-[#ee009d] border-[1.5px] hover:border-[#2aa100] border-[#ee009d] hover:text-[#2aa100] py-2 px-3 rounded-md whitespace-nowrap">
+  Apply Now
+</button>
+
             </Link>
       </div>
       

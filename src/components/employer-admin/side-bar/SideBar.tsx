@@ -9,9 +9,10 @@ import Images from '../../constant/Images';
 import ProgressBar from '../../reusable/ProgressBar';
 import { AppContext } from '../../../global/state';
 import { iProfileCompany } from '../../../models/profle';
-import { httpGetWithToken } from '../../../utils/http_utils';
+import { httpGetWithToken, httpPostWithToken } from '../../../utils/http_utils';
 import { useToast } from '@chakra-ui/react';
 import ls from "localstorage-slim";
+import SwitchAccountModal from '../../candidate-admin/delete-account/switch_account';
 
 interface iContext {
   user? : iProfileCompany,
@@ -26,7 +27,7 @@ const SideNav: React.FC = () => {
   const { user, updateUser } : iContext = useContext(AppContext);
   const toast = useToast();
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress(prevProgress => {
@@ -48,7 +49,7 @@ const SideNav: React.FC = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
   const switchAccount =async (role : string) => {
-    var resp = await httpGetWithToken("switch-account/"+role);
+    var resp = await httpPostWithToken("switch-account/"+role);
     if(resp.status == "success") {
       sessionStorage.setItem("wwph_usr", JSON.stringify(resp.data));
       ls.set("wwph_usr", resp.data, {encrypt : true});
@@ -57,8 +58,8 @@ const SideNav: React.FC = () => {
     }else {
       toast({
         status : "error",
-        title : "Unauthorized",
-        description : "Please login first",
+        title : "Something went wrong!",
+        description : "Unable to to switich account",
         isClosable : true,
         duration : 5000
       })
@@ -69,22 +70,26 @@ const SideNav: React.FC = () => {
   };
 
   const [isModalOpen, setModalOpen] = useState(false);
-
-  const handleDelete = () => {
-    // Perform delete action here
-    console.log('Account deleted');
-    setModalOpen(false);
-  };
  
-
+  const handleOpenModal = () => setModalOpen(true);
+  const handleCloseModal = () => setModalOpen(false);
+  
   return (
-    <div>
+    <div className=''>
+      <SwitchAccountModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onConfirm={()=> {
+          switchAccount("candidate");
+        }}
+        role='Candidate'
+      />
       <div className="lg:hidden p-4 text-white absolute left-0 top-2 flex justify-between items-center">
         <button onClick={toggleSidebar}>
           {isSidebarOpen ? <UilTimes color='#2aa100' className='text-[#2aa100]' size={24} /> : <FaBarsStaggered size={25} color='#2aa100' className='font-bold' />}
         </button>
       </div>
-      <div className={`h-full w-60 bg-[#f5f5f5] text-white flex flex-col fixed lg:static transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
+      <div className={`h-full w-60 bg-[#f9faf1] text-white flex flex-col fixed lg:static transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
         <div className="p-6 flex items-center flex-col">
           <div onClick={toggleSidebar} className='lg:hidden block'>
             {isSidebarOpen ? <UilTimes size={35} color='#2aa100' className='absolute top-2 left-[12rem]' /> : <FaBars size={24} />}
@@ -110,7 +115,7 @@ const SideNav: React.FC = () => {
                <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Settings</li>
                </Link>
                <Link to="#?" onClick={()=> {
-                switchAccount("candidate");
+                handleOpenModal();
                }}>
                <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Switch to Candidate</li>
                </Link>

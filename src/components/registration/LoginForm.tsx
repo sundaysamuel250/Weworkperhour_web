@@ -117,7 +117,7 @@ const LoginForm: React.FC = () => {
               <input
                 type="email"
                 id="email"
-                className="w-full px-6 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
+                className="w-full px-6 py-2 mt-2 border-b-[1px] focus:outline-none focus:ring-[1px] focus:ring-[#2aa100]"
                 value={state.email}
                 onChange={(e) => dispatch({ type: 'SET_EMAIL', payload: e.target.value })}
                 required
@@ -128,7 +128,7 @@ const LoginForm: React.FC = () => {
               <input
                 type={state.showPassword ? 'text' : 'password'}
                 id="password"
-                className="w-full px-6 py-2 mt-2 border-b-[1.5px] focus:outline-none focus:ring-2 focus:ring-[#2aa100]"
+                className="w-full px-6 py-2 mt- border-b-[1px] focus:outline-none focus:ring-[1px] focus:ring-[#2aa100]"
                 value={state.password}
                 onChange={(e) => dispatch({ type: 'SET_PASSWORD', payload: e.target.value })}
                 required
@@ -142,7 +142,9 @@ const LoginForm: React.FC = () => {
               </button>
             </div>
             <div className="flex justify-between items-center">
-              <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">Forgot Password?</a>
+             <Link to="/forget-password">
+             <button className="text-sm text-blue-600 hover:underline">Forgot Password?</button>
+             </Link>
             </div>
             <div>
               <button

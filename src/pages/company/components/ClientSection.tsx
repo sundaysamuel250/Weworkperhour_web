@@ -46,40 +46,43 @@ const ClientSection: React.FC = () => {
     <div className='bg-[#f5f5f5] w-full py-[0.5rem] mt-[-4rem]'>
       <Slider {...settings}>
         <div className="mt-2">
-        <img src={Images.FirstBankImage} alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        <img src={Images.LeveragePrintTestimonialLogo} alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         <div className="mt-2">
-        <img src={Images.NetflixImage } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        <img src={Images.RedLenceTestimonialLogo } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         <div className="mt-2">
-        <img src={Images.SportifyImage } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        <img src={Images.CollaborateAfricaTestimonialLogo } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         <div className="mt-2">
-        <img src={Images.MicrosoftImage } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        <img src={Images.BluwayTestimonialLogo} alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         <div className="mt-2">
-        <img src={Images.AmazonImage} alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        <img src={Images.TheWomenTestimonialLogo} alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         <div className="mt-2">
-        <img src={Images.UberImage} alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        <img src={Images.CoraTestimonialLogo } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         <div className="mt-2">
-        <img src={Images.UBAImage } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        <img src={Images.BluwayTestimonialLogo} alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         <div className="mt-2">
-        <img src={Images.PaypalImage } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]'/>
+        <img src={Images.TheWomenTestimonialLogo} alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         <div className="mt-2">
-        <img src={Images.IBMImage } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        <img src={Images.CoraTestimonialLogo } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         <div className="mt-2">
-        <img src={Images.AppleImage } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        <img src={Images.BluwayTestimonialLogo} alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         <div className="mt-2">
-        <img src={Images.OracleImage } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        <img src={Images.TheWomenTestimonialLogo} alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         <div className="mt-2">
-        <img src={Images.SamsungImage } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        <img src={Images.LeveragePrintTestimonialLogo} alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
+        </div>
+        <div className="mt-2">
+        <img src={Images.RedLenceTestimonialLogo } alt="" className='w-[80px] border-[1px] rounded-[50px] h-[80px]' />
         </div>
         {/* Add more slides as needed */}
       </Slider>
