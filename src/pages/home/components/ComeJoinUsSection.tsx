@@ -16,6 +16,7 @@ const ComeJoinUsSection: React.FC = () => {
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+    
   };
 
   return (

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import CourseCard from './CourseCard';
-import Videos from '../../../constant/Videos';
 const courses = [
   {
     title: 'Introduction',
