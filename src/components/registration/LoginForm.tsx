@@ -62,7 +62,7 @@ const LoginForm: React.FC = () => {
     const response = await httpPostWithoutToken("login", d)
     setIsSubmitting(false)
 
-    if(response.status == "success") {
+    if(response.status === "success") {
       toast({
         status : "success",
         title : "Login successful!",
@@ -74,8 +74,8 @@ const LoginForm: React.FC = () => {
       ls.set("wwph_usr", response.user, {encrypt : true});
       updateUser(response.user)
       setTimeout(() => {
-      if(response.user.role == "Company") {
-        if(response.user.about_company == "" || !response.user.about_company) {
+      if(response.user.role === "Company") {
+        if(response.user.about_company === "" || !response.user.about_company) {
           navigate("/employers-profile")
         }else {
           navigate("/employers-dashboard")

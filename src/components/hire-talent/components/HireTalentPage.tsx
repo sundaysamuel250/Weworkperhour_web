@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import JobSearch from '../../../pages/home/components/JobSearch';
 import Images from '../../constant/Images';
 import { Link } from 'react-router-dom';
+import { httpGetWithoutToken } from '../../../utils/http_utils';
 
 interface Candidate {
   image: string;
@@ -318,6 +319,24 @@ const ITEMS_PER_PAGE = 9;
 
 const CandidatesHireTalent: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
+
+  useEffect(() => {
+    const fetchCandidates = async () => {
+      try {
+        const response = await httpGetWithoutToken("candidates");
+        console.log(response.data)
+        if (response?.data) {
+          setCandidates(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching candidates:", error);
+      }
+    };
+
+    fetchCandidates();
+  }, []);
+
 
   // Calculate the total number of pages
   const totalPages = Math.ceil(candidates.length / ITEMS_PER_PAGE);
@@ -436,7 +455,7 @@ const CandidatesHireTalent: React.FC = () => {
       <p className="text-xl font-semibold mb-4">All {candidates.length} candidates found</p>
 
       <div className="flex flex-wrap -mx-4">
-        {currentCandidates.map((candidate, index) => (
+      {candidates.slice(((currentPage-1)*ITEMS_PER_PAGE), ITEMS_PER_PAGE).map((candidate, index) =>(
           <div key={index} className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
             <div className="bg-white p-4 rounded shadow">
               <div className='flex items-center justify-center'>
@@ -503,3 +522,4 @@ const CandidatesHireTalent: React.FC = () => {
 };
 
 export default CandidatesHireTalent;
+

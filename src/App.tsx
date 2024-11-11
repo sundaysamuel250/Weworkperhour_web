@@ -123,7 +123,9 @@ function Main({
         <Route path="free-courses" element={<Courses />} />
         <Route path="forget-password" element={<ForgotPassword />} />
         <Route path="verify-account" element={<AccountVerification />} />
-       <Route path="verification-code" element={<PasswordVerificationCode length={6} />} />
+       <Route path="verification-code" element={<PasswordVerificationCode length={6}  onSubmit={(code: string) => {
+              console.log("Code submitted:", code);
+            }}  />} />
 
        
        {/* Master Admin Routing Section */}
