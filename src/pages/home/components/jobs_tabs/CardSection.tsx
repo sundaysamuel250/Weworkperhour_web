@@ -21,12 +21,16 @@ interface CardSectionProps {
 const CardSection: React.FC <CardSectionProps>= ({companyLogo, jobType, slug, datePosted, companyName, LocationName, jobTitle, jobDescription, payment, workType}) => {
   const [lastUpdated, setLastUpdated] = useState<string>('');
   
-  useEffect(() => {
-    const currentDate = new Date();
-    const monthNames: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const formattedDate = `${monthNames[currentDate.getMonth()]} ${currentDate.getDate()}`;
-    setLastUpdated(formattedDate);
-  }, []);
+  // useEffect(() => {
+  //   const currentDate = new Date();
+  //   const monthNames: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  //   const formattedDate = `${monthNames[currentDate.getMonth()]} ${currentDate.getDate()}`;
+  //   setLastUpdated(formattedDate);
+  // }, []);
+  const formattedDate = datePosted
+  ? new Date(datePosted).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+  : new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
   return (
     <section className='w-[300px] bg-white shadow-md border-[1px] rounded-[4px]'>
        <section className='p-[1rem]'>
@@ -39,7 +43,7 @@ const CardSection: React.FC <CardSectionProps>= ({companyLogo, jobType, slug, da
          <p className='text-[10px] text-[#646A73] font-sans font-semilight tracking-[0.5px] w-[100px]'>{LocationName}</p>
          </div>
          </div>
-         <p className="text-[12px] text-[#646A73] font-sans font-semilight tracking-[0.5px] w-[100px]">{moment(datePosted).format("MMM, DD")}</p>
+         <p className="text-[12px] text-[#646A73] font-sans font-semilight tracking-[0.5px] w-[100px]">{moment(formattedDate).format("MMM, DD")}</p>
         </section>
         <div className='flex items-center gap-[0.5rem] mt-[1rem] '>
           <p className='text-[12px] text-center font-sans my-2 tracking-wider rounded-[4px] p-1 w-[60px] text-[#2AA100]  bg-[#D1FFBD]'>{workType}</p>

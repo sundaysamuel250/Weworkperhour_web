@@ -50,8 +50,10 @@ import Courses from "./components/reusable/training/Courses";
 import ForgotPassword from "./components/registration/ForgetPass";
 import AccountVerification from "./components/registration/Verification";
 import PasswordVerificationCode from "./components/registration/PasswordVerificationCode";
-import MsAdminDashboard from "./components/master-admin/MsAdminDashboard";
 import AdminLogin from "./components/master-admin/components/AdminLogin";
+import JobList from "./components/master-admin/components/JobList";
+import AdminJobDetails from "./components/master-admin/components/JobDetails";
+import AppliedJobs from "./components/candidate-admin/applied-job/AppliedJobs";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -85,12 +87,16 @@ function Main({
     "/messages",
     "/job-alerts",
     "/saved-jobs",
+    "/my-jobs",
+    "/employers-messages",
+    "/employers-account-settings",
     "/account-setting",
     "/delete-account",
     "/employers-dashboard",
     "/employers-profile",
     "/submit-jobs",
     "/saved-candidate",
+    "/applied-jobs",
     "/employers-wallet-account",
     "/candidate-dashboard",
     "/candidate-wallet-account",
@@ -129,11 +135,22 @@ function Main({
 
        
        {/* Master Admin Routing Section */}
-       {!isLoggedIn ? (
+       {/* {!isLoggedIn ? (
           <Route path="admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
         ) : (
           <Route path="master-admin-dashboard" element={<MsAdminDashboard />} />
-        )}
+        )} */}
+        {/* <Route path="admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
+        <Route path="master-admin-dashboard" element={<MsAdminDashboard />} />
+        <Route path="admin-jobs" element={<JobList />} />
+        <Route path="job-details/:id" element={<JobDetails />} />
+        <Route path="*" element={<Navigate to="admin-jobs" />} /> */}
+
+          <Route path={"/master-admin-dashboard"} >
+          <Route path="admin-jobs" element={<JobList />} />
+          <Route path="job-details/:id" element={<AdminJobDetails  />} />
+        </Route>
+        <Route path="admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
   
         {/* Candidates Admin routing section */}
         <Route
@@ -159,6 +176,10 @@ function Main({
         <Route
           path="saved-jobs"
           element={<AdminLayout element={<SavedJobs />} />}
+        />
+         <Route
+          path="applied-jobs"
+          element={<AdminLayout element={<AppliedJobs />} />}
         />
         <Route
           path="account-setting"

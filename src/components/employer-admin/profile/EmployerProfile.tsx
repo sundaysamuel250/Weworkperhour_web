@@ -217,7 +217,7 @@ const EmployerProfile: React.FC = () => {
     setBio(res.data.about_company)
     setUserCity(res.data.city)
     setUserCountry(res.data.country)
-    if (res.data.country != "") {
+    if (res.data.country !== "") {
       // getStates(res.data.country)
     }
     setLinks(res.data.social_medias)

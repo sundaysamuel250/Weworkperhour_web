@@ -15,6 +15,10 @@ const ProfileForm: React.FC = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [cvFile, setCvFile] = useState("");
+  const [salary, setSalary] = useState<string>("");
+  const [jobTitle, setJobTitle] = useState<string>("");
+  const [experience, setExperience] = useState("");
+
   const [loading, setLoading] = useState(false);
   const [education, setEducation] = useState([
     {
@@ -53,6 +57,35 @@ const ProfileForm: React.FC = () => {
       getResume();
   }
 
+  };
+
+  const saveSalaryAndJobTitle = async () => {
+    if (loading) return;
+    if (!salary || !jobTitle || !experience) {
+      toast({
+        status: "warning",
+        title: "Both Salary, Experience and Job Title are required.",
+        isClosable: true,
+        duration: 5000,
+      });
+      return;
+    }
+    setLoading(true);
+    const res = await httpPostWithToken("resume/update", {
+      salary,
+      jobTitle,
+      experience,
+    });
+    if (res.status === "success") {
+      getResume();
+      toast({
+        status: "success",
+        title: "Salary and Job Title updated successfully",
+        isClosable: true,
+        duration: 5000,
+      });
+    }
+    setLoading(false);
   };
 
   // Function to remove a portfolio image
@@ -247,6 +280,9 @@ const ProfileForm: React.FC = () => {
       }
       setPortfolioImages(res.data.portfolio)
       setSkills(res.data.skills.split(","))
+      setSalary(res.data.salary || "");
+      setJobTitle(res.data.jobTitle || "");
+      setExperience(res.data.experiences || []);
       if(res.data.resume_title) {
         setCv(res.data.resume_title)
         setCvFile(res.data.resume)
@@ -334,6 +370,62 @@ const ProfileForm: React.FC = () => {
           </>
         }
       </div>
+      </div>
+      {/* Salary and Job Title Section */}
+      <div className="bg-white rounded-2xl py-8 px-8 mt-[2rem]">
+        <h2 className="text-xl font-semibold text-[#ee009d]">
+          Salary & Job Title
+        </h2>
+        <div className="mb-4">
+          <label className="block text-green-600 font-semibold mb-2">
+            Desired Salary*
+          </label>
+          <input
+            type="text"
+            value={salary}
+            onChange={(e) => setSalary(e.target.value)}
+            placeholder="Enter your desired salary"
+            className="w-full border rounded-lg p-4 shadow-sm"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-green-600 font-semibold mb-2">
+            Job Title*
+          </label>
+          <input
+            type="text"
+            value={jobTitle}
+            onChange={(e) => setJobTitle(e.target.value)}
+            placeholder="Enter your job title"
+            className="w-full border rounded-lg p-4 shadow-sm"
+          />
+        </div>
+        <div className="mb-4">
+    <label className="block text-green-600 font-semibold mb-2">
+      Years of Experience*
+    </label>
+    <input
+      type="number"
+      value={experience}
+      onChange={(e) => setExperience(e.target.value)}
+      placeholder="Enter your years of experience"
+      className="w-full border rounded-lg p-4 shadow-sm"
+      min={0}
+    />
+  </div>
+        <Button
+          bg={"#ee009d"}
+          color={"white"}
+          isLoading={loading}
+          onClick={saveSalaryAndJobTitle}
+          py={2}
+          px={8}
+          fontSize={"large"}
+          fontWeight={"600"}
+          rounded={"lg"}
+        >
+          Save
+        </Button>
       </div>
 
       {/* profile upload section ends here  */}
@@ -461,6 +553,7 @@ const ProfileForm: React.FC = () => {
       </section>
 
       {/* introduction video section ends here  */}
+      
 
       {/* Eductional section start here */}
 

@@ -16,7 +16,7 @@ const PasswordVerificationCode: React.FC<PassVerificationCodeProps> = ({ length,
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [email, setEmail] = useState <string>('')
+  const [email, setEmail] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isResending, setIsResending] = useState<boolean>(false);
 
@@ -27,15 +27,13 @@ const PasswordVerificationCode: React.FC<PassVerificationCodeProps> = ({ length,
   useContext(AppContext);
 
   useEffect(() => {
-    let e = (search).substring(search.indexOf("&u="))
-    e = e.replace("&u=", '');
-    if(!validateEmail(e)){
-        return navigate('/login')
-    }else{
-      setEmail(e.toString())
+    const queryEmail = new URLSearchParams(search).get("email");
+    if (!queryEmail || !validateEmail(queryEmail)) {
+      navigate("/login");
+    } else {
+      setEmail(queryEmail);
     }
-}, []);
-
+  }, [search, navigate]);
 
   const handleChange = (value: string, index: number) => {
     if (/^[0-9]$/.test(value)) {
@@ -56,35 +54,47 @@ const PasswordVerificationCode: React.FC<PassVerificationCodeProps> = ({ length,
 
   const handleSubmit = async () => {
     const codeString = code.join("");
-    if (codeString.length === length) {
-      setIsSubmitting(true);
+    if (codeString.length !== length) {
+      setError("Please enter the full verification code.");
+      return;
+    }
+    setIsSubmitting(true);
 
-      try {
-        const response = await httpPostWithoutToken("verify-token", { email, token: codeString });
-        setIsSubmitting(false);
+    try {
+      const response = await httpPostWithoutToken("verify-token", { email, token: codeString });
+      setIsSubmitting(false);
 
-        if (response.status === "success") {
-          setIsVerified(true);
-          toast({
-            status: "success",
-            title: "Code Verified",
-            description: "Verification successful! You can now reset your password.",
-            isClosable: true,
-            duration: 4000,
-          });
-        } else {
-          setError(response.message || "Verification failed. Please try again.");
-        }
-      } catch (error) {
-        setIsSubmitting(false);
-        setError("An error occurred. Please try again.");
+      if (response.status === "success") {
+        setIsVerified(true);
+        toast({
+          status: "success",
+          title: "Code Verified",
+          description: "You can now reset your password.",
+          isClosable: true,
+          duration: 4000,
+        });
+      } else {
+        setError(response.message || "Verification failed. Please try again.");
       }
-    } else {
-      setError("Please enter the full code.");
+    } catch (error) {
+      setIsSubmitting(false);
+      setError("An error occurred during verification. Please try again.");
     }
   };
 
   const handlePasswordReset = async () => {
+    const codeString = code.join(""); // Define codeString here
+
+    if (newPassword.trim() === "" || confirmPassword.trim() === "") {
+      setError("Password fields cannot be empty.");
+      return;
+    }
+
+    if (newPassword.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
+
     if (newPassword !== confirmPassword) {
       setError("Passwords do not match.");
       return;
@@ -96,6 +106,8 @@ const PasswordVerificationCode: React.FC<PassVerificationCodeProps> = ({ length,
       const response = await httpPostWithoutToken("reset-password", {
         email,
         password: newPassword,
+        token: codeString,
+        password_confirmation: newPassword,
       });
 
       setIsSubmitting(false);
@@ -114,7 +126,7 @@ const PasswordVerificationCode: React.FC<PassVerificationCodeProps> = ({ length,
       }
     } catch (error) {
       setIsSubmitting(false);
-      setError("An error occurred. Please try again.");
+      setError("An error occurred during password reset. Please try again.");
     }
   };
 
@@ -138,13 +150,13 @@ const PasswordVerificationCode: React.FC<PassVerificationCodeProps> = ({ length,
       }
     } catch (error) {
       setIsResending(false);
-      setError("An error occurred. Please try again.");
+      setError("An error occurred during OTP resend. Please try again.");
     }
   };
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white shadow-md xl:max-w-[1300px] lg:max-w-[900px] mx-auto gap-2 flex flex-col lg:flex-row items-center">
+      <div className="bg-white shadow-md xl:max-w-[1300px] lg:max-w-[900px] mx-auto flex flex-col lg:flex-row items-center">
         {!isVerified ? (
           <div className="w-full lg:w-1/2 p-20">
             <h1 className="text-2xl font-semibold mb-6">Enter Verification Code</h1>
