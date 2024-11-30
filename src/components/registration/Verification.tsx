@@ -1,38 +1,75 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Images from "../constant/Images";
+import { httpPostWithoutToken, validateEmail } from "../../utils/http_utils";
+import { useToast } from "@chakra-ui/react";
 
 const AccountVerification: React.FC = () => {
   const [code, setCode] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [email, setEmail] = useState <string>('')
+  const location = useLocation();
+  const search = location.search;
+  const navigate = useNavigate();
+  const toast = useToast();
+  
+  useEffect(() => {
+    let e = (search).substring(search.indexOf("&u="))
+    e = e.replace("&u=", '');
+    if(!validateEmail(e)){
+        return navigate('/login')
+    }else{
+      setEmail(e.toString())
+    }
+}, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("verify-account", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: "contact@weworkperhour.com", // Example email or retrieved from the form
-          verificationCode: code, // Code from user input
-        }),
+      const response = await httpPostWithoutToken("verify-account", {
+          email: email, // Example email or retrieved from the form
+          token: code, // Code from user input
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data.message); // Handle success (e.g., show success message)
+      console.log(response)
+      if (response.status === "success") {
+        toast({
+          status : "success",
+          title : "Account verified successful!",
+          isClosable : true,
+        })
+        navigate("/login")  
         setSubmitted(true);
       } else {
-        const errorData = await response.json();
-        console.error(errorData.message); // Handle error (e.g., show error message)
+        toast({
+          status : "error",
+          title : response.message,
+          isClosable : true,
+        })
       }
     } catch (error) {
       console.error("Error verifying account:", error);
     }
   };
+
+  const resendToken = async () => {
+    const resp = await httpPostWithoutToken("resend-verification", {
+         email : email
+    })
+    if(resp.status === "success") {
+      toast({
+        status : "success",
+        title : `Email verification code sent ${email}`,
+        isClosable : true,
+      })
+    }else {
+      toast({
+        status : "error",
+        title : resp.message,
+        isClosable : true,
+      })
+    }
+    }
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -78,7 +115,7 @@ const AccountVerification: React.FC = () => {
               </form>
               <p className="text-center mt-4 text-gray-600">
                 Didn't receive a code?{" "}
-                <Link to="/" className="text-[#2aa100] hover:underline">
+                <Link onClick={()=>resendToken()} to="#?" className="text-[#2aa100] hover:underline">
                   Resend
                 </Link>
               </p>
@@ -94,3 +131,4 @@ const AccountVerification: React.FC = () => {
 };
 
 export default AccountVerification;
+

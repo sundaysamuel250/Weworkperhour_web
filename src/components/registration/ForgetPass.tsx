@@ -32,7 +32,7 @@ const ForgetPassword: React.FC<ForgetPasswordProps> = () => {
           position: "top-right",
         });
         // Navigate to the verification page with email in the query parameters
-        navigate(`/verification-code?email=${encodeURIComponent(email)}`);
+        navigate(`/verification-code?email=${email}`);
       } else {
         setError(response?.message || "Failed to send verification email. Please try again.");
       }

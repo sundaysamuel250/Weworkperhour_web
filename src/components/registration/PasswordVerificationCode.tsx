@@ -1,104 +1,156 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { httpPostWithoutToken } from "../../utils/http_utils"; // Ensure this function is defined and works correctly
+import { httpPostWithoutToken, validateEmail } from "../../utils/http_utils";
 import { useToast } from "@chakra-ui/react";
 import Images from "../constant/Images";
+import { AppContext } from "../../global/state";
 
-const PasswordVerificationCode: React.FC<{ length: number }> = ({ length }) => {
+interface PassVerificationCodeProps {
+  length: number;
+  onSubmit: (code: string) => void;
+}
+
+const PasswordVerificationCode: React.FC<PassVerificationCodeProps> = ({ length, onSubmit }) => {
   const [code, setCode] = useState<string[]>(Array(length).fill(""));
   const [error, setError] = useState<string | null>(null);
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isResending, setIsResending] = useState<boolean>(false);
 
   const location = useLocation();
-  const email = location.state?.email; // Ensure email is correctly passed from the previous route
+  const search = location.search;
   const navigate = useNavigate();
   const toast = useToast();
+  useContext(AppContext);
+
+  useEffect(() => {
+    const queryEmail = new URLSearchParams(search).get("email");
+    if (!queryEmail || !validateEmail(queryEmail)) {
+      navigate("/login");
+    } else {
+      setEmail(queryEmail);
+    }
+  }, [search, navigate]);
 
   const handleChange = (value: string, index: number) => {
-    const newCode = [...code];
-    newCode[index] = value.slice(0, 1); // Limit input to 1 character
-    setCode(newCode);
-
-    // Move to next input if current input is filled
-    if (value && index < length - 1) {
-      document.getElementById(`code-${index + 1}`)?.focus();
+    if (/^[0-9]$/.test(value)) {
+      const newCode = [...code];
+      newCode[index] = value;
+      setCode(newCode);
+      if (index < length - 1) {
+        (document.getElementById(`code-${index + 1}`) as HTMLInputElement)?.focus();
+      }
     }
+  };
 
-    // Move back to previous input if current input is empty
-    if (!value && index > 0) {
-      document.getElementById(`code-${index - 1}`)?.focus();
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+    if (e.key === "Backspace" && code[index] === "") {
+      (document.getElementById(`code-${index - 1}`) as HTMLInputElement)?.focus();
     }
   };
 
   const handleSubmit = async () => {
     const codeString = code.join("");
-    if (codeString.length === length && email) {
-      setIsSubmitting(true);
-      setError(null); // Reset error on new submission
-      try {
-        const response = await httpPostWithoutToken("verify-token", { email, token: codeString });
-        setIsSubmitting(false);
+    if (codeString.length !== length) {
+      setError("Please enter the full verification code.");
+      return;
+    }
+    setIsSubmitting(true);
 
-        if (response.status === "success") {
-          setIsVerified(true);
-          toast({
-            status: "success",
-            title: "Code Verified",
-            description: "Verification successful! You can now reset your password.",
-            isClosable: true,
-            duration: 4000,
-          });
-        } else {
-          setError(response.message || "Verification failed. Please try again.");
-        }
-      } catch (error) {
-        setIsSubmitting(false);
-        console.error("Error in verification submit:", error); // Log error for debugging
-        setError("An error occurred. Please try again.");
+    try {
+      const response = await httpPostWithoutToken("verify-token", { email, token: codeString });
+      setIsSubmitting(false);
+
+      if (response.status === "success") {
+        setIsVerified(true);
+        toast({
+          status: "success",
+          title: "Code Verified",
+          description: "You can now reset your password.",
+          isClosable: true,
+          duration: 4000,
+        });
+      } else {
+        setError(response.message || "Verification failed. Please try again.");
       }
-    } else {
-      setError("Please enter the full code.");
+    } catch (error) {
+      setIsSubmitting(false);
+      setError("An error occurred during verification. Please try again.");
     }
   };
 
   const handlePasswordReset = async () => {
+    const codeString = code.join(""); // Define codeString here
+
+    if (newPassword.trim() === "" || confirmPassword.trim() === "") {
+      setError("Password fields cannot be empty.");
+      return;
+    }
+
+    if (newPassword.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
+
     if (newPassword !== confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
 
-    if (email) {
-      setIsSubmitting(true);
-      setError(null); // Reset error on new submission
-      try {
-        const response = await httpPostWithoutToken("reset-password", {
-          email,
-          password: newPassword,
-        });
-        setIsSubmitting(false);
+    setIsSubmitting(true);
 
-        if (response.status === "success") {
-          toast({
-            status: "success",
-            title: "Password Reset Successful",
-            description: "You can now log in with your new password.",
-            isClosable: true,
-            duration: 4000,
-          });
-          navigate("/login");
-        } else {
-          setError(response.message || "Password reset failed. Please try again.");
-        }
-      } catch (error) {
-        setIsSubmitting(false);
-        console.error("Error in password reset:", error); // Log error for debugging
-        setError("An error occurred. Please try again.");
+    try {
+      const response = await httpPostWithoutToken("reset-password", {
+        email,
+        password: newPassword,
+        token: codeString,
+        password_confirmation: newPassword,
+      });
+
+      setIsSubmitting(false);
+
+      if (response.status === "success") {
+        toast({
+          status: "success",
+          title: "Password Reset Successful",
+          description: "You can now log in with your new password.",
+          isClosable: true,
+          duration: 4000,
+        });
+        navigate("/login");
+      } else {
+        setError(response.message || "Password reset failed. Please try again.");
       }
-    } else {
-      setError("Email is missing.");
+    } catch (error) {
+      setIsSubmitting(false);
+      setError("An error occurred during password reset. Please try again.");
+    }
+  };
+
+  const handleResendOTP = async () => {
+    setIsResending(true);
+
+    try {
+      const response = await httpPostWithoutToken("resend-otp", { email });
+      setIsResending(false);
+
+      if (response.status === "success") {
+        toast({
+          status: "success",
+          title: "OTP Resent",
+          description: `A new OTP has been sent to ${email}.`,
+          isClosable: true,
+          duration: 4000,
+        });
+      } else {
+        setError(response.message || "Failed to resend OTP. Please try again.");
+      }
+    } catch (error) {
+      setIsResending(false);
+      setError("An error occurred during OTP resend. Please try again.");
     }
   };
 
@@ -121,6 +173,7 @@ const PasswordVerificationCode: React.FC<{ length: number }> = ({ length }) => {
                   className="w-12 h-12 text-center border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-xl"
                   value={value}
                   onChange={(e) => handleChange(e.target.value, index)}
+                  onKeyDown={(e) => handleKeyPress(e, index)}
                 />
               ))}
             </div>
@@ -132,35 +185,44 @@ const PasswordVerificationCode: React.FC<{ length: number }> = ({ length }) => {
             >
               {isSubmitting ? "Submitting..." : "Submit"}
             </button>
+            <p className="mt-4 text-sm">
+              Didn't receive it?{" "}
+              <button
+                className="text-blue-600 hover:underline"
+                onClick={handleResendOTP}
+                disabled={isResending}
+              >
+                {isResending ? "Resending..." : "Resend OTP"}
+              </button>
+            </p>
           </div>
         ) : (
           <div className="w-full lg:w-1/2 p-20">
             <h1 className="text-2xl font-semibold mb-6">Reset Your Password</h1>
+            <p className="mb-4">Please enter your new password.</p>
             <div className="flex flex-col gap-4 mb-4">
               <input
                 type="password"
                 placeholder="New Password"
-                className="w-full p-2 border-b-[1.5px] focus:outline-none focus:ring-1 focus:ring-[#2aa100]"
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-lg"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                required
               />
               <input
                 type="password"
                 placeholder="Confirm New Password"
-                className="w-full p-2 border-b-[1.5px] focus:outline-none focus:ring-1 focus:ring-[#2aa100]"
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-lg"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                required
               />
-              {error && <p className="text-red-500 mb-4">{error}</p>}
             </div>
+            {error && <p className="text-red-500 mb-4">{error}</p>}
             <button
               className={`bg-[#ee009d] text-white px-6 py-2 rounded font-medium hover:bg-[#2aa100] transition-transform ease-in-out duration-300 hover:scale-110 ${isSubmitting ? "opacity-50" : ""}`}
               onClick={handlePasswordReset}
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Resetting..." : "Reset Password"}
+              {isSubmitting ? "Submitting..." : "Reset Password"}
             </button>
           </div>
         )}

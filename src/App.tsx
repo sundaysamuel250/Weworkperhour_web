@@ -50,10 +50,15 @@ import Courses from "./components/reusable/training/Courses";
 import ForgotPassword from "./components/registration/ForgetPass";
 import AccountVerification from "./components/registration/Verification";
 import PasswordVerificationCode from "./components/registration/PasswordVerificationCode";
-import MsAdminDashboard from "./components/master-admin/MsAdminDashboard";
 import AdminLogin from "./components/master-admin/components/AdminLogin";
+<<<<<<< HEAD
 import AdminJobList from "./components/master-admin/components/JobList";
 import AdminJobDetails from "./components/master-admin/components/JobDetails";
+=======
+import JobList from "./components/master-admin/components/JobList";
+import AdminJobDetails from "./components/master-admin/components/JobDetails";
+import AppliedJobs from "./components/candidate-admin/applied-job/AppliedJobs";
+>>>>>>> 257849e77e090e56153d4c3e482d474f4f05ab01
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -87,12 +92,16 @@ function Main({
     "/messages",
     "/job-alerts",
     "/saved-jobs",
+    "/my-jobs",
+    "/employers-messages",
+    "/employers-account-settings",
     "/account-setting",
     "/delete-account",
     "/employers-dashboard",
     "/employers-profile",
     "/submit-jobs",
     "/saved-candidate",
+    "/applied-jobs",
     "/employers-wallet-account",
     "/candidate-dashboard",
     "/candidate-wallet-account",
@@ -125,15 +134,36 @@ function Main({
         <Route path="free-courses" element={<Courses />} />
         <Route path="forget-password" element={<ForgotPassword />} />
         <Route path="verify-account" element={<AccountVerification />} />
-       <Route path="verification-code" element={<PasswordVerificationCode length={6} />} />
+       <Route path="verification-code" element={<PasswordVerificationCode length={6}  onSubmit={(code: string) => {
+              console.log("Code submitted:", code);
+            }}  />} />
 
        
        {/* Master Admin Routing Section */}
+<<<<<<< HEAD
        <Route path={"/admin"} >
           <Route path="" element={<AdminLogin />} />
           <Route path="admin-jobs" element={<AdminJobList />} />
           <Route path="job-details/:id" element={<AdminJobDetails />} />
         </Route>
+=======
+       {/* {!isLoggedIn ? (
+          <Route path="admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
+        ) : (
+          <Route path="master-admin-dashboard" element={<MsAdminDashboard />} />
+        )} */}
+        {/* <Route path="admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
+        <Route path="master-admin-dashboard" element={<MsAdminDashboard />} />
+        <Route path="admin-jobs" element={<JobList />} />
+        <Route path="job-details/:id" element={<JobDetails />} />
+        <Route path="*" element={<Navigate to="admin-jobs" />} /> */}
+
+          <Route path={"/master-admin-dashboard"} >
+          <Route path="admin-jobs" element={<JobList />} />
+          <Route path="job-details/:id" element={<AdminJobDetails  />} />
+        </Route>
+        <Route path="admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
+>>>>>>> 257849e77e090e56153d4c3e482d474f4f05ab01
   
         {/* Candidates Admin routing section */}
         <Route
@@ -159,6 +189,10 @@ function Main({
         <Route
           path="saved-jobs"
           element={<AdminLayout element={<SavedJobs />} />}
+        />
+         <Route
+          path="applied-jobs"
+          element={<AdminLayout element={<AppliedJobs />} />}
         />
         <Route
           path="account-setting"
