@@ -141,7 +141,7 @@ const Navbar: React.FC = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-[6px]">
             {activeToken ? (
-              <Link to={role === "Company" ? "/employers-dashboard" : "/candidate-dashboard"}>
+              <Link to={role === "Company" ? "/employers-dashboard" : ( role === "admin" ? "/admin/admin-jobs" : "/candidate-dashboard")}>
                 <button className="font-sans mr-2 text-[14px] font-medium text-[#000000] border-2 border-[#2AA100] hover:text-[#EE009D] py-[4px] px-[10px] rounded-[5px] ease-in duration-300">
                   My Account
                 </button>

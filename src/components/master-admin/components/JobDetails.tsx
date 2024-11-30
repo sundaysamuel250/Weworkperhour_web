@@ -9,7 +9,7 @@ interface Job {
   description: string;
 }
 
-const JobDetails: React.FC = () => {
+const AdminJobDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
@@ -54,4 +54,4 @@ const JobDetails: React.FC = () => {
   );
 };
 
-export default JobDetails;
+export default AdminJobDetails;

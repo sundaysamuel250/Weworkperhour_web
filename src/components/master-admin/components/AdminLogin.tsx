@@ -1,22 +1,48 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { httpPostWithoutToken } from '../../../utils/http_utils';
+import ls from "localstorage-slim";
+import { Button, useToast } from '@chakra-ui/react';
+import { AppContext } from '../../../global/state';
 
-interface LoginProps {
-  onLoginSuccess: () => void;
-}
-
-const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
+const Login = () => {
+  const {updateUser}:any = useContext(AppContext)
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const toast = useToast();
 
-  const handleLogin = () => {
-    if (username === 'admin' && password === 'admin123') {
-      navigate('/applied-jobs'); // Redirect to Applied Jobs page on successful login
-    } else {
-      setError('Invalid credentials. Please try again.');
-    }
+  const handleLogin = async () => {
+      let d = {
+        email: username,
+        password: password,
+      }
+      setIsSubmitting(true)
+      const response = await httpPostWithoutToken("admin/login", d)
+      setIsSubmitting(false)
+  
+      if(response.status == "success") {
+        toast({
+          status : "success",
+          title : "Login successful!",
+          isClosable : true,
+        })
+        sessionStorage.setItem("wwph_token", response.access_token);
+        sessionStorage.setItem("wwph_usr", JSON.stringify(response.user));
+        ls.set("wwph_token", response.access_token, {encrypt : true});
+        ls.set("wwph_usr", response.user, {encrypt : true});
+        updateUser(response.user)
+        navigate("/admin/admin-jobs")
+      }else{
+        toast({
+          status : "error",
+          title : response.message,
+          isClosable : true,
+        })
+      }
+  
   };
 
   return (
@@ -42,12 +68,13 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
           />
         </div>
         {error && <p className="text-red-500 mb-4">{error}</p>}
-        <button
+        <Button 
           className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
           onClick={handleLogin}
+          isLoading={isSubmitting}
         >
           Login
-        </button>
+        </Button>
       </div>
     </div>
   );

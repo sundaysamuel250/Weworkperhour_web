@@ -52,6 +52,8 @@ import AccountVerification from "./components/registration/Verification";
 import PasswordVerificationCode from "./components/registration/PasswordVerificationCode";
 import MsAdminDashboard from "./components/master-admin/MsAdminDashboard";
 import AdminLogin from "./components/master-admin/components/AdminLogin";
+import AdminJobList from "./components/master-admin/components/JobList";
+import AdminJobDetails from "./components/master-admin/components/JobDetails";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -127,11 +129,11 @@ function Main({
 
        
        {/* Master Admin Routing Section */}
-       {!isLoggedIn ? (
-          <Route path="admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
-        ) : (
-          <Route path="master-admin-dashboard" element={<MsAdminDashboard />} />
-        )}
+       <Route path={"/admin"} >
+          <Route path="" element={<AdminLogin />} />
+          <Route path="admin-jobs" element={<AdminJobList />} />
+          <Route path="job-details/:id" element={<AdminJobDetails />} />
+        </Route>
   
         {/* Candidates Admin routing section */}
         <Route
