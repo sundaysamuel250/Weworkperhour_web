@@ -279,7 +279,7 @@ const ProfileForm: React.FC = () => {
         setEducation(res.data.educations)
       }
       setPortfolioImages(res.data.portfolio)
-      setSkills(res.data.skills.split(","))
+      setSkills(res.data.skills ? res.data.skills.split(",") : [])
       setSalary(res.data.salary || "");
       setJobTitle(res.data.jobTitle || "");
       setExperience(res.data.experiences || []);

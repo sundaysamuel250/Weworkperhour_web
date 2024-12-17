@@ -2,7 +2,7 @@ import React, { useContext, useReducer, useState } from 'react';
 import Images from '../constant/Images';
 import { FaGoogle, FaApple, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { httpPostWithoutToken } from '../../utils/http_utils';
+import { generateToken, httpPostWithoutToken } from '../../utils/http_utils';
 import { useToast } from '@chakra-ui/react';
 import ls from "localstorage-slim";
 import { AppContext } from '../../global/state';
@@ -85,6 +85,10 @@ const LoginForm: React.FC = () => {
       }
       }, 1000);
     }else{
+      if(response.message == "Email not verified") {
+          navigate(`/verify-account?token${generateToken(20)}=&u=${state.email}`)
+          return;
+      }
       dispatch({ type: 'SET_ERROR', payload: response.message });
       console.log('Account created:', response.data);
     }

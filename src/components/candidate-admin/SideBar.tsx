@@ -81,7 +81,7 @@ const SideNav: React.FC = () => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onConfirm={()=> {
-          switchAccount("candidate");
+          switchAccount("company");
         }}
         role='Company'
       />

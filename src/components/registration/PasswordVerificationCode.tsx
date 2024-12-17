@@ -134,7 +134,7 @@ const PasswordVerificationCode: React.FC<PassVerificationCodeProps> = ({ length,
     setIsResending(true);
 
     try {
-      const response = await httpPostWithoutToken("resend-otp", { email });
+      const response = await httpPostWithoutToken("resend-verification", { email });
       setIsResending(false);
 
       if (response.status === "success") {

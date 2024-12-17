@@ -51,14 +51,9 @@ import ForgotPassword from "./components/registration/ForgetPass";
 import AccountVerification from "./components/registration/Verification";
 import PasswordVerificationCode from "./components/registration/PasswordVerificationCode";
 import AdminLogin from "./components/master-admin/components/AdminLogin";
-<<<<<<< HEAD
 import AdminJobList from "./components/master-admin/components/JobList";
 import AdminJobDetails from "./components/master-admin/components/JobDetails";
-=======
-import JobList from "./components/master-admin/components/JobList";
-import AdminJobDetails from "./components/master-admin/components/JobDetails";
 import AppliedJobs from "./components/candidate-admin/applied-job/AppliedJobs";
->>>>>>> 257849e77e090e56153d4c3e482d474f4f05ab01
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -140,30 +135,11 @@ function Main({
 
        
        {/* Master Admin Routing Section */}
-<<<<<<< HEAD
        <Route path={"/admin"} >
           <Route path="" element={<AdminLogin />} />
           <Route path="admin-jobs" element={<AdminJobList />} />
           <Route path="job-details/:id" element={<AdminJobDetails />} />
         </Route>
-=======
-       {/* {!isLoggedIn ? (
-          <Route path="admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
-        ) : (
-          <Route path="master-admin-dashboard" element={<MsAdminDashboard />} />
-        )} */}
-        {/* <Route path="admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
-        <Route path="master-admin-dashboard" element={<MsAdminDashboard />} />
-        <Route path="admin-jobs" element={<JobList />} />
-        <Route path="job-details/:id" element={<JobDetails />} />
-        <Route path="*" element={<Navigate to="admin-jobs" />} /> */}
-
-          <Route path={"/master-admin-dashboard"} >
-          <Route path="admin-jobs" element={<JobList />} />
-          <Route path="job-details/:id" element={<AdminJobDetails  />} />
-        </Route>
-        <Route path="admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
->>>>>>> 257849e77e090e56153d4c3e482d474f4f05ab01
   
         {/* Candidates Admin routing section */}
         <Route
